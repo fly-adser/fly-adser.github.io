@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="Fly Adser">
 <meta property="og:description" content="出价策略大体上可以分为两部分：1）结合业务特点，将竞价优化问题建模为线性规划问题，并利用对偶优化理论，求解出最优出价的公式。这一步基本没什么难度，只要掌握一些线性规划知识，都可以求解出来2）求解最优出价公式中的参数，以达到流量的最优分配。这一步是出价策略中最难的一部分 参数求解目前来看主要有以下三种形式：1）利用历史请求信息求解线性规划问题，得到最优参数。这种方式适合流量比较稳定的场景，如一些站内">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2021/12/26/images/RTBpapers/1.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/RTBpapers/1.png">
 <meta property="og:image" content="https://files.mdnice.com/user/8785/5f191472-c307-4277-8599-cf80fab19a98.png">
 <meta property="og:image" content="https://files.mdnice.com/user/8785/869abf16-d610-4cd0-aaf4-775f24cc242b.png">
 <meta property="og:image" content="https://files.mdnice.com/user/8785/0b261216-b155-4e9d-86df-e50a00c8b0ba.png">
@@ -40,10 +40,10 @@
 <meta property="og:image" content="https://files.mdnice.com/user/8785/fdf48852-59ae-433e-b1d8-98a126e843c2.png">
 <meta property="og:image" content="https://files.mdnice.com/user/8785/54cec6fb-4d3d-4f56-adae-de3d59d0b7d6.png">
 <meta property="article:published_time" content="2021-12-26T11:36:32.000Z">
-<meta property="article:modified_time" content="2021-12-26T14:38:27.717Z">
+<meta property="article:modified_time" content="2021-12-27T14:49:47.105Z">
 <meta property="article:author" content="Fly Adser">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/12/26/images/RTBpapers/1.png">
+<meta name="twitter:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/RTBpapers/1.png">
 
 <link rel="canonical" href="http://example.com/2021/12/26/RTBpapers/">
 
@@ -199,10 +199,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-26 19:36:32 / 修改时间：22:38:27" itemprop="dateCreated datePublished" datetime="2021-12-26T19:36:32+08:00">2021-12-26</time>
+              <time title="创建时间：2021-12-26 19:36:32" itemprop="dateCreated datePublished" datetime="2021-12-26T19:36:32+08:00">2021-12-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-12-27 22:49:47" itemprop="dateModified" datetime="2021-12-27T22:49:47+08:00">2021-12-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -233,11 +239,11 @@
 <p>$$<br>roi_{u,a}=\frac{p(c|u,a) \cdot v_{a}}{b_{a}}{\quad}{\quad}(1)<br>$$</p>
 <p>广告$a$在不同用户和点击下的总体ROI：</p>
 <p>$$<br>roi_{a}=\frac{v_{a} \cdot \sum_{u}n_{u}\cdot p(c|u,a)}{b_{a}\cdot \sum_{u}n_{u}}=\frac{E_{u}[p(c|u,a)]\cdot v_{a}}{b_{a}}{\quad}{\quad}(2)<br>$$</p>
-<p>由等式(2)可知，广告主的整体ROI由三个因素决定：期望转化率$E_{u}[p(c|u,a)]$，预估的单次交易额$v_{a}$以及出价$b_{a}$。其中，$v_{a}$是每个广告的内在属性，$E_{u}[p(c|u,a)]$是每次特定拍卖的静态值。等式(2)证明了$roi_{a}$与$E_{u}[p(c|u,a)]$之间的线性关系，为了避免ROI下降，竞价优化需要满足$\frac{b_{a}^{*}}{b_{a}} \leq \frac{p(c|u,a)}{E_{u}[p(c|u,a)]}$。考虑到广告主获取高质量流量的需求，可以在投放时遵循以下原则：当流量质量较高，即$\frac{p(c|u,a)}{E_{u}[p(c|u,a)]} \geq 1$时，提高出价；当流量质量偏低，即$\frac{p(c|u,a)}{E_{u}[p(c|u,a)]} &lt; 1$时，降低出价。质量和数量折中的优化范围如图(1)所示，固定阈值$r_{a}$如(40%)通常是为了业务安全而设置的，用于避免广告主在优化ROI时，流量下降过大</br></br></p>
+<p>由等式(2)可知，广告主的整体ROI由三个因素决定：期望转化率$E_{u}[p(c|u,a)]$，预估的单次交易额$v_{a}$以及出价$b_{a}$。其中，$v_{a}$是每个广告的内在属性，$E_{u}[p(c|u,a)]$是每次特定拍卖的静态值。等式(2)证明了$roi_{a}$与$E_{u}[p(c|u,a)]$之间的线性关系，为了避免ROI下降，竞价优化需要满足$\frac{b_{a}^{*}}{b_{a}} \leq \frac{p(c|u,a)}{E_{u}[p(c|u,a)]}$。考虑到广告主获取高质量流量的需求，可以在投放时遵循以下原则：当流量质量较高，即$\frac{p(c|u,a)}{E_{u}[p(c|u,a)]} \geq 1$时，提高出价；当流量质量偏低，即$\frac{p(c|u,a)}{E_{u}[p(c|u,a)]} &lt; 1$时，降低出价。质量和数量折中的优化范围如图(1)所示，固定阈值$r_{a}$如(40%)通常是为了业务安全而设置的，用于避免广告主在优化ROI时，流量下降过大</p>
 <center>
-<img src="../images/RTBpapers/1.png" width="500" height="450"/>
+<img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/RTBpapers/1.png" width="500" height="450"/>
 </center>
-</br>
+
 
 <p>对于图(3)中的的灰色区域，我们用$l(b_{a}^{<em>})$和$u(b_{a}^{</em>})$来表示上届和下界，它的计算方法如公式(3)和公式(4)所示。竞价优化目标可以推广到广告主的其它目标，而不仅限于ROI。如果部分广告主未授权进行竞价优化，则其上下限均等于$b_{a}$</p>
 <p>$$<br>l(b_{a}^{*}) = \begin{cases}<br>               b_{a} \cdot (1-r_{a}), \quad \quad \frac{p(c|u,a)}{E_{u}[p(c|u,a)]} &lt; 1 \<br>               b_{a}, \quad \quad \frac{p(c|u,a)}{E_{u}[p(c|u,a)]} \geq 1<br>               \end{cases} \quad \quad (3)<br>$$</p>
