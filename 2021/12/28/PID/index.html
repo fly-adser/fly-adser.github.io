@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="概述PID控制算法其实指的就是比例、积分和微分控制，如下：  可以用下面的公式表示：  U(t)&#x3D;kp(err(t)+\frac{1}{T_{1}}\int err(t)dt + \frac{T_{D}derr(t)}{dt})比例控制算法假设有一个水缸，初始时水缸里的水高度是0.2米，目的是要保证水位维持在1米的高度，那么现在的水位距离目标水位之间存在一个误差。假设现在旁边有个人通过往缸里加水的">
+  <meta name="description" content="概述PID控制算法其实指的就是比例、积分和微分控制，如下：  可以用下面的公式表示：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PID控制算法">
 <meta property="og:url" content="http://example.com/2021/12/28/PID/index.html">
 <meta property="og:site_name" content="Fly Adser">
-<meta property="og:description" content="概述PID控制算法其实指的就是比例、积分和微分控制，如下：  可以用下面的公式表示：  U(t)&#x3D;kp(err(t)+\frac{1}{T_{1}}\int err(t)dt + \frac{T_{D}derr(t)}{dt})比例控制算法假设有一个水缸，初始时水缸里的水高度是0.2米，目的是要保证水位维持在1米的高度，那么现在的水位距离目标水位之间存在一个误差。假设现在旁边有个人通过往缸里加水的">
+<meta property="og:description" content="概述PID控制算法其实指的就是比例、积分和微分控制，如下：  可以用下面的公式表示：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/PID/1.png">
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png">
 <meta property="article:published_time" content="2021-12-28T14:29:55.000Z">
-<meta property="article:modified_time" content="2021-12-28T14:44:16.098Z">
+<meta property="article:modified_time" content="2021-12-28T15:03:17.277Z">
 <meta property="article:author" content="Fly Adser">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/PID/1.png">
@@ -303,7 +303,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-12-28 22:29:55 / 修改时间：22:44:16" itemprop="dateCreated datePublished" datetime="2021-12-28T22:29:55+08:00">2021-12-28</time>
+              <time title="创建时间：2021-12-28 22:29:55 / 修改时间：23:03:17" itemprop="dateCreated datePublished" datetime="2021-12-28T22:29:55+08:00">2021-12-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -328,7 +328,7 @@ mjx-container[display="true"] + br {
       
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>PID控制算法其实指的就是<strong>比例、积分和微分控制</strong>，如下：</p>
 <p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/PID/1.png" width="60%" height="60%"></p>
-<p>可以用下面的公式表示：</p>
+<p>可以用下面的公式表示：<br><span id="more"></span></p>
 <script type="math/tex; mode=display">
 U(t)=kp(err(t)+\frac{1}{T_{1}}\int err(t)dt + \frac{T_{D}derr(t)}{dt})</script><h1 id="比例控制算法"><a href="#比例控制算法" class="headerlink" title="比例控制算法"></a>比例控制算法</h1><p>假设有一个水缸，初始时水缸里的水高度是0.2米，目的是要保证水位维持在1米的高度，那么现在的水位距离目标水位之间存在一个误差<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.186ex" xmlns="http://www.w3.org/2000/svg" width="11.121ex" height="1.692ex" role="img" focusable="false" viewBox="0 -666 4915.6 748"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(466,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(917,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(1368,0)"><path data-c="1D45C" d="M201 -11Q126 -11 80 38T34 156Q34 221 64 279T146 380Q222 441 301 441Q333 441 341 440Q354 437 367 433T402 417T438 387T464 338T476 268Q476 161 390 75T201 -11ZM121 120Q121 70 147 48T206 26Q250 26 289 58T351 142Q360 163 374 216T388 308Q388 352 370 375Q346 405 306 405Q243 405 195 347Q158 303 140 230T121 120Z"></path></g><g data-mml-node="mi" transform="translate(1853,0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(2581.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(3637.6,0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path><path data-c="2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z" transform="translate(500,0)"></path><path data-c="38" d="M70 417T70 494T124 618T248 666Q319 666 374 624T429 515Q429 485 418 459T392 417T361 389T335 371T324 363L338 354Q352 344 366 334T382 323Q457 264 457 174Q457 95 399 37T249 -22Q159 -22 101 29T43 155Q43 263 172 335L154 348Q133 361 127 368Q70 417 70 494ZM286 386L292 390Q298 394 301 396T311 403T323 413T334 425T345 438T355 454T364 471T369 491T371 513Q371 556 342 586T275 624Q268 625 242 625Q201 625 165 599T128 534Q128 511 141 492T167 463T217 431Q224 426 228 424L286 386ZM250 21Q308 21 350 55T392 137Q392 154 387 169T375 194T353 216T330 234T301 253T274 270Q260 279 244 289T218 306L210 311Q204 311 181 294T133 239T107 157Q107 98 150 60T250 21Z" transform="translate(778,0)"></path></g></g></g></svg></mjx-container>。假设现在旁边有个人通过往缸里加水的方式控制水位，则比例控制算法的运行方式如下：</p>
 <ul>
@@ -367,7 +367,10 @@ u(k)=K_{p}e(k)+K_{i}\sum_{n=1}^{k}e(n)+K_{d}(e(k)-e(k-1))</script><p>到这里�
     <a href="/2021/12/27/sortFormula/" rel="prev" title="多目标约束条件下的排序算法设计">
       <i class="fa fa-chevron-left"></i> 多目标约束条件下的排序算法设计
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/28/linearProgram/" rel="next" title="优化问题中的对偶理论">
+      优化问题中的对偶理论 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -443,7 +446,7 @@ u(k)=K_{p}e(k)+K_{i}\sum_{n=1}^{k}e(n)+K_{d}(e(k)-e(k-1))</script><p>到这里�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
