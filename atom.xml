@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-12-29T16:01:45.426Z</updated>
+  <updated>2021-12-29T16:12:56.504Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git常用命令梳理</title>
+    <link href="http://example.com/2021/12/30/gitorder/"/>
+    <id>http://example.com/2021/12/30/gitorder/</id>
+    <published>2021-12-29T16:08:23.000Z</published>
+    <updated>2021-12-29T16:12:56.504Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>三层结构：</strong>  </p><ul><li>working directory：工作区  </li><li>staging index：暂存区  </li><li>git directory：版本库 </li></ul><p><strong>文件的四种状态：</strong>  </p><ul><li>untraced：文件未被追踪  </li><li>Modified：表示工作区修改了某个文件但还没有添加到暂存区  </li><li>staged：表示把工作区修改的文件添加到了暂存区，但是没有提交到版本库  </li><li>commited：表示数据被安全地存储在版本库中 </li></ul><p><strong>基本操作命令：</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git init：初始化git仓库，出现.git文件</span><br><span class="line">git config --global user.name JayChou：配置用户名称</span><br><span class="line">git config --global user.email zhoujielun@qq.com：配置用户邮箱</span><br><span class="line">git config --list：查看配置信息</span><br><span class="line">git add filename：将文件添加到暂存处</span><br><span class="line">git add .：将工作区下的所有修改的文件添加到暂存区</span><br><span class="line">git commit -m 'description'：将暂存区的文件提交到版本库</span><br><span class="line">git commit -am 'description'：跳过git add，直接将工作区所有已追踪的文件提交到版本库</span><br><span class="line">git log：查看提交历史</span><br><span class="line">git status：查看项目文件状态</span><br></pre></td></tr></table></figure></p><p><strong>撤销操作：</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend：撤销上一次提交，并将暂存区的文件重新提交</span><br><span class="line">git checkout --filename：拉去暂存区文件并用其替换工作区文件</span><br><span class="line">git reset HEAD(版本号) --filename：拉取最近一次提交到版本库中的这个文件到暂存区，该操作不影响工作区</span><br><span class="line">git rm --cached filename：删除暂存区文件但不删除工作区文件</span><br><span class="line">git rm -f filename：同时删除工作区和暂存区文件</span><br><span class="line">git mv oldname newname相当于依次执行了以下三个命令：</span><br><span class="line">1）mv oldname newname</span><br><span class="line">2）git rm oldname</span><br><span class="line">3）git add newname</span><br></pre></td></tr></table></figure></p><p><strong>分支操作：</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git branch：查看分支</span><br><span class="line">git branch dev：创建分支</span><br><span class="line">git checkout dev：切换分支</span><br><span class="line">git branch -d dev：删除分支</span><br><span class="line">git branch -m dev fix：修改分支名称</span><br><span class="line">git checkout -n dev：创建并切换到新分支</span><br><span class="line">git merge dev：合并分支</span><br><span class="line">git branch -set upstream dev(本地分支) origin/dev(远程分支)：创建本地分支并与远程分支关联</span><br></pre></td></tr></table></figure></p><p><strong>比较操作：</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git diff：比较工作区与暂存区之间的差异</span><br><span class="line">git diff --staged：比较暂存区与版本库之间的差异</span><br><span class="line">git diff 版本号 版本号：比较分支内的两个版本差异</span><br><span class="line">git diff 分支 分支：比较两个分支最新提交版本的差异</span><br></pre></td></tr></table></figure></p><p><strong>储存变更：</strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git stash：储存信息，并使工作区返回到未修改的状态</span><br><span class="line">git stash list：查看所有储存信息</span><br><span class="line">git stash apply stash@num：应用储存信息，后面不加名字时，则应用最近一次储存的信息</span><br><span class="line">git stash pop stash@num：应用并删除储存信息</span><br><span class="line">git stash drop stash@num：删除储存信息</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;strong&gt;三层结构：&lt;/strong&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;working directory：工作区  &lt;/li&gt;
+&lt;li&gt;staging index：暂存区  &lt;/li&gt;
+&lt;li&gt;git directory：版本库 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;str</summary>
+      
+    
+    
+    
+    <category term="工程能力积累" scheme="http://example.com/categories/%E5%B7%A5%E7%A8%8B%E8%83%BD%E5%8A%9B%E7%A7%AF%E7%B4%AF/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>RTB论文梳理及总结</title>
