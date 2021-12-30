@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="maven">
+  <meta name="description" content="Maven的作用 1）管理Jar包：既可以方便地添加第三方Jar包，又可以自动关联下载所有依赖的Jar包 2）将项目拆分成多个模块">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven知识点梳理">
 <meta property="og:url" content="http://example.com/2021/12/30/maven/index.html">
 <meta property="og:site_name" content="Fly Adser">
+<meta property="og:description" content="Maven的作用 1）管理Jar包：既可以方便地添加第三方Jar包，又可以自动关联下载所有依赖的Jar包 2）将项目拆分成多个模块">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/maven/1.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png">
 <meta property="article:published_time" content="2021-12-29T16:21:09.000Z">
-<meta property="article:modified_time" content="2021-12-29T16:21:09.826Z">
+<meta property="article:modified_time" content="2021-12-30T14:02:26.540Z">
 <meta property="article:author" content="Fly Adser">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/maven/1.png">
 
 <link rel="canonical" href="http://example.com/2021/12/30/maven/">
 
@@ -43,7 +48,7 @@
   };
 </script>
 
-  <title>maven | Fly Adser</title>
+  <title>Maven知识点梳理 | Fly Adser</title>
   
 
 
@@ -74,7 +79,119 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -175,7 +292,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          maven
+          Maven知识点梳理
         </h1>
 
         <div class="post-meta">
@@ -184,8 +301,18 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-12-30 00:21:09" itemprop="dateCreated datePublished" datetime="2021-12-30T00:21:09+08:00">2021-12-30</time>
+              <time title="创建时间：2021-12-30 00:21:09 / 修改时间：22:02:26" itemprop="dateCreated datePublished" datetime="2021-12-30T00:21:09+08:00">2021-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%83%BD%E5%8A%9B%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">工程能力积累</span></a>
+                </span>
             </span>
 
           
@@ -199,7 +326,76 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p><strong>Maven的作用</strong><br>
+1）管理Jar包：既可以方便地添加第三方Jar包，又可以自动关联下载所有依赖的Jar包<br>
+2）将项目拆分成多个模块</p>
+<span id="more"></span>
+<p><strong>Maven的基本概念</strong><br>
+<strong>定义：</strong> 是一个基于Java平台的自动化构建工具</p>
+<p><strong>清理：</strong> 删除编译的结果，为重新编译做准备</p>
+<p><strong>编译：</strong> Java -&gt; class</p>
+<p><strong>测试：</strong> 针对项目中的关键点进行测试，也可用项目中的测试代码去测试开发代码</p>
+<p><strong>报告：</strong> 将测试的结果进行显示</p>
+<p><strong>打包：</strong> 将项目中包含的多个文件压缩成一个文件，用于安装或部署</p>
+<p><strong>安装：</strong> 将打成的包放到本地仓库，供其它模块使用</p>
+<p><strong>部署：</strong> 将打成的包放到服务器上准备运行</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/maven/1.png" width="40%" height="40%"></p>
+<p>如上图所示，当工程项目寻找自身所依赖的jar包时，首先会到本地仓库找，如果找不到，再到远程仓库找；远程仓库又分为私服仓库和中央仓库，其中私服仓库通常是公司内部或部门内部所搭建的仓库，中央仓库是指Maven中央仓库</p>
+<p><strong>Maven项目目录</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">    main            -&gt; 程序功能代码</span><br><span class="line">        java        -&gt; Java代码</span><br><span class="line">        resources   -&gt; 资源代码、配置代码</span><br><span class="line">    test</span><br><span class="line">        java</span><br><span class="line">        resources</span><br><span class="line">pom.xml </span><br><span class="line">target              -&gt; 编译后的文件</span><br></pre></td></tr></table></figure>
+<p><strong>Maven常用命令</strong> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mvn clean    # 删除编译后的文件(target目录)</span><br><span class="line">mvn compile  # 只编译main目录下的文件</span><br><span class="line">mvn test     # 测试</span><br><span class="line">mvn package  # 打包</span><br><span class="line">mvn install  # 将开发的模块放入本地仓库，供其它模块使用</span><br><span class="line">mvn deploy   # 将开发的项目放入远程仓库(通常是私服仓库)，供其它项目使用</span><br></pre></td></tr></table></figure></p>
+<p><strong>Maven依赖</strong></p>
+<p>在Maven项目中，如果要使用一个已存在的jar包或模块，可以通过依赖实现(去本地、远程仓库找)。引入依赖： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>域名翻转.大项目名<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.JayChou.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>子模块名<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>HelloWorld<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>版本号<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>0.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br></pre></td></tr></table></figure> 以上三部分也叫做gav</p>
+<p>依赖的范围：compile(默认)、test、provided。Maven在编译、测试和运行项目时，各自使用一套classpath，各自能够获取的依赖权限范围如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>stage</th>
+<th>compile</th>
+<th>test</th>
+<th>provided</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>编译</td>
+<td>是</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr class="even">
+<td>测试程序</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr class="odd">
+<td>部署(运行)</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<p>依赖排除：当通过maven引入A.jar时，会自动引入B.jar：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A.jar(x.jar, y.jar, z.jar)</span><br><span class="line">B.jar(p.jar, j.jar, k.jar)</span><br><span class="line">A.jar与B.jar的依赖本质是：z.jar依赖于k.jar</span><br></pre></td></tr></table></figure>
+<p>当我们只用到x.jar和y.jar时，那么可以不用引入B.jar。可以通过以下方法排除B.jar：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span><span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span><span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>依赖的传递性：当A.jar依赖于B.jar，B.jar依赖于C.jar，要使A.jar依赖于C.jar，当且仅当B.jar依赖于C.jar的范围是compile</p>
+<p>依赖原则： 1）路径最短原则 2）路径长度相同。i）在同一个pom.xml文件中有2个相同的依赖：则后面声明的依赖会覆盖前面声明的依赖；ii）如果是不同的pom.xml中有2个相同的依赖：则先声明的依赖会覆盖后声明的依赖</p>
+<p><strong>Maven生命周期和构建的关系</strong> 如果Maven的生命周期如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a -&gt; b -&gt; c -&gt; d -&gt;e</span><br></pre></td></tr></table></figure>
+<p>假如执行命令d，则Maven会自动先执行a, b, c，再执行d</p>
+<p><strong>Maven的继承</strong> 定义：若A继承B，则A可以使用B的所有依赖 实现步骤： 1）建立父工程：父工程打包方式为pom(可以通过父工程，统一管理依赖的版本号) 2）在父工程的pom.xml中编写依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencyManageMent</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManageMent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>3）子类中引入父类</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--1.加入父工程gav--&gt;</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">&lt;!--2.当前工程pom.xml到父工程pom.xml之间的相对路径--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">relativepath</span>&gt;</span>../B/pom.xml<span class="tag">&lt;/<span class="name">relativepath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>4）子子类中声明使用哪些父类的依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--声明：只需要ga--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>Maven的聚合</strong></p>
+<p>配置聚合后，可以避免前置工程的install操作(只适合打包方式为pom的工程)。只需要操作总工程，则会自动操作聚合中配置过的工程</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--前置项目的根路径--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">module</span>&gt;</span>../Maven1<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">module</span>&gt;</span>../Maven2<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png" width="60%" height="60%"></p>
 
     </div>
 
@@ -218,7 +414,10 @@
     <a href="/2021/12/30/gitorder/" rel="prev" title="Git常用命令梳理">
       <i class="fa fa-chevron-left"></i> Git常用命令梳理
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/30/LTRpartA/" rel="next" title="LTR预估：从慕名而来到一探深浅">
+      LTR预估：从慕名而来到一探深浅 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -293,14 +492,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -386,6 +585,72 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+    
 
   
 
