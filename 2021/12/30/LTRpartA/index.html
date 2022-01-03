@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartA/7.png">
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png">
 <meta property="article:published_time" content="2021-12-30T14:04:16.000Z">
-<meta property="article:modified_time" content="2021-12-30T16:22:35.319Z">
+<meta property="article:modified_time" content="2022-01-03T13:50:00.151Z">
 <meta property="article:author" content="Fly Adser">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartA/1.png">
@@ -86,6 +86,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -198,8 +199,7 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
-</head>
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -316,7 +316,7 @@ mjx-container[display="true"] + br {
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-31 00:22:35" itemprop="dateModified" datetime="2021-12-31T00:22:35+08:00">2021-12-31</time>
+                <time title="修改时间：2022-01-03 21:50:00" itemprop="dateModified" datetime="2022-01-03T21:50:00+08:00">2022-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -345,7 +345,7 @@ mjx-container[display="true"] + br {
 <span id="more"></span> 1）基于point-wise模型的LTR。该类模型单个item和request的特征，输出是相关性得分，根据相关性得分对item进行排序。point-wise模型没有考虑商品之间的相互影响，因此，并不能保证序列是最优的。比较典型的如CTR预估模型Wide &amp; Deep和CVR预估模型ESSM<br>
 2）基于pair-wise模型的LTR预估。该类模型通过损失函数来预估item对之间的相对位置关系，如果二者之间的相对位置正确，则为正例，否则，为反例，模型的目标是减少错误item对的个数。pair-wise模型忽略了列表的全局信息，而且极大地增加了模型训练和预估的复杂度，比较典型的如RankNet、LambdaRANK、LambdaMART<br>
 3）基于list-wise模型的LTR预估。该类模型对每个request下的整个item list进行建模，考虑内部所有样本之间的关系，并通过list-wise损失函数来比较不同item之间的关系。比较典型如DLCM<br>
-4）基于generative模型的LTR预估。该类模型通过序列建模直接对整个序列收益进行预估，最终选取最优序列，比较典型如miRNN</p>
+4）基于generative模型的LTR预估。该类模型一边生成序列，一边通过序列建模直接对整个序列收益进行预估，最终选取最优序列，比较典型如miRNN</p>
 <h1 id="基于point-wise模型的ltr">基于point-wise模型的LTR</h1>
 <h2 id="wide-deep-learning-for-recommender-systemswide-deep模型">Wide &amp; Deep Learning for Recommender Systems(Wide &amp; Deep模型)</h2>
 <p>Wide&amp;Deep模型是谷歌商店推荐团队在2016年提出的模型[1]，它的框架如下图所示。首先，对该模型的优势作一个简单总结[2]：</p>
