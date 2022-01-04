@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://example.com/2021/12/29/RTBpapers/</loc>
+    <lastmod>2022-01-04</lastmod>
+  </url>
+  <url>
     <loc>http://example.com/2021/12/30/LTRpartA/</loc>
     <lastmod>2022-01-03</lastmod>
   </url>
   <url>
     <loc>http://example.com/2021/12/29/sortEquation/</loc>
-    <lastmod>2022-01-02</lastmod>
-  </url>
-  <url>
-    <loc>http://example.com/2021/12/29/RTBpapers/</loc>
     <lastmod>2022-01-02</lastmod>
   </url>
   <url>
