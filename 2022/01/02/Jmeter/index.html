@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="为什么要做压测？对于我个人而言，我的工作是算法工程师，经常需要上线新的算法或策略，从而改动线上代码。在改动线上代码后，自测、预测回归、压测都是必不可少的步骤。只有经过这些步骤的检测，才能保证所上线算法或策略能够吐出符合预期的预测值、保证线上服务的稳定性。当然，如果是做后端研发的同学，可能更加需要做压测的工作。">
+  <meta name="description" content="为什么要做压测？ 对于我个人而言，我的工作是算法工程师，经常需要上线新的算法或策略，从而改动线上代码。在改动线上代码后，自测、预测回归、压测都是必不可少的步骤。只有经过这些步骤的检测，才能保证所上线算法或策略能够吐出符合预期的预测值、保证线上服务的稳定性。当然，如果是做后端研发的同学，可能更加需要做压测的工作。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jmeter压测">
 <meta property="og:url" content="http://example.com/2022/01/02/Jmeter/index.html">
 <meta property="og:site_name" content="Fly Adser">
-<meta property="og:description" content="为什么要做压测？对于我个人而言，我的工作是算法工程师，经常需要上线新的算法或策略，从而改动线上代码。在改动线上代码后，自测、预测回归、压测都是必不可少的步骤。只有经过这些步骤的检测，才能保证所上线算法或策略能够吐出符合预期的预测值、保证线上服务的稳定性。当然，如果是做后端研发的同学，可能更加需要做压测的工作。">
+<meta property="og:description" content="为什么要做压测？ 对于我个人而言，我的工作是算法工程师，经常需要上线新的算法或策略，从而改动线上代码。在改动线上代码后，自测、预测回归、压测都是必不可少的步骤。只有经过这些步骤的检测，才能保证所上线算法或策略能够吐出符合预期的预测值、保证线上服务的稳定性。当然，如果是做后端研发的同学，可能更加需要做压测的工作。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/1.png">
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/2.png">
@@ -38,8 +38,9 @@
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/9.png">
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png">
 <meta property="article:published_time" content="2022-01-02T03:46:43.000Z">
-<meta property="article:modified_time" content="2022-01-02T04:35:42.396Z">
+<meta property="article:modified_time" content="2022-01-08T13:22:06.792Z">
 <meta property="article:author" content="Fly Adser">
+<meta property="article:tag" content="工程能力积累">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/1.png">
 
@@ -87,7 +88,6 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -200,7 +200,8 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style></head>
+</style><link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -314,10 +315,16 @@ mjx-container[display="true"] + br {
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-02 11:46:43 / 修改时间：12:35:42" itemprop="dateCreated datePublished" datetime="2022-01-02T11:46:43+08:00">2022-01-02</time>
+              <time title="创建时间：2022-01-02 11:46:43" itemprop="dateCreated datePublished" datetime="2022-01-02T11:46:43+08:00">2022-01-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 21:22:06" itemprop="dateModified" datetime="2022-01-08T21:22:06+08:00">2022-01-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -339,21 +346,31 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="为什么要做压测？"><a href="#为什么要做压测？" class="headerlink" title="为什么要做压测？"></a>为什么要做压测？</h1><p>对于我个人而言，我的工作是算法工程师，经常需要上线新的算法或策略，从而改动线上代码。在改动线上代码后，自测、预测回归、压测都是必不可少的步骤。只有经过这些步骤的检测，才能保证所上线算法或策略能够吐出符合预期的预测值、保证线上服务的稳定性。当然，如果是做后端研发的同学，可能更加需要做压测的工作。</p>
+        <h1 id="为什么要做压测">为什么要做压测？</h1>
+<p>对于我个人而言，我的工作是算法工程师，经常需要上线新的算法或策略，从而改动线上代码。在改动线上代码后，自测、预测回归、压测都是必不可少的步骤。只有经过这些步骤的检测，才能保证所上线算法或策略能够吐出符合预期的预测值、保证线上服务的稳定性。当然，如果是做后端研发的同学，可能更加需要做压测的工作。</p>
 <span id="more"></span>
-<h1 id="安装JMeter"><a href="#安装JMeter" class="headerlink" title="安装JMeter"></a>安装JMeter</h1><p>1.配置JDK1.8，<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a85658902f26">参考链接</a><br>2.下载二进制版本的JMeter，<a target="_blank" rel="noopener" href="http://jmeter.apache.org/download_jmeter.cgi">下载链接</a></p>
+<h1 id="安装jmeter">安装JMeter</h1>
+<p>1.配置JDK1.8，<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a85658902f26">参考链接</a><br>
+2.下载二进制版本的JMeter，<a target="_blank" rel="noopener" href="http://jmeter.apache.org/download_jmeter.cgi">下载链接</a></p>
 <p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/1.png" width="50%" height="50%"></p>
 <p>3.解压后，进入bin目录，sh jmeter启动</p>
-<h1 id="开始压测"><a href="#开始压测" class="headerlink" title="开始压测"></a>开始压测</h1><h2 id="新建一个线程组并设置参数"><a href="#新建一个线程组并设置参数" class="headerlink" title="新建一个线程组并设置参数"></a>新建一个线程组并设置参数</h2><p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/2.png" width="70%" height="70%"></p>
+<h1 id="开始压测">开始压测</h1>
+<h2 id="新建一个线程组并设置参数">新建一个线程组并设置参数</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/2.png" width="70%" height="70%"></p>
 <p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/3.png" width="70%" height="70%"></p>
-<h2 id="新建http请求默认值"><a href="#新建http请求默认值" class="headerlink" title="新建http请求默认值"></a>新建http请求默认值</h2><p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/4.png" width="70%" height="70%"></p>
+<h2 id="新建http请求默认值">新建http请求默认值</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/4.png" width="70%" height="70%"></p>
 <p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/5.png" width="70%" height="70%"></p>
-<h2 id="新建压测http请求"><a href="#新建压测http请求" class="headerlink" title="新建压测http请求"></a>新建压测http请求</h2><p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/6.png" width="70%" height="70%"></p>
+<h2 id="新建压测http请求">新建压测http请求</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/6.png" width="70%" height="70%"></p>
 <p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/7.png" width="70%" height="70%"></p>
-<h2 id="新建监听器"><a href="#新建监听器" class="headerlink" title="新建监听器"></a>新建监听器</h2><p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/8.png" width="70%" height="70%"></p>
+<h2 id="新建监听器">新建监听器</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/8.png" width="70%" height="70%"></p>
 <p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/jmeter/9.png" width="70%" height="70%"></p>
-<h2 id="批量设置参数"><a href="#批量设置参数" class="headerlink" title="批量设置参数"></a>批量设置参数</h2><p>可参考： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/puresoul/p/4742120.html">jmeter批量设置参数</a></p>
-<h1 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h1><p>对这方面还没有深入的研究，我一般只看响应时间有没有显著增加</p>
+<h2 id="批量设置参数">批量设置参数</h2>
+<p>可参考： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/puresoul/p/4742120.html">jmeter批量设置参数</a></p>
+<h1 id="指标">指标</h1>
+<p>对这方面还没有深入的研究，我一般只看响应时间有没有显著增加</p>
 <p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png" width="60%" height="60%"></p>
 
     </div>
@@ -363,6 +380,9 @@ mjx-container[display="true"] + br {
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E7%A8%8B%E8%83%BD%E5%8A%9B%E7%A7%AF%E7%B4%AF/" rel="tag"># 工程能力积累</a>
+          </div>
 
         
 
@@ -436,7 +456,7 @@ mjx-container[display="true"] + br {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E5%8E%8B%E6%B5%8B%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么要做压测？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85JMeter"><span class="nav-number">2.</span> <span class="nav-text">安装JMeter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%8E%8B%E6%B5%8B"><span class="nav-number">3.</span> <span class="nav-text">开始压测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E7%BB%84%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">新建一个线程组并设置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BAhttp%E8%AF%B7%E6%B1%82%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">新建http请求默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%8E%8B%E6%B5%8Bhttp%E8%AF%B7%E6%B1%82"><span class="nav-number">3.3.</span> <span class="nav-text">新建压测http请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">新建监听器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text">批量设置参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E6%A0%87"><span class="nav-number">4.</span> <span class="nav-text">指标</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A%E5%8E%8B%E6%B5%8B"><span class="nav-number">1.</span> <span class="nav-text">为什么要做压测？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85jmeter"><span class="nav-number">2.</span> <span class="nav-text">安装JMeter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%8E%8B%E6%B5%8B"><span class="nav-number">3.</span> <span class="nav-text">开始压测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B%E7%BB%84%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">新建一个线程组并设置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BAhttp%E8%AF%B7%E6%B1%82%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">新建http请求默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%8E%8B%E6%B5%8Bhttp%E8%AF%B7%E6%B1%82"><span class="nav-number">3.3.</span> <span class="nav-text">新建压测http请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E7%9B%91%E5%90%AC%E5%99%A8"><span class="nav-number">3.4.</span> <span class="nav-text">新建监听器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text">批量设置参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E6%A0%87"><span class="nav-number">4.</span> <span class="nav-text">指标</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -463,8 +483,10 @@ mjx-container[display="true"] + br {
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
-        <span class="site-state-item-name">标签</span>
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
