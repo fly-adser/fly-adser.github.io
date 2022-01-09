@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://example.com/2022/01/09/xgboost/</loc>
+    <lastmod>2022-01-09</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2022/01/09/leetcode32-2/</loc>
+    <lastmod>2022-01-09</lastmod>
+  </url>
+  <url>
     <loc>http://example.com/2022/01/09/leetcodesum/</loc>
-    <lastmod>2022-01-08</lastmod>
+    <lastmod>2022-01-09</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2022/01/09/leetcode32-3/</loc>
+    <lastmod>2022-01-09</lastmod>
+  </url>
+  <url>
+    <loc>http://example.com/2022/01/09/leetcode32-1/</loc>
+    <lastmod>2022-01-09</lastmod>
   </url>
   <url>
     <loc>http://example.com/2022/01/02/springinit/</loc>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="作为一名算法工程师，coding能力是一项必备技能。spring作为java的一种常用框架，在日常的开发工作中经常会使用到。本文尝试用尽量短的篇幅对spring作一个介绍，文中所用到的代码可以在github上找到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring入门学习">
+<meta property="og:url" content="http://example.com/2022/01/02/springinit/index.html">
+<meta property="og:site_name" content="Fly Adser">
+<meta property="og:description" content="作为一名算法工程师，coding能力是一项必备技能。spring作为java的一种常用框架，在日常的开发工作中经常会使用到。本文尝试用尽量短的篇幅对spring作一个介绍，文中所用到的代码可以在github上找到">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/1.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/2.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/3.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/4.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/5.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/6.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/7.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/8.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/9.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/10.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png">
+<meta property="article:published_time" content="2022-01-02T03:04:56.000Z">
+<meta property="article:modified_time" content="2022-01-08T13:31:22.198Z">
+<meta property="article:author" content="Fly Adser">
+<meta property="article:tag" content="工程能力积累">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/1.png">
+
+<link rel="canonical" href="http://example.com/2022/01/02/springinit/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Spring入门学习 | Fly Adser</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fly Adser</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个广告策略算法工程师的学习笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">17</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">28</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/fly-adser" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/02/springinit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Fly Adser">
+      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fly Adser">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring入门学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-02 11:04:56" itemprop="dateCreated datePublished" datetime="2022-01-02T11:04:56+08:00">2022-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-08 21:31:22" itemprop="dateModified" datetime="2022-01-08T21:31:22+08:00">2022-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E7%A8%8B%E8%83%BD%E5%8A%9B%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">工程能力积累</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>作为一名算法工程师，coding能力是一项必备技能。spring作为java的一种常用框架，在日常的开发工作中经常会使用到。本文尝试用尽量短的篇幅对spring作一个介绍，文中所用到的代码可以在<a target="_blank" rel="noopener" href="https://github.com/fly-adser/algorithm_strategy_for_advertise/tree/main/5.%E5%B7%A5%E7%A8%8B%E8%83%BD%E5%8A%9B%E5%BB%BA%E8%AE%BE">github</a>上找到</p>
+<span id="more"></span>
+<h1 id="spring简单介绍">Spring简单介绍</h1>
+<p>spring是一个轻量级<strong>控制反转</strong>(IOC)和<strong>面向切面</strong>(AOP)的容器框架，它主要是为了解决企业应用开发的复杂性而诞生的</p>
+<p>IOC，对于spring框架来说，就是spring控制对象的生命周期和对象间的关系。IOC的另外一个名字叫做<strong>依赖注入</strong>(Dependency Injection)，所谓依赖注入，就是由IOC容器在运行期间动态地将某种依赖关系注入到对象中。因此，依赖注入(DI)和控制反转(IOC)是从不同角度在描述同一件事情，指通过引入IOC容器，利用依赖关系注入的方式实现对象之间的解耦。二者在语义上区别在于：</p>
+<ul>
+<li>IOC控制反转。说的是创建实例的控制权从代码控制剥离到IOC容器控制，实现就是在xml进行控制，侧重原理</li>
+<li>DI依赖注入。说的是创建对象实例时，为这个对象注入属性值或其它对象实例，侧重实现</li>
+</ul>
+<p>所谓AOP，即将系统分为系统服务和业务逻辑，主要意图是将日志记录、性能统计、异常处理等代码从业务逻辑中分离出来。通常通过AOP来处理一些具有横切性质的系统级服务，如事务管理、安全检查、缓存、对象池管理等，AOP已经成为一种非常有用的解决方案</p>
+<p>sing是一个复杂、完整的框架体系，上述只是对spring的主要思想作了简要介绍。其中，IOC和AOP的实现都依赖与Java的反射机制，因此，接下来会先介绍一下什么是Java的反射机制</p>
+<h1 id="java反射机制">Java反射机制</h1>
+<p>Java语言允许通过程序化的方式间接对class的对象实例进行操作，class文件由类装载器装载后，在JVM中将形成一份描述class结构的元信息对象，通过该元信息对象可以获知class的结构信息，如构造函数、属性和方法</p>
+<p>类装载器就是寻找类的字节码并构造出类在JVM内部表示的对象组件，主要工作由ClassLoader及其子类负责。ClassLoader是一个重要的Java运行时系统组件，它负责在运行时查找和装入class字节码文件。我们通过一个例子来进一步说明java反射机制</p>
+<p>Car类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String brand;</span><br><span class="line">    <span class="keyword">private</span> String color;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxSpeed;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//1.默认构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"init car!!"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.带参构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">(String brand, String color, <span class="keyword">int</span> maxSpeed)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.brand = brand;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">        <span class="keyword">this</span>.maxSpeed = maxSpeed;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3.为带参方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">introduce</span><span class="params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"brand:"</span> + brand + <span class="string">"; color:"</span> + color + <span class="string">"; maxSpeed:"</span> + maxSpeed);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBrand</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> brand;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBrand</span><span class="params">(String brand)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.brand = brand;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getColor</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> color;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(String color)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMaxSpeed</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> maxSpeed;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMaxSpeed</span><span class="params">(<span class="keyword">int</span> maxSpeed)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.maxSpeed = maxSpeed;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>ReflectTest类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReflectTest</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Throwable</span>{</span><br><span class="line">        Car car1 = initByDefaultConst();</span><br><span class="line">        Car car2 = initByParamConst();</span><br><span class="line">        car1.introduce();</span><br><span class="line">        car2.introduce();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//通过无参构造器实例化对象并初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">initByDefaultConst</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span>{</span><br><span class="line">        <span class="comment">//1.通过类装载器获取Car类对象</span></span><br><span class="line">        ClassLoader loader = Thread.currentThread().getContextClassLoader();</span><br><span class="line">        Class clazz        = loader.loadClass(<span class="string">"springIOC.reflect.Car"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.获取类的默认构造器对象并实例化Car</span></span><br><span class="line">        Constructor cons   = clazz.getDeclaredConstructor((Class[]) <span class="keyword">null</span>);</span><br><span class="line">        Car car            = (Car)cons.newInstance();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.通过反射方法获取属性</span></span><br><span class="line">        Method setBrand = clazz.getMethod(<span class="string">"setBrand"</span>, String.class);</span><br><span class="line">        setBrand.invoke(car, <span class="string">"奔驰"</span>);</span><br><span class="line">        Method setColor = clazz.getMethod(<span class="string">"setColor"</span>, String.class);</span><br><span class="line">        setColor.invoke(car, <span class="string">"黑色"</span>);</span><br><span class="line">        Method setMaxSpeed = clazz.getMethod(<span class="string">"setMaxSpeed"</span>, <span class="keyword">int</span>.class);</span><br><span class="line">        setMaxSpeed.invoke(car, <span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> car;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//通过有参构造器实例化对象并初始化</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Car <span class="title">initByParamConst</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span>{</span><br><span class="line">        <span class="comment">//1.通过类装载器获取类对象</span></span><br><span class="line">        ClassLoader loader = Thread.currentThread().getContextClassLoader();</span><br><span class="line">        Class clazz        = loader.loadClass(<span class="string">"springIOC.reflect.Car"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.获取类的带有参数的构造器</span></span><br><span class="line">        Constructor cons   = clazz.getDeclaredConstructor(<span class="keyword">new</span> Class[]{String.class, String.class, <span class="keyword">int</span>.class});</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.使用带有参数的构造器实例化对象</span></span><br><span class="line">        Car car = (Car)cons.newInstance(<span class="keyword">new</span> Object[]{<span class="string">"宝马"</span>, <span class="string">"绿色"</span>, <span class="number">180</span>});</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> car;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure> 运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/1.png" width="400" height="80"></p>
+<h1 id="spring-ioc机制">Spring IOC机制</h1>
+<p>如前所述，Spring IOC机制指的是创建实例的控制权从代码控制剥离到IOC容器控制。而Spring初始化Bean共有三种方式，分别是使用构造函数来初始化Bean、使用静态工厂方式来初始化Bean以及使用实例工厂方式来初始化Bean。下面分别对这三种方式进行说明</p>
+<h2 id="使用构造器来实例化bean">使用构造器来实例化Bean</h2>
+<p>HelloWorld接口： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HelloWorld</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>HelloWorld实现类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldImpl</span> <span class="keyword">implements</span> <span class="title">HelloWorld</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String message;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloWorldImpl</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.message = <span class="string">"Hello World!"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HelloWorldImpl</span><span class="params">(String message)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.message = message;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>{</span><br><span class="line">        System.out.println(message);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>配置文件： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用默认构造参数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloWorldWithNoArgs"</span> <span class="attr">class</span>=<span class="string">"springIOC.instanceA.HelloWorldImpl"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--使用有参数构造函数--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloWorldWithArgs"</span> <span class="attr">class</span>=<span class="string">"springIOC.instanceA.HelloWorldImpl"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--指定构造器参数--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"Hello Args"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>主函数： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.BeanFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">        sayHelloWithArgs();</span><br><span class="line">        sayHelloWithNoArgs();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用无参数构造器来实例化Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sayHelloWithNoArgs</span><span class="params">()</span></span>{</span><br><span class="line">        BeanFactory beanFactory = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"resource/conf-instanceA.xml"</span>);</span><br><span class="line">        HelloWorld helloWorld   = beanFactory.getBean(<span class="string">"helloWorldWithNoArgs"</span>, HelloWorld.class);</span><br><span class="line">        helloWorld.sayHello();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用有参数构造器来实例化Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sayHelloWithArgs</span><span class="params">()</span></span>{</span><br><span class="line">        BeanFactory beanFactory = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"resource/conf-instanceA.xml"</span>);</span><br><span class="line">        HelloWorld helloWorld   = beanFactory.getBean(<span class="string">"helloWorldWithArgs"</span>, HelloWorld.class);</span><br><span class="line">        helloWorld.sayHello();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure> 运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/2.png" width="250" height="50"></p>
+<h2 id="使用静态工厂实例化bean">使用静态工厂实例化Bean</h2>
+<p>使用静态工厂的方式除了指定必须的class属性外，还要指定factory-method属性来实例化Bean的方法，而且使用静态工厂方法也允许指定方法参数。Spring IOC容器将调用此属性指定的方法来获取Bean</p>
+<p>示例中，HelloWorld接口和HelloWorldImpl类和3.1节一样，HelloWorldInstanceFactory类如下： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldInstanceFactory</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HelloWorld <span class="title">newInstance</span><span class="params">(String message)</span></span>{</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HelloWorldImpl(message);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>配置文件如下： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--静态工厂方式--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloWorldStaticFactory"</span> <span class="attr">class</span>=<span class="string">"springIOC.instanceB.HelloWorldInstanceFactory"</span> <span class="attr">factory-method</span>=<span class="string">"newInstance"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--指定构造器参数--&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"Hello Static Factory!"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>主函数如下： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">        helloWorldStaticFactory();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用静态工厂方法来实例化Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">helloWorldStaticFactory</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="comment">//1.读取配置文件实例化一个IOC容器</span></span><br><span class="line">        BeanFactory beanFactory = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"resource/conf-instanceB.xml"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.从容器中获取Bean</span></span><br><span class="line">        HelloWorld helloWorld   = beanFactory.getBean(<span class="string">"helloWorldStaticFactory"</span>, HelloWorld.class);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.执行业务逻辑</span></span><br><span class="line">        helloWorld.sayHello();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/3.png" width="400" height="80"></p>
+<h2 id="使用实例工厂来实例化bean">使用实例工厂来实例化Bean</h2>
+<p>使用实例工厂方式不能指定class属性，此时必须使用factory-bean属性来指定工厂bean，factory-method属性来指定实例化bean的方法。同时，使用实例工厂方法允许指定方法参数<br>
+示例中，HelloWorld接口和HelloWorldImpl类和3.1节一样，HelloWorldInstanceFactory类如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldInstanceFactory</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HelloWorld <span class="title">newInstance</span><span class="params">(String message)</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HelloWorldImpl(message);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>xml配置文件如下： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--定义实例工厂Bean--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloWorldInstanceFactory"</span> <span class="attr">class</span>=<span class="string">"springIOC.instanceC.HelloWorldInstanceFactory"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--使用实例工程Bean创建Bean--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"helloWorldInstance"</span> <span class="attr">factory-bean</span>=<span class="string">"helloWorldInstanceFactory"</span> <span class="attr">factory-method</span>=<span class="string">"newInstance"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">index</span>=<span class="string">"0"</span> <span class="attr">value</span>=<span class="string">"Hello Instance Factory"</span>&gt;</span><span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/4.png" width="400" height="80"></p>
+<h2 id="spring-ioc实现原理">Spring IOC实现原理</h2>
+<p>Spring IOC的实现原理利用的是Java的反射机制，它的工厂类会帮我们完成配置文件的读取、利用反射机制注入对象等工作，我们可以通过Bean的名称来获取对应的对象。下面通过一个示例来简单展示来它的实现机制。首先创建一个JavaBean类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUserName</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> userName;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserName</span><span class="params">(String userName)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.userName = userName;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> password;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.password = password;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>BeanFactory类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanFactory</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Object&gt; beanMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * bean工厂的初始化，通过xml文件给对象注入相关属性</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> xml xml配置文件</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(String xml)</span></span>{</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            <span class="comment">//1.创建读取配置文件的reader对象</span></span><br><span class="line">            SAXReader reader = <span class="keyword">new</span> SAXReader();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//2.获取当前线程中的类装载器对象</span></span><br><span class="line">            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//3.从class目录下获取指定的xml文件</span></span><br><span class="line">            InputStream ins = classLoader.getResourceAsStream(xml);</span><br><span class="line">            Document doc    = reader.read(ins);</span><br><span class="line">            Element root    = doc.getRootElement();</span><br><span class="line">            Element foo;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//4.遍历xml文件中的bean实例</span></span><br><span class="line">            <span class="keyword">for</span>(Iterator i=root.elementIterator(<span class="string">"bean"</span>); i.hasNext();){</span><br><span class="line">                foo = (Element) i.next();</span><br><span class="line"></span><br><span class="line">                <span class="comment">//5.针对每个bean实例，获取bean的属性id和class</span></span><br><span class="line">                Attribute id  = foo.attribute(<span class="string">"id"</span>);</span><br><span class="line">                Attribute cls = foo.attribute(<span class="string">"class"</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//6.利用java反射机制，通过class名称获取class对象</span></span><br><span class="line">                Class bean = Class.forName(cls.getText());</span><br><span class="line"></span><br><span class="line">                <span class="comment">//7.获取对应class信息</span></span><br><span class="line">                java.beans.BeanInfo info = java.beans.Introspector.getBeanInfo(bean);</span><br><span class="line"></span><br><span class="line">                <span class="comment">//8.获取其属性信息</span></span><br><span class="line">                java.beans.PropertyDescriptor pd[] = info.getPropertyDescriptors();</span><br><span class="line"></span><br><span class="line">                <span class="comment">//9.创建一个对象，并在接下来的代码中为对象的属性赋值</span></span><br><span class="line">                Object obj = bean.getDeclaredConstructor().newInstance();</span><br><span class="line"></span><br><span class="line">                <span class="comment">//10.遍历该bean的property属性</span></span><br><span class="line">                <span class="keyword">for</span>(Iterator ite=foo.elementIterator(<span class="string">"property"</span>); ite.hasNext();){</span><br><span class="line">                    Element foo2 = (Element)ite.next();</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//11.获取该property的name属性</span></span><br><span class="line">                    Attribute name = foo2.attribute(<span class="string">"name"</span>);</span><br><span class="line">                    String   value = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//12.获取该property的子元素value的值</span></span><br><span class="line">                    <span class="keyword">for</span>(Iterator ite1=foo2.elementIterator(<span class="string">"value"</span>); ite1.hasNext();){</span><br><span class="line">                        Element node = (Element)ite.next();</span><br><span class="line">                        value = node.getText();</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    }</span><br><span class="line"></span><br><span class="line">                    <span class="comment">//13.利用java的反射机制调用对象的某个set方法，并将值设置进去</span></span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>; k&lt;pd.length; k++){</span><br><span class="line">                        <span class="keyword">if</span>(pd[k].getName().equalsIgnoreCase(name.getText())){</span><br><span class="line">                            Method mSet = <span class="keyword">null</span>;</span><br><span class="line">                            mSet = pd[k].getWriteMethod();</span><br><span class="line">                            mSet.invoke(obj, value);</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line"></span><br><span class="line">                <span class="comment">//14.将对象放入beanMap中，其中key为id值，value为对象</span></span><br><span class="line">                beanMap.put(id.getText(), obj);</span><br><span class="line">            }</span><br><span class="line">        } <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">            System.out.println(e.toString());</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getBean</span><span class="params">(String beanName)</span></span>{</span><br><span class="line">        Object obj = beanMap.get(beanName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">        BeanFactory factory = <span class="keyword">new</span> BeanFactory();</span><br><span class="line">        factory.init(<span class="string">"resource/config-realize.xml"</span>);</span><br><span class="line">        JavaBean javaBean = (JavaBean)factory.getBean(<span class="string">"javaBean"</span>);</span><br><span class="line">        System.out.println(<span class="string">"userName="</span> + javaBean.getUserName());</span><br><span class="line">        System.out.println(<span class="string">"password="</span> + javaBean.getPassword());</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>xml配置文件： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"javaBean"</span> <span class="attr">class</span>=<span class="string">"springIOC.realize.JavaBean"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"userName"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">value</span>&gt;</span>周杰伦<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"password"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">value</span>&gt;</span>19790118<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="spring-bean的作用域">Spring Bean的作用域</h2>
+<p>Spring Bean中所说的作用域，在xml配置文件中使用"scope"配置，指其创建的Bean对象相对于其它Bean对象的请求可见范围。常见的有以下两种：</p>
+<ul>
+<li>singleton：Spring IOC中只会存在一个共享的Bean实例，所有对Bean的请求，只要id相匹配，则只会返回Bean的同一个实例</li>
+<li>prototype：每次对该Bean进行请求时，都会创建一个新的Bean实例</li>
+</ul>
+<p>下面通过一个例子来说明这两种作用域的区别。首先创建一个Car类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Car</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String color;</span><br><span class="line">    <span class="keyword">private</span> String brand;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> price;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getPrice</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">return</span> price;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrice</span><span class="params">(<span class="keyword">double</span> price)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.price = price;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBrand</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">return</span> brand;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBrand</span><span class="params">(String brand)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.brand = brand;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getColor</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">return</span> color;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(String color)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>Boss类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Car car;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Boss</span><span class="params">()</span></span>{}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Car <span class="title">getCar</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">return</span> car;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCar</span><span class="params">(Car car)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.car = car;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"name:"</span> + name + <span class="string">"\n car:"</span> + car;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>xml配置文件： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"car"</span> <span class="attr">class</span>=<span class="string">"springIOC.scope.Car"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"boss1"</span> <span class="attr">class</span>=<span class="string">"springIOC.scope.Boss"</span> <span class="attr">p:car-ref</span>=<span class="string">"car"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"boss2"</span> <span class="attr">class</span>=<span class="string">"springIOC.scope.Boss"</span> <span class="attr">p:car-ref</span>=<span class="string">"car"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"boss3"</span> <span class="attr">class</span>=<span class="string">"springIOC.scope.Boss"</span> <span class="attr">p:car-ref</span>=<span class="string">"car"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>主函数： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">        BeanFactory beanFactory = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"resource/conf-scope.xml"</span>);</span><br><span class="line">        Boss boss1 = beanFactory.getBean(<span class="string">"boss1"</span>, Boss.class);</span><br><span class="line">        Boss boss2 = beanFactory.getBean(<span class="string">"boss2"</span>, Boss.class);</span><br><span class="line">        Boss boss3 = beanFactory.getBean(<span class="string">"boss3"</span>, Boss.class);</span><br><span class="line">        System.out.println(boss1.getCar());</span><br><span class="line">        System.out.println(boss2.getCar());</span><br><span class="line">        System.out.println(boss3.getCar());</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>当scope="singleton"运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/5.png" width="400" height="80"></p>
+<p>三个对象的地址是一样的，证明三次对Bean的请求返回的是同一个实例。当scope="prototype"运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/6.png" width="400" height="80"></p>
+<h1 id="spring-aop机制">Spring AOP机制</h1>
+<h2 id="相关概念">相关概念</h2>
+<table>
+<thead>
+<tr class="header">
+<th>概念</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>连接点</td>
+<td>程序执行的某个特定位置，比如类初始化前、初始化后，方法执行前、执行后</td>
+</tr>
+<tr class="even">
+<td>切点</td>
+<td>通过切点来定位特殊的连接点</td>
+</tr>
+<tr class="odd">
+<td>增强</td>
+<td>织入到目标类连接点上的一段代码</td>
+</tr>
+<tr class="even">
+<td>目标对象</td>
+<td>增强对象的织入目标类</td>
+</tr>
+<tr class="odd">
+<td>引介</td>
+<td>引介是一种特殊的增强，它为类添加一些属性和方法</td>
+</tr>
+<tr class="even">
+<td>织入</td>
+<td>将增强添加到目标类具体连接点的过程</td>
+</tr>
+<tr class="odd">
+<td>代理</td>
+<td>一个类被AOP织入增强后，会产生一个结果类，该类是融合了原类和增强逻辑的代理类</td>
+</tr>
+<tr class="even">
+<td>切面</td>
+<td>由切点和增强组成，既包括了增强逻辑的定义，也包括了连接点的定义</td>
+</tr>
+</tbody>
+</table>
+<h2 id="利用proxy实现aop功能">利用proxy实现AOP功能</h2>
+<p>本小节是单纯针对AOP思想的实现，而不局限于Apring AOP。对于proxy类有一个使用前提，就是目标对象必须要实现接口，否则不能使用这个方法。下面通过一个示例来说明如何通过proxy类来实现AOP思想</p>
+<p>StudengInterface接口： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">StudentInterface</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>StudentBean类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentBean</span> <span class="keyword">implements</span> <span class="title">StudentInterface</span></span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StudentBean</span><span class="params">()</span></span>{}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StudentBean</span><span class="params">(String name)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="string">"Hello World!"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>ProxyFactory类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyFactory</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object stu;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">createStudentProxy</span><span class="params">(Object stu)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.stu = stu;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(stu.getClass().getClassLoader(), stu.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>{</span><br><span class="line">        StudentBean s = (StudentBean)stu;</span><br><span class="line">        Object object = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(s.getName()!=<span class="keyword">null</span>){</span><br><span class="line">            object = method.invoke(stu, args);</span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            System.out.println(<span class="string">"名称为空，代理类已经拦截！"</span>);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> object;</span><br><span class="line">    }</span><br></pre></td></tr></table></figure></p>
+<p>主函数： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line"></span><br><span class="line">        StudentInterface s1  = <span class="keyword">new</span> StudentBean();</span><br><span class="line">        ProxyFactory factory = <span class="keyword">new</span> ProxyFactory();</span><br><span class="line">        StudentInterface s2  = (StudentInterface)factory.createStudentProxy(s1);</span><br><span class="line">        s2.print();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure> 运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/7.png" width="350" height="80"></p>
+<h2 id="利用cglib实现aop功能">利用CGLib实现AOP功能</h2>
+<p>CGLib(Code Generation Library)是一个开源项目，它是一个强大的、高性能、高质量的Code生成类库，可以在运行期间扩展Java类与实现Java接口。利用proxy创建的代理类和目标对象必须实现同一接口，使用CGLib则继承了目标对象</p>
+<p>Student类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StudentBean</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StudentBean</span><span class="params">()</span></span>{}</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StudentBean</span><span class="params">(String name)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.name=name;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="string">"Hello World!"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>CGLibProxyFactory类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CGLibProxyFactory</span> <span class="keyword">implements</span> <span class="title">MethodInterceptor</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Object object;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">createStudent</span><span class="params">(Object object)</span></span>{</span><br><span class="line">        <span class="keyword">this</span>.object = object;</span><br><span class="line">        Enhancer enhancer = <span class="keyword">new</span> Enhancer();</span><br><span class="line">        enhancer.setSuperclass(object.getClass());</span><br><span class="line">        enhancer.setCallback(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> enhancer.create();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getObject</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> object;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setObject</span><span class="params">(Object object)</span> </span>{</span><br><span class="line">        <span class="keyword">this</span>.object = object;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">intercept</span><span class="params">(Object proxy, Method method, Object[] args, MethodProxy methodProxy)</span> <span class="keyword">throws</span> Throwable </span>{</span><br><span class="line">        StudentBean stu = (StudentBean)object;</span><br><span class="line">        Object result   = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(stu.getName()!=<span class="keyword">null</span>){</span><br><span class="line">            result = methodProxy.invoke(object, args);</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            System.out.println(<span class="string">"该方法已被拦截！"</span>);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>主函数： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line">        StudentBean s1 = (StudentBean)(<span class="keyword">new</span> CGLibProxyFactory()).createStudent(<span class="keyword">new</span> StudentBean());</span><br><span class="line">        StudentBean s2 = (StudentBean)(<span class="keyword">new</span> CGLibProxyFactory()).createStudent(<span class="keyword">new</span> StudentBean(<span class="string">"Leon"</span>));</span><br><span class="line"></span><br><span class="line">        s1.print();</span><br><span class="line">        s2.print();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/8.png" width="280" height="50"></p>
+<h2 id="spring利用注解方式实现aop">Spring利用注解方式实现AOP</h2>
+<p>Student类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">print</span><span class="params">(String name)</span></span>{</span><br><span class="line">        System.out.println(name);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello World"</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>StuInterceptor类： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StuInterceptor</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Pointcut("execution(* springAOP.aspect.Student.print(..))")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printMethod</span><span class="params">()</span></span>{</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before("printMethod()")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printBeforeAdvice</span><span class="params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"printBeforeAdvice!"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterReturning(pointcut="printMethod()", returning="flag")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printAfterAdvice</span><span class="params">(String flag)</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"printAfterAdvice()!"</span> + flag);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@After("printMethod()")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printFinallyAdvice</span><span class="params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"printFinally"</span> +</span><br><span class="line">                <span class="string">"Advice!"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around("printMethod() &amp;&amp; args(name)")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">printAroundAdvice</span><span class="params">(ProceedingJoinPoint pjp, String name)</span> <span class="keyword">throws</span> Throwable</span>{</span><br><span class="line">        Object obeject = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(name.equals(<span class="string">"Jay Chou"</span>))</span><br><span class="line">            pjp.proceed();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            System.out.println(<span class="string">"print()方法已经被拦截！！"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> obeject;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>xml配置： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">       <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"stuInterceptor"</span> <span class="attr">class</span>=<span class="string">"springAOP.aspect.StuInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"stu"</span> <span class="attr">class</span>=<span class="string">"springAOP.aspect.Student"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>主函数： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line"></span><br><span class="line">        ApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"resource/conf-aspect.xml"</span>);</span><br><span class="line">        Student stu = (Student)ctx.getBean(<span class="string">"stu"</span>);</span><br><span class="line">        stu.print(<span class="string">"Jay Chou"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/9.png" width="400" height="100"></p>
+<h2 id="spring利用xml配置文件实现aop">Spring利用xml配置文件实现AOP</h2>
+<p>Student类和4.4小节的Student类一样。StuInterceptor类如下： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StuInterceptor</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printMethod</span><span class="params">()</span></span>{</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printBeforeAdvice</span><span class="params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"printBeforeAdvice!"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printAfterAdvice</span><span class="params">(String flag)</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"printAfterAdvice()!"</span> + flag);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printFinallyAdvice</span><span class="params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"printFinally"</span> + <span class="string">"Advice!"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">printAroundAdvice</span><span class="params">(ProceedingJoinPoint pjp, String name)</span> <span class="keyword">throws</span> Throwable</span>{</span><br><span class="line">        Object obeject = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(name.equals(<span class="string">"Jay Chou"</span>))</span><br><span class="line">            pjp.proceed();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            System.out.println(<span class="string">"print()方法已经被拦截！！"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> obeject;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>xml配置文件如下： <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">"http://www.springframework.org/schema/aop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/aop/spring-aop-3.1.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"interceptor"</span> <span class="attr">class</span>=<span class="string">"springAOP.xml.StuInterceptor"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"stu"</span> <span class="attr">class</span>=<span class="string">"springAOP.xml.Student"</span>&gt;</span><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">id</span>=<span class="string">"stuInterceptor"</span> <span class="attr">ref</span>=<span class="string">"interceptor"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:before</span></span></span><br><span class="line"><span class="tag">                <span class="attr">pointcut</span>=<span class="string">"execution(* springAOP.xml.Student.print(..))"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">method</span>=<span class="string">"printBeforeAdvice"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:after-returning</span></span></span><br><span class="line"><span class="tag">                <span class="attr">pointcut</span>=<span class="string">"execution(* springAOP.xml.Student.print(..)) and args(flag)"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">method</span>=<span class="string">"printAfterAdvice"</span> <span class="attr">arg-names</span>=<span class="string">"flag"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:after</span></span></span><br><span class="line"><span class="tag">                <span class="attr">pointcut</span>=<span class="string">"execution(* springAOP.xml.Student.print(..))"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">method</span>=<span class="string">"printFinallyAdvice"</span> /&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">aop:around</span></span></span><br><span class="line"><span class="tag">                <span class="attr">pointcut</span>=<span class="string">"execution(* springAOP.xml.Student.print(..)) and args(name)"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">method</span>=<span class="string">"printAroundAdvice"</span> <span class="attr">arg-names</span>=<span class="string">"pjp,name"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>主函数： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>{</span><br><span class="line"></span><br><span class="line">        ApplicationContext ctx = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"resource/conf-xml.xml"</span>);</span><br><span class="line">        Student stu = (Student)ctx.getBean(<span class="string">"stu"</span>);</span><br><span class="line">        stu.print(<span class="string">"Jay Chou"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure></p>
+<p>运行结果如下：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/springinit/10.png" width="400" height="100"></p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png" width="60%" height="60%"></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Fly Adser 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/fly-adser">
+            <span class="icon">
+              <i class="fab fab fa-github"></i>
+            </span>
+
+            <span class="label">github</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat.png">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="https://www.zhihu.com/people/its-tough">
+            <span class="icon">
+              <i class="fab fa-zhihu"></i>
+            </span>
+
+            <span class="label">知乎</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E7%A8%8B%E8%83%BD%E5%8A%9B%E7%A7%AF%E7%B4%AF/" rel="tag"># 工程能力积累</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/02/mysqlopti/" rel="prev" title="Mysql查询优化">
+      <i class="fa fa-chevron-left"></i> Mysql查询优化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/02/Jmeter/" rel="next" title="Jmeter压测">
+      Jmeter压测 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#spring%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">Spring简单介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">Java反射机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring-ioc%E6%9C%BA%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">Spring IOC机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9E%84%E9%80%A0%E5%99%A8%E6%9D%A5%E5%AE%9E%E4%BE%8B%E5%8C%96bean"><span class="nav-number">3.1.</span> <span class="nav-text">使用构造器来实例化Bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82%E5%AE%9E%E4%BE%8B%E5%8C%96bean"><span class="nav-number">3.2.</span> <span class="nav-text">使用静态工厂实例化Bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%9E%E4%BE%8B%E5%B7%A5%E5%8E%82%E6%9D%A5%E5%AE%9E%E4%BE%8B%E5%8C%96bean"><span class="nav-number">3.3.</span> <span class="nav-text">使用实例工厂来实例化Bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-ioc%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">3.4.</span> <span class="nav-text">Spring IOC实现原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">3.5.</span> <span class="nav-text">Spring Bean的作用域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spring-aop%E6%9C%BA%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">Spring AOP机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8proxy%E5%AE%9E%E7%8E%B0aop%E5%8A%9F%E8%83%BD"><span class="nav-number">4.2.</span> <span class="nav-text">利用proxy实现AOP功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A9%E7%94%A8cglib%E5%AE%9E%E7%8E%B0aop%E5%8A%9F%E8%83%BD"><span class="nav-number">4.3.</span> <span class="nav-text">利用CGLib实现AOP功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring%E5%88%A9%E7%94%A8%E6%B3%A8%E8%A7%A3%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0aop"><span class="nav-number">4.4.</span> <span class="nav-text">Spring利用注解方式实现AOP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spring%E5%88%A9%E7%94%A8xml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0aop"><span class="nav-number">4.5.</span> <span class="nav-text">Spring利用xml配置文件实现AOP</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Fly Adser"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Fly Adser</p>
+  <div class="site-description" itemprop="description">主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fly-adser" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fly-adser" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=718229223@qq.com" title="E-mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;cgi-bin&#x2F;qm_share?t&#x3D;qm_mailme&amp;email&#x3D;718229223@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png" title="公众号 → https:&#x2F;&#x2F;fly-adser-1302830623.cos.ap-beijing.myqcloud.com&#x2F;common&#x2F;wechat.png" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>公众号</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/its-tough" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;its-tough" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fly Adser</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    // window.MathJax = {
+    //   loader: {
+    //
+    //       load: ['[tex]/mhchem'],
+    //
+    //     source: {
+    //       '[tex]/amsCd': '[tex]/amscd',
+    //       '[tex]/AMScd': '[tex]/amscd'
+    //     }
+    //   },
+    //   tex: {
+    //     inlineMath: {'[+]': [['$', '$']]},
+    //
+    //       packages: {'[+]': ['mhchem']},
+    //
+    //     tags: 'ams'
+    //   },
+    //   options: {
+    //     renderActions: {
+    //       findScript: [10, doc => {
+    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+    //           const display = !!node.type.match(/; *mode=display/);
+    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+    //           const text = document.createTextNode('');
+    //           node.parentNode.replaceChild(text, node);
+    //           math.start = {node: text, delim: '', n: 0};
+    //           math.end = {node: text, delim: '', n: 0};
+    //           doc.math.push(math);
+    //         });
+    //       }, '', false],
+    //       insertedScript: [200, () => {
+    //         document.querySelectorAll('mjx-container').forEach(node => {
+    //           let target = node.parentNode;
+    //           if (target.nodeName.toLowerCase() === 'li') {
+    //             target.parentNode.classList.add('has-jax');
+    //           }
+    //         });
+    //       }, '', false]
+    //     }
+    //   }
+    // };
+    window.MathJax = {
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+    
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fd262d672cd4d2b91ce',
+      clientSecret: 'acd47e1dac8d5317949c86b494d9fa90fcb773db',
+      repo        : 'fly-adser.github.io',
+      owner       : 'fly-adser',
+      admin       : ['fly-adser'],
+      id          : '54ee43cbdd87622096c753e94fa7a5a7',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
