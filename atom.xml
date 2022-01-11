@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-01-10T23:29:28.453Z</updated>
+  <updated>2022-01-11T14:03:48.399Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>121.股票的最大利润</title>
+    <link href="http://example.com/2022/01/11/leetcode121/"/>
+    <id>http://example.com/2022/01/11/leetcode121/</id>
+    <published>2022-01-11T13:59:06.000Z</published>
+    <updated>2022-01-11T14:03:48.399Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？<a href="https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/">题目</a><br /><span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span>(<span class="params">self, prices</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type prices: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        cost, profit = <span class="built_in">float</span>(<span class="string">&quot;+inf&quot;</span>), <span class="number">0</span> </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> price <span class="keyword">in</span> prices:</span><br><span class="line">            cost = <span class="built_in">min</span>(cost, price)</span><br><span class="line">            profit = <span class="built_in">max</span>(profit, price-cost)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> profit</span><br></pre></td></tr></table></figure><h1 id="思考">思考</h1><p><span class="math display">\[ profit = max(profit, min(cost, price))\]</span></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;假设把某股票的价格按照时间先后顺序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？&lt;a href=&quot;https://leetcode-cn.com/problems/gu-piao-de-zui-da-li-run-lcof/&quot;&gt;题目&lt;/a&gt;&lt;br /&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://example.com/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
+    
+    <category term="动态规划" scheme="http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+    <category term="数组" scheme="http://example.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>10-1.斐波那契数列</title>
+    <link href="http://example.com/2022/01/11/leetcode10-1/"/>
+    <id>http://example.com/2022/01/11/leetcode10-1/</id>
+    <published>2022-01-11T13:52:30.000Z</published>
+    <updated>2022-01-11T13:57:01.124Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项（即 F(N)）。<a href="https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/">题目链接</a><br /><span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fib</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        a, b = <span class="number">0</span>, <span class="number">1</span> </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            a, b = b, a + b </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> a % <span class="number">1000000007</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项（即 F(N)）。&lt;a href=&quot;https://leetcode-cn.com/problems/fei-bo-na-qi-shu-lie-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br /&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://example.com/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
+    
+    <category term="动态规划" scheme="http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
   
   <entry>
     <title>28.对称的二叉树</title>
@@ -476,58 +530,6 @@
     <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
     
     <category term="链表" scheme="http://example.com/tags/%E9%93%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>06.从尾到头打印链表</title>
-    <link href="http://example.com/2022/01/06/leetcode06/"/>
-    <id>http://example.com/2022/01/06/leetcode06/</id>
-    <published>2022-01-05T16:12:21.000Z</published>
-    <updated>2022-01-05T16:38:06.596Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。<a href="https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reversePrint</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">while</span> head!=<span class="literal">None</span>:</span><br><span class="line">            stack.append(head.val)</span><br><span class="line">            head = head.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> stack[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure><h1 id="思考">思考</h1><ol type="1"><li>python中使用list模拟栈</li><li>list[param1,param2,param3]<br />param1: 相当于start_index，可以为空，默认是0<br />param2: 相当于end_index，可以为空，默认是list.size<br />param3: 步长，默认为1。步长为-1时，返回倒序原序列</li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。&lt;a href=&quot;https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://example.com/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
-    
-    <category term="链表" scheme="http://example.com/tags/%E9%93%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>30.包含min函数的栈</title>
-    <link href="http://example.com/2022/01/04/leetcode30/"/>
-    <id>http://example.com/2022/01/04/leetcode30/</id>
-    <published>2022-01-04T14:21:59.000Z</published>
-    <updated>2022-01-04T14:35:23.328Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。<a href="https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/">题目链接</a></p><span id="more"></span><p>示例： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MinStack minStack = new MinStack();</span><br><span class="line">minStack.push(-2);</span><br><span class="line">minStack.push(0);</span><br><span class="line">minStack.push(-3);</span><br><span class="line">minStack.min();   --&gt; 返回 -3.</span><br><span class="line">minStack.pop();</span><br><span class="line">minStack.top();      --&gt; 返回 0.</span><br><span class="line">minStack.min();   --&gt; 返回 -2.</span><br></pre></td></tr></table></figure></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinStack</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        initialize your data structure here.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.stackA = []</span><br><span class="line">        self.stackB = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type x: int</span></span><br><span class="line"><span class="string">        :rtype: None</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.stackA.append(x)</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">len</span>(self.stackB)&lt;=<span class="number">0</span> <span class="keyword">or</span> x&lt;=self.stackB[-<span class="number">1</span>]):  <span class="comment">##划重点</span></span><br><span class="line">            self.stackB.append(x)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :rtype: None</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span>(self.stackB[-<span class="number">1</span>]==self.stackA[-<span class="number">1</span>]):  <span class="comment">##划重点</span></span><br><span class="line">            self.stackB.pop()</span><br><span class="line">        </span><br><span class="line">        self.stackA.pop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">top</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.stackA[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">min</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.stackB[-<span class="number">1</span>]</span><br></pre></td></tr></table></figure><h1 id="思考">思考</h1><ol type="1"><li>使用两个list分别模拟两个栈</li><li>第一个栈正常的存和取，第二个栈栈顶只存最小的数</li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。&lt;a href=&quot;https://leetcode-cn.com/problems/bao-han-minhan-shu-de-zhan-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://example.com/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
-    
-    <category term="栈和队列" scheme="http://example.com/tags/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/"/>
     
   </entry>
   
