@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-01-11T14:03:48.399Z</updated>
+  <updated>2022-01-12T15:15:48.461Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>47.礼物的最大价值</title>
+    <link href="http://example.com/2022/01/12/leetcode47/"/>
+    <id>http://example.com/2022/01/12/leetcode47/</id>
+    <published>2022-01-12T15:11:43.000Z</published>
+    <updated>2022-01-12T15:15:48.461Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>在一个 m*n 的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于 0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格、直到到达棋盘的右下角。给定一个棋盘及其上面的礼物的价值，请计算你最多能拿到多少价值的礼物？<a href="https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/">题目链接</a><br /><span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxValue</span>(<span class="params">self, grid</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type grid: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> grid <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> <span class="built_in">len</span>(grid)&lt;=<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        dp = grid </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(grid)):</span><br><span class="line">            dp[i][<span class="number">0</span>] = dp[i-<span class="number">1</span>][<span class="number">0</span>] + grid[i][<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(grid[<span class="number">0</span>])):</span><br><span class="line">            dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j-<span class="number">1</span>] + grid[<span class="number">0</span>][j]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(grid)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(grid[<span class="number">0</span>])):</span><br><span class="line">                dp[i][j] = <span class="built_in">max</span>(dp[i-<span class="number">1</span>][j], dp[i][j-<span class="number">1</span>]) + grid[i][j]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[<span class="built_in">len</span>(grid)-<span class="number">1</span>][<span class="built_in">len</span>(grid[<span class="number">0</span>])-<span class="number">1</span>]</span><br></pre></td></tr></table></figure><h1 id="思考">思考</h1><p><span class="math display">\[dp[i][j] = max(dp[i-1][j], dp[i][j-1]) + nums[i][j]\]</span></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;在一个 m*n 的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于 0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格、直到到达棋盘的右下角。给定一个棋盘及其上面的礼物的价值，请计算你最多能拿到多少价值的礼物？&lt;a href=&quot;https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br /&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://example.com/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
+    
+    <category term="动态规划" scheme="http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+    <category term="数组" scheme="http://example.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+    <category term="矩阵" scheme="http://example.com/tags/%E7%9F%A9%E9%98%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>53.连续子数组的最大和</title>
+    <link href="http://example.com/2022/01/12/leetcode53-3/"/>
+    <id>http://example.com/2022/01/12/leetcode53-3/</id>
+    <published>2022-01-12T14:54:52.000Z</published>
+    <updated>2022-01-12T15:09:48.179Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。<a href="https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSubArray</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        dp     = []</span><br><span class="line">        dp.append(nums[<span class="number">0</span>])</span><br><span class="line">        maxSum = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(nums)):</span><br><span class="line">            dp.append(<span class="built_in">max</span>(dp[i-<span class="number">1</span>], <span class="number">0</span>) + nums[i])</span><br><span class="line">            maxSum = <span class="built_in">max</span>(maxSum, dp[i])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> maxSum</span><br></pre></td></tr></table></figure><h1 id="思考">思考</h1><p><span class="math display">\[dp[i]=max(dp[i-1), 0) + nums[i]\]</span></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。&lt;a href=&quot;https://leetcode-cn.com/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
+    
+    <category term="动态规划" scheme="http://example.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+    <category term="数组" scheme="http://example.com/tags/%E6%95%B0%E7%BB%84/"/>
+    
+    <category term="剑指Offer" scheme="http://example.com/tags/%E5%89%91%E6%8C%87Offer/"/>
+    
+  </entry>
   
   <entry>
     <title>121.股票的最大利润</title>
@@ -478,58 +536,6 @@
     <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
     
     <category term="字符串" scheme="http://example.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>35.复杂链表的复制</title>
-    <link href="http://example.com/2022/01/06/leetcode35/"/>
-    <id>http://example.com/2022/01/06/leetcode35/</id>
-    <published>2022-01-05T16:29:50.000Z</published>
-    <updated>2022-01-05T16:37:21.881Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。<a href="https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">copyRandomList</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: Node</span></span><br><span class="line"><span class="string">        :rtype: Node</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> head==<span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line"></span><br><span class="line">        cur = head</span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            tmp = Node(cur.val)</span><br><span class="line">            tmp.<span class="built_in">next</span> = cur.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span> = tmp</span><br><span class="line">            cur = tmp.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        cur = head</span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            <span class="keyword">if</span> cur.random:</span><br><span class="line">                cur.<span class="built_in">next</span>.random = cur.random.<span class="built_in">next</span></span><br><span class="line">            cur = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        cur = res = head.<span class="built_in">next</span></span><br><span class="line">        pre = head</span><br><span class="line">        <span class="keyword">while</span> cur.<span class="built_in">next</span>:</span><br><span class="line">            pre.<span class="built_in">next</span> = pre.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span> = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            pre = pre.<span class="built_in">next</span></span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">            </span><br><span class="line">        pre.<span class="built_in">next</span> = <span class="literal">None</span> </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure><h1 id="思考">思考</h1><ol type="1"><li>复制每个节点，并插入到原节点之后(只用next指针连接)</li><li>为复制节点添加random指针</li><li>将原节点和复制节点拆分，注意，<strong>原节点也要拆分</strong></li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。&lt;a href=&quot;https://leetcode-cn.com/problems/fu-za-lian-biao-de-fu-zhi-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://example.com/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
-    
-    <category term="链表" scheme="http://example.com/tags/%E9%93%BE%E8%A1%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>24.翻转链表</title>
-    <link href="http://example.com/2022/01/06/leetcode24/"/>
-    <id>http://example.com/2022/01/06/leetcode24/</id>
-    <published>2022-01-05T16:21:44.000Z</published>
-    <updated>2022-01-05T16:38:48.625Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。<a href="https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseList</span>(<span class="params">self, head</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> head==<span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">            </span><br><span class="line">        pre  = <span class="literal">None</span></span><br><span class="line">        cur  = head</span><br><span class="line">        nxt  = head.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur!=<span class="literal">None</span>:</span><br><span class="line">            cur.<span class="built_in">next</span> = pre </span><br><span class="line">            pre      = cur </span><br><span class="line">            cur      = nxt </span><br><span class="line">            <span class="keyword">if</span> cur==<span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">return</span> pre </span><br><span class="line">            nxt      = cur.<span class="built_in">next</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> pre</span><br></pre></td></tr></table></figure><h1 id="思考">思考</h1><ol type="1"><li>循环终止条件：cur!=None。因为最后一个节点仍需要翻转</li><li>翻转终止条件：cur=None</li></ol>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。&lt;a href=&quot;https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://example.com/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://example.com/tags/LeetCode/"/>
-    
-    <category term="链表" scheme="http://example.com/tags/%E9%93%BE%E8%A1%A8/"/>
     
   </entry>
   
