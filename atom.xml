@@ -6,7 +6,7 @@
   <link href="http://fly-adser.top/atom.xml" rel="self"/>
   
   <link href="http://fly-adser.top/"/>
-  <updated>2022-01-18T15:21:51.440Z</updated>
+  <updated>2022-01-19T13:36:00.231Z</updated>
   <id>http://fly-adser.top/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>61.扑克牌中的顺子</title>
+    <link href="http://fly-adser.top/2022/01/19/leetcode61/"/>
+    <id>http://fly-adser.top/2022/01/19/leetcode61/</id>
+    <published>2022-01-19T13:34:02.000Z</published>
+    <updated>2022-01-19T13:36:00.231Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>从若干副扑克牌中随机抽 5 张牌，判断是不是一个顺子，即这5张牌是不是连续的。2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。<a href="https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isStraight</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        repeat = <span class="built_in">set</span>() </span><br><span class="line">        ma, mi = <span class="number">0</span>, <span class="number">14</span> </span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> num==<span class="number">0</span>: <span class="keyword">continue</span> </span><br><span class="line">            ma = <span class="built_in">max</span>(ma, num)</span><br><span class="line">            mi = <span class="built_in">min</span>(mi, num)</span><br><span class="line">            <span class="keyword">if</span> num <span class="keyword">in</span> repeat: <span class="keyword">return</span> <span class="literal">False</span> </span><br><span class="line">            repeat.add(num)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ma-mi&lt;<span class="number">5</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;从若干副扑克牌中随机抽 5 张牌，判断是不是一个顺子，即这5张牌是不是连续的。2～10为数字本身，A为1，J为11，Q为12，K为13，而大、小王为 0 ，可以看成任意数字。A 不能视为 14。&lt;a href=&quot;https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="剑指Offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87Offer/"/>
+    
+    <category term="排序" scheme="http://fly-adser.top/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>45.把数组排成最小的数</title>
+    <link href="http://fly-adser.top/2022/01/19/leetcode45/"/>
+    <id>http://fly-adser.top/2022/01/19/leetcode45/</id>
+    <published>2022-01-19T13:25:20.000Z</published>
+    <updated>2022-01-19T13:27:49.715Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。<a href="https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minNumber</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.nums = [<span class="built_in">str</span>(num) <span class="keyword">for</span> num <span class="keyword">in</span> nums] </span><br><span class="line">        self.quick(<span class="number">0</span>, <span class="built_in">len</span>(nums)-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(self.nums)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">quick</span>(<span class="params">self, l, r</span>):</span></span><br><span class="line">        <span class="keyword">if</span> l&gt;=r: <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line">        i, j = l, r </span><br><span class="line">        <span class="keyword">while</span> i&lt;j:</span><br><span class="line">            <span class="keyword">while</span> self.nums[j]+self.nums[l]&gt;=self.nums[l]+self.nums[j] <span class="keyword">and</span> i&lt;j: j-=<span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> self.nums[i]+self.nums[l]&lt;=self.nums[l]+self.nums[i] <span class="keyword">and</span> i&lt;j: i+=<span class="number">1</span></span><br><span class="line">            self.nums[i], self.nums[j] = self.nums[j], self.nums[i]</span><br><span class="line">        self.nums[i], self.nums[l] = self.nums[l], self.nums[i]</span><br><span class="line"></span><br><span class="line">        self.quick(l, i-<span class="number">1</span>)</span><br><span class="line">        self.quick(i+<span class="number">1</span>, r)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。&lt;a href=&quot;https://leetcode-cn.com/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="剑指Offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87Offer/"/>
+    
+    <category term="排序" scheme="http://fly-adser.top/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>54.二叉搜索树的第k大节点</title>
@@ -496,58 +548,6 @@
     <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
     
     <category term="动态规划" scheme="http://fly-adser.top/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>28.对称的二叉树</title>
-    <link href="http://fly-adser.top/2022/01/11/leetcode28/"/>
-    <id>http://fly-adser.top/2022/01/11/leetcode28/</id>
-    <published>2022-01-10T23:26:15.000Z</published>
-    <updated>2022-01-10T23:29:28.453Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。<a href="https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/">题目链接</a><br /><span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isSymmetric</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>: <span class="keyword">return</span> <span class="literal">True</span> </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.symTree(root.left, root.right)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">symTree</span>(<span class="params">self, A, B</span>):</span></span><br><span class="line">        <span class="keyword">if</span> A <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">and</span> B <span class="keyword">is</span> <span class="literal">None</span>: <span class="keyword">return</span> <span class="literal">True</span> </span><br><span class="line">        <span class="keyword">if</span> A <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> B <span class="keyword">is</span> <span class="literal">None</span>: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> A.val!=B.val: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.symTree(A.left, B.right) <span class="keyword">and</span> self.symTree(A.right, B.left)</span><br></pre></td></tr></table></figure><h1 id="思考">思考</h1><p>针对递归：<br />1）选择自上而下还是自下而上<br />2）想清楚终止条件</p>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。&lt;a href=&quot;https://leetcode-cn.com/problems/dui-cheng-de-er-cha-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br /&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>27.二叉树的镜像</title>
-    <link href="http://fly-adser.top/2022/01/11/leetcode27/"/>
-    <id>http://fly-adser.top/2022/01/11/leetcode27/</id>
-    <published>2022-01-10T23:13:05.000Z</published>
-    <updated>2022-01-10T23:19:58.212Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>请完成一个函数，输入一个二叉树，该函数输出它的镜像。<a href="https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/">题目链接</a><br /><span id="more"></span></p><h1 id="解法">解法</h1><h2 id="自上而下递归">自上而下递归</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mirrorTree</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: TreeNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>: <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        root.left, root.right = root.right, root.left </span><br><span class="line">        self.mirrorTree(root.left)</span><br><span class="line">        self.mirrorTree(root.right)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure><h2 id="自下而上递归">自下而上递归</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mirrorTree</span>(<span class="params">self, root: TreeNode</span>) -&gt; TreeNode:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span></span><br><span class="line">        root.left, root.right = self.mirrorTree(root.right), self.mirrorTree(root.left)</span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;请完成一个函数，输入一个二叉树，该函数输出它的镜像。&lt;a href=&quot;https://leetcode-cn.com/problems/er-cha-shu-de-jing-xiang-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br /&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
