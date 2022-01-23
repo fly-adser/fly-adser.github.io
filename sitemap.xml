@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://fly-adser.top/2021/12/30/LTRpartA/</loc>
+    
+    <lastmod>2022-01-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://fly-adser.top/2022/01/23/leetcode33/</loc>
     
     <lastmod>2022-01-23</lastmod>
@@ -399,15 +408,6 @@
   
   <url>
     <loc>http://fly-adser.top/2021/12/29/RTBpapers/</loc>
-    
-    <lastmod>2022-01-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://fly-adser.top/2021/12/30/LTRpartA/</loc>
     
     <lastmod>2022-01-08</lastmod>
     
