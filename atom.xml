@@ -6,7 +6,7 @@
   <link href="http://fly-adser.top/atom.xml" rel="self"/>
   
   <link href="http://fly-adser.top/"/>
-  <updated>2022-01-23T08:59:24.462Z</updated>
+  <updated>2022-01-24T14:37:56.243Z</updated>
   <id>http://fly-adser.top/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>65.不用加减乘除做加法</title>
+    <link href="http://fly-adser.top/2022/01/24/leetcode65/"/>
+    <id>http://fly-adser.top/2022/01/24/leetcode65/</id>
+    <published>2022-01-24T14:05:08.000Z</published>
+    <updated>2022-01-24T14:37:56.243Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。<a href="https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">self, a, b</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type a: int</span></span><br><span class="line"><span class="string">        :type b: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        x = <span class="number">0xffffffff</span></span><br><span class="line">        a, b = a &amp; x, b &amp; x</span><br><span class="line">        <span class="keyword">while</span> b != <span class="number">0</span>:</span><br><span class="line">            a, b = (a ^ b), (a &amp; b) &lt;&lt; <span class="number">1</span> &amp; x</span><br><span class="line">        <span class="keyword">return</span> a <span class="keyword">if</span> a &lt;= <span class="number">0x7fffffff</span> <span class="keyword">else</span> ~(a ^ x)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。&lt;a href=&quot;https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="位运算" scheme="http://fly-adser.top/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>191.二进制中1的个数</title>
+    <link href="http://fly-adser.top/2022/01/24/leetcode191/"/>
+    <id>http://fly-adser.top/2022/01/24/leetcode191/</id>
+    <published>2022-01-24T13:52:15.000Z</published>
+    <updated>2022-01-24T14:03:54.300Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 '1' 的个数。<a href="https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hammingWeight</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        res = <span class="number">0</span> </span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            <span class="keyword">if</span> n&amp;<span class="number">1</span>: res += <span class="number">1</span></span><br><span class="line">            n &gt;&gt;= <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 &#39;1&#39; 的个数。&lt;a href=&quot;https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="位运算" scheme="http://fly-adser.top/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>33.二叉搜索树的后序遍历序列</title>
@@ -484,57 +536,6 @@
     <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
     
     <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>151.翻转单词顺序</title>
-    <link href="http://fly-adser.top/2022/01/16/leetcode151/"/>
-    <id>http://fly-adser.top/2022/01/16/leetcode151/</id>
-    <published>2022-01-16T07:51:52.000Z</published>
-    <updated>2022-01-22T08:01:07.609Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串"I am a student. "，则输出"student. a am I"。<a href="https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseWords</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        strList    = s.split(<span class="string">&quot; &quot;</span>) </span><br><span class="line">        strListRes = []</span><br><span class="line">        <span class="keyword">for</span> subStr <span class="keyword">in</span> strList:</span><br><span class="line">            <span class="keyword">if</span> subStr==<span class="string">&quot;&quot;</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            strListRes.append(subStr)</span><br><span class="line"></span><br><span class="line">        strListRes = self.reverseHelper(strListRes)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot; &quot;</span>.join(strListRes).strip()</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reverseHelper</span>(<span class="params">self, subStr</span>):</span></span><br><span class="line">        left, right = <span class="number">0</span>, <span class="built_in">len</span>(subStr)-<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left&lt;right:</span><br><span class="line">            subStr[left], subStr[right] = subStr[right], subStr[left]</span><br><span class="line">            left  = left + <span class="number">1</span></span><br><span class="line">            right = right - <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> subStr</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串&quot;I am a student. &quot;，则输出&quot;student. a am I&quot;。&lt;a href=&quot;https://leetcode-cn.com/problems/fan-zhuan-dan-ci-shun-xu-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="双指针" scheme="http://fly-adser.top/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>57.和为s的两个数</title>
-    <link href="http://fly-adser.top/2022/01/16/leetcode57/"/>
-    <id>http://fly-adser.top/2022/01/16/leetcode57/</id>
-    <published>2022-01-16T07:47:25.000Z</published>
-    <updated>2022-01-16T07:51:02.252Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。<a href="https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">twoSum</span>(<span class="params">self, nums, target</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type target: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        left, right = <span class="number">0</span>, <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">while</span> left&lt;right:</span><br><span class="line">            <span class="keyword">if</span> nums[left]+nums[right]&lt;target:</span><br><span class="line">                left = left + <span class="number">1</span> </span><br><span class="line">            <span class="keyword">elif</span> nums[left] + nums[right]&gt;target:</span><br><span class="line">                right = right - <span class="number">1</span> </span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                res.append(nums[left])</span><br><span class="line">                res.append(nums[right])</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。&lt;a href=&quot;https://leetcode-cn.com/problems/he-wei-sde-liang-ge-shu-zi-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="双指针" scheme="http://fly-adser.top/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
     
   </entry>
   
