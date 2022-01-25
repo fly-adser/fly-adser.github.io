@@ -6,7 +6,7 @@
   <link href="http://fly-adser.top/atom.xml" rel="self"/>
   
   <link href="http://fly-adser.top/"/>
-  <updated>2022-01-24T14:37:56.243Z</updated>
+  <updated>2022-01-25T14:50:03.738Z</updated>
   <id>http://fly-adser.top/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>56-2.数组中出现的次数II</title>
+    <link href="http://fly-adser.top/2022/01/25/leetcode56-2/"/>
+    <id>http://fly-adser.top/2022/01/25/leetcode56-2/</id>
+    <published>2022-01-25T14:48:10.000Z</published>
+    <updated>2022-01-25T14:50:03.738Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。<a href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        res = <span class="number">0</span> </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">32</span>):</span><br><span class="line">            countOne = <span class="number">0</span> </span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">                countOne += (num &gt;&gt; i) &amp; <span class="number">1</span> </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> countOne % <span class="number">3</span> == <span class="number">1</span>:</span><br><span class="line">                res |= <span class="number">1</span> &lt;&lt; i </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="位运算" scheme="http://fly-adser.top/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>56-1.数组中数字出现的次数</title>
+    <link href="http://fly-adser.top/2022/01/25/leetcode56-1/"/>
+    <id>http://fly-adser.top/2022/01/25/leetcode56-1/</id>
+    <published>2022-01-25T14:44:37.000Z</published>
+    <updated>2022-01-25T14:47:15.240Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。<a href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/">题目</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">singleNumbers</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        x, y, n, m = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span> </span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            n ^= num </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> n&amp;m==<span class="number">0</span>:</span><br><span class="line">            m &lt;&lt;= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> num &amp; m == <span class="number">0</span>: </span><br><span class="line">                x ^= num </span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                y ^= num </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>  x, y</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/&quot;&gt;题目&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="位运算" scheme="http://fly-adser.top/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>65.不用加减乘除做加法</title>
@@ -484,58 +536,6 @@
     <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
     
     <category term="二叉树" scheme="http://fly-adser.top/tags/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>13.机器人的运动范围</title>
-    <link href="http://fly-adser.top/2022/01/17/leetcode13/"/>
-    <id>http://fly-adser.top/2022/01/17/leetcode13/</id>
-    <published>2022-01-17T14:48:53.000Z</published>
-    <updated>2022-01-22T07:55:14.676Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？<a href="https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">movingCount</span>(<span class="params">self, m, n, k</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type m: int</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        valid = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, m):</span><br><span class="line">            valid.append([<span class="literal">False</span>]*n)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> self.helper(<span class="number">0</span>,<span class="number">0</span>,k,m,n,valid)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">self, i, j, k, m, n, valid</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=i&lt;m <span class="keyword">or</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=j&lt;n <span class="keyword">or</span> valid[i][j] <span class="keyword">or</span> self.getSum(i)+self.getSum(j)&gt;k: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        valid[i][j] = <span class="literal">True</span> </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>+self.helper(i-<span class="number">1</span>, j, k, m, n, valid)+self.helper(i+<span class="number">1</span>,j,k,m,n,valid)+self.helper(i,j-<span class="number">1</span>,k,m,n,valid)+self.helper(i,j+<span class="number">1</span>,k,m,n,valid)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getSum</span>(<span class="params">self, digit</span>):</span></span><br><span class="line">        res = <span class="number">0</span> </span><br><span class="line">        <span class="keyword">while</span> digit!=<span class="number">0</span>:</span><br><span class="line">            res = res + (digit % <span class="number">10</span>)</span><br><span class="line">            digit = digit // <span class="number">10</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？&lt;a href=&quot;https://leetcode-cn.com/problems/ji-qi-ren-de-yun-dong-fan-wei-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>79.矩阵中的路径</title>
-    <link href="http://fly-adser.top/2022/01/17/leetcode79/"/>
-    <id>http://fly-adser.top/2022/01/17/leetcode79/</id>
-    <published>2022-01-17T14:43:54.000Z</published>
-    <updated>2022-01-17T14:47:02.043Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。<a href="https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">exist</span>(<span class="params">self, board, word</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type board: List[List[str]]</span></span><br><span class="line"><span class="string">        :type word: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(word)&lt;=<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span> </span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(board)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(board[<span class="number">0</span>])):</span><br><span class="line">                <span class="keyword">if</span> self.helper(board, i, j, word, <span class="number">0</span>):</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span>  </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">self, board, i, j, word, k</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=i&lt;=<span class="built_in">len</span>(board)-<span class="number">1</span> <span class="keyword">or</span> <span class="keyword">not</span> <span class="number">0</span>&lt;=j&lt;=<span class="built_in">len</span>(board[<span class="number">0</span>])-<span class="number">1</span> <span class="keyword">or</span> board[i][j]!=word[k]: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> k&gt;=<span class="built_in">len</span>(word)-<span class="number">1</span>: <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">        board[i][j] = <span class="string">&quot;&quot;</span></span><br><span class="line">        res = self.helper(board, i-<span class="number">1</span>, j, word, k+<span class="number">1</span>) <span class="keyword">or</span> self.helper(board, i+<span class="number">1</span>, j, word, k+<span class="number">1</span>) <span class="keyword">or</span> self.helper(board, i, j-<span class="number">1</span>, word, k+<span class="number">1</span>) <span class="keyword">or</span>  self.helper(board, i, j+<span class="number">1</span>, word, k+<span class="number">1</span>)</span><br><span class="line">        board[i][j] = word[k]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;给定一个 m x n 二维字符网格 board 和一个字符串单词 word 。如果 word 存在于网格中，返回 true ；否则，返回 false 。单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。&lt;a href=&quot;https://leetcode-cn.com/problems/ju-zhen-zhong-de-lu-jing-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
