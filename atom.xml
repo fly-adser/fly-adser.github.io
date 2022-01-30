@@ -6,7 +6,7 @@
   <link href="http://fly-adser.top/atom.xml" rel="self"/>
   
   <link href="http://fly-adser.top/"/>
-  <updated>2022-01-28T14:56:25.589Z</updated>
+  <updated>2022-01-30T15:51:11.716Z</updated>
   <id>http://fly-adser.top/</id>
   
   <author>
@@ -15,6 +15,110 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>59.队列的最大值</title>
+    <link href="http://fly-adser.top/2022/01/30/leetcodesd69/"/>
+    <id>http://fly-adser.top/2022/01/30/leetcodesd69/</id>
+    <published>2022-01-30T15:48:43.000Z</published>
+    <updated>2022-01-30T15:51:11.716Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的均摊时间复杂度都是O(1)。<a href="https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> queue</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MaxQueue</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        self.queue = queue.Queue()</span><br><span class="line">        self.deque = queue.deque()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">max_value</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.deque[<span class="number">0</span>] <span class="keyword">if</span> self.deque <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push_back</span>(<span class="params">self, value: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        self.queue.put(value)</span><br><span class="line">        <span class="keyword">while</span> self.deque <span class="keyword">and</span> self.deque[-<span class="number">1</span>] &lt; value:</span><br><span class="line">            self.deque.pop()</span><br><span class="line">        self.deque.append(value)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop_front</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.queue.empty(): <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        val = self.queue.get()</span><br><span class="line">        <span class="keyword">if</span> val == self.deque[<span class="number">0</span>]:</span><br><span class="line">            self.deque.popleft()</span><br><span class="line">        <span class="keyword">return</span> val</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;请定义一个队列并实现函数 max_value 得到队列里的最大值，要求函数max_value、push_back 和 pop_front 的均摊时间复杂度都是O(1)。&lt;a href=&quot;https://leetcode-cn.com/problems/dui-lie-de-zui-da-zhi-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="栈与队列" scheme="http://fly-adser.top/tags/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>239.滑动窗口的最大值</title>
+    <link href="http://fly-adser.top/2022/01/30/leetcode239/"/>
+    <id>http://fly-adser.top/2022/01/30/leetcode239/</id>
+    <published>2022-01-30T15:46:25.000Z</published>
+    <updated>2022-01-30T15:51:16.371Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。<a href="https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSlidingWindow</span>(<span class="params">self, nums, k</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        deque = collections.deque()</span><br><span class="line">        res, n = [], <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">for</span> i,j <span class="keyword">in</span> <span class="built_in">zip</span>(<span class="built_in">range</span>(<span class="number">1</span>-k, n+<span class="number">1</span>-k), <span class="built_in">range</span>(n)):</span><br><span class="line">            <span class="keyword">if</span> i&gt;<span class="number">0</span> <span class="keyword">and</span> deque[<span class="number">0</span>]==nums[i-<span class="number">1</span>]:</span><br><span class="line">                deque.popleft() </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span> <span class="built_in">len</span>(deque)&gt;<span class="number">0</span> <span class="keyword">and</span> deque[-<span class="number">1</span>]&lt;nums[j]:</span><br><span class="line">                deque.pop()</span><br><span class="line">            deque.append(nums[j])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> i&gt;=<span class="number">0</span>:</span><br><span class="line">                res.append(deque[<span class="number">0</span>])</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。&lt;a href=&quot;https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="栈与队列" scheme="http://fly-adser.top/tags/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>8.把字符串转换成整数</title>
+    <link href="http://fly-adser.top/2022/01/30/leetcode8/"/>
+    <id>http://fly-adser.top/2022/01/30/leetcode8/</id>
+    <published>2022-01-30T15:43:51.000Z</published>
+    <updated>2022-01-30T15:45:49.368Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>写一个函数 StrToInt，实现把字符串转换成整数这个功能。不能使用 atoi 或者其他类似的库函数。<a href="https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/">题目</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">strToInt</span>(<span class="params">self, <span class="built_in">str</span></span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type str: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="built_in">str</span> = <span class="built_in">str</span>.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">str</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        res, int_max, int_min, bodary = <span class="number">0</span>, <span class="number">2</span>**<span class="number">31</span>-<span class="number">1</span>, -<span class="number">2</span>**<span class="number">31</span>, <span class="number">2</span>**<span class="number">31</span> // <span class="number">10</span></span><br><span class="line">        i, sign = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">str</span>[<span class="number">0</span>]==<span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">            sign = -<span class="number">1</span> </span><br><span class="line">            i    = <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">str</span>[<span class="number">0</span>]==<span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">            i = <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">str</span>[i:]:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> <span class="string">&#x27;0&#x27;</span>&lt;=c&lt;=<span class="string">&#x27;9&#x27;</span>: <span class="keyword">break</span> </span><br><span class="line">            <span class="keyword">if</span> res&gt;bodary <span class="keyword">or</span> res==bodary <span class="keyword">and</span> c&gt;<span class="string">&#x27;7&#x27;</span>:</span><br><span class="line">                <span class="keyword">return</span> int_max <span class="keyword">if</span> sign==<span class="number">1</span> <span class="keyword">else</span> int_min  </span><br><span class="line">            </span><br><span class="line">            res = res * <span class="number">10</span> + <span class="built_in">ord</span>(c) - <span class="built_in">ord</span>(<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> sign*res</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;写一个函数 StrToInt，实现把字符串转换成整数这个功能。不能使用 atoi 或者其他类似的库函数。&lt;a href=&quot;https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/&quot;&gt;题目&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="字符串" scheme="http://fly-adser.top/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>20.表示数值的字符串</title>
+    <link href="http://fly-adser.top/2022/01/30/leetcodesd20/"/>
+    <id>http://fly-adser.top/2022/01/30/leetcodesd20/</id>
+    <published>2022-01-30T15:41:09.000Z</published>
+    <updated>2022-01-30T15:44:09.073Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。<a href="https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/">题目</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isNumber</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        states = [</span><br><span class="line">            &#123;<span class="string">&#x27; &#x27;</span>:<span class="number">0</span>, <span class="string">&#x27;s&#x27;</span>:<span class="number">1</span>, <span class="string">&#x27;d&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;.&#x27;</span>:<span class="number">4</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;d&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;.&#x27;</span>:<span class="number">4</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;d&#x27;</span>:<span class="number">2</span>, <span class="string">&#x27;.&#x27;</span>:<span class="number">3</span>, <span class="string">&#x27;e&#x27;</span>: <span class="number">5</span>, <span class="string">&#x27; &#x27;</span>:<span class="number">8</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;d&#x27;</span>:<span class="number">3</span>, <span class="string">&#x27;e&#x27;</span>:<span class="number">5</span>, <span class="string">&#x27; &#x27;</span>:<span class="number">8</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;d&#x27;</span>:<span class="number">3</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;s&#x27;</span>:<span class="number">6</span>, <span class="string">&#x27;d&#x27;</span>:<span class="number">7</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;d&#x27;</span>:<span class="number">7</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;d&#x27;</span>:<span class="number">7</span>, <span class="string">&#x27; &#x27;</span>:<span class="number">8</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27; &#x27;</span>:<span class="number">8</span>&#125;</span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        p = <span class="number">0</span> </span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;0&#x27;</span>&lt;=c&lt;=<span class="string">&#x27;9&#x27;</span>: t=<span class="string">&#x27;d&#x27;</span></span><br><span class="line">            <span class="keyword">elif</span> c <span class="keyword">in</span> <span class="string">&#x27;. &#x27;</span>: t=c</span><br><span class="line">            <span class="keyword">elif</span> c <span class="keyword">in</span> <span class="string">&#x27;eE&#x27;</span>: t=<span class="string">&#x27;e&#x27;</span></span><br><span class="line">            <span class="keyword">elif</span> c <span class="keyword">in</span> <span class="string">&#x27;+-&#x27;</span>: t=<span class="string">&#x27;s&#x27;</span></span><br><span class="line">            <span class="keyword">else</span>: t=<span class="string">&#x27;?&#x27;</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> t <span class="keyword">not</span> <span class="keyword">in</span> states[p] : <span class="keyword">return</span> <span class="literal">False</span> </span><br><span class="line">            p = states[p][t]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> p <span class="keyword">in</span> (<span class="number">2</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">8</span>)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。&lt;a href=&quot;https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/&quot;&gt;题目&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="字符串" scheme="http://fly-adser.top/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+  </entry>
   
   <entry>
     <title>946.栈的压入、弹出序列</title>
@@ -412,110 +516,6 @@
     
     <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
 &lt;p&gt;给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。&lt;a href=&quot;https://leetcode-cn.com/problems/er-cha-shu-de-zui-jin-gong-gong-zu-xian-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>235.二叉搜索树的最近公共祖先</title>
-    <link href="http://fly-adser.top/2022/01/22/leetcode235/"/>
-    <id>http://fly-adser.top/2022/01/22/leetcode235/</id>
-    <published>2022-01-22T04:28:28.000Z</published>
-    <updated>2022-01-22T04:31:06.637Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。<a href="https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lowestCommonAncestor</span>(<span class="params">self, root, p, q</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :type p: TreeNode</span></span><br><span class="line"><span class="string">        :type q: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: TreeNode</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> p.val&gt;q.val:</span><br><span class="line">            p, q = q, p </span><br><span class="line">        </span><br><span class="line">        self.ans = <span class="literal">None</span> </span><br><span class="line">        self.helper(root, p, q)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.ans</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">self, root, p, q</span>):</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> root.val&gt;q.val:</span><br><span class="line">            self.helper(root.left, p, q)</span><br><span class="line">        <span class="keyword">elif</span> root.val&lt;p.val:</span><br><span class="line">            self.helper(root.right, p, q) </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.ans = root </span><br><span class="line">            <span class="keyword">return</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。&lt;a href=&quot;https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-zui-jin-gong-gong-zu-xian-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>645.求1+2+…+n</title>
-    <link href="http://fly-adser.top/2022/01/22/leetcode645/"/>
-    <id>http://fly-adser.top/2022/01/22/leetcode645/</id>
-    <published>2022-01-22T04:19:41.000Z</published>
-    <updated>2022-01-22T04:27:45.431Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>求 1+2+...+n ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。<a href="https://leetcode-cn.com/problems/qiu-12n-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    res = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sumNums</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        n&gt;<span class="number">1</span> <span class="keyword">and</span> self.sumNums(n-<span class="number">1</span>)</span><br><span class="line">        self.res += n </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;求 1+2+...+n ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。&lt;a href=&quot;https://leetcode-cn.com/problems/qiu-12n-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>110.平衡二叉树</title>
-    <link href="http://fly-adser.top/2022/01/22/leetcode110/"/>
-    <id>http://fly-adser.top/2022/01/22/leetcode110/</id>
-    <published>2022-01-22T04:16:30.000Z</published>
-    <updated>2022-01-22T04:18:53.272Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。<a href="https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isBalanced</span>(<span class="params">self, root</span>):</span></span><br><span class="line">         </span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>: <span class="keyword">return</span> <span class="literal">True</span> </span><br><span class="line"></span><br><span class="line">        left  = self.recur(root.left)</span><br><span class="line">        right = self.recur(root.right)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">abs</span>(left-right)&gt;<span class="number">1</span>: <span class="keyword">return</span> <span class="literal">False</span> </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.isBalanced(root.left) <span class="keyword">and</span> self.isBalanced(root.right)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">recur</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(self.recur(root.left), self.recur(root.right)) + <span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;输入一棵二叉树的根节点，判断该树是不是平衡二叉树。如果某二叉树中任意节点的左右子树的深度相差不超过1，那么它就是一棵平衡二叉树。&lt;a href=&quot;https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="搜索与回溯算法" scheme="http://fly-adser.top/tags/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>104.二叉树的深度</title>
-    <link href="http://fly-adser.top/2022/01/22/leetcode104/"/>
-    <id>http://fly-adser.top/2022/01/22/leetcode104/</id>
-    <published>2022-01-22T04:13:31.000Z</published>
-    <updated>2022-01-22T04:15:50.771Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。<a href="https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxDepth</span>(<span class="params">self, root</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type root: TreeNode</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.ans = <span class="number">0</span></span><br><span class="line">        self.recur(root, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.ans</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">recur</span>(<span class="params">self, root, depth</span>):</span></span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>: <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line">        depth += <span class="number">1</span></span><br><span class="line">        self.ans = <span class="built_in">max</span>(self.ans, depth)</span><br><span class="line">        self.recur(root.left, depth)</span><br><span class="line">        self.recur(root.right, depth)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。&lt;a href=&quot;https://leetcode-cn.com/problems/er-cha-shu-de-shen-du-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
     
     
     
