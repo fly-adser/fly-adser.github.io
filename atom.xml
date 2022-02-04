@@ -6,7 +6,7 @@
   <link href="http://fly-adser.top/atom.xml" rel="self"/>
   
   <link href="http://fly-adser.top/"/>
-  <updated>2022-01-31T02:18:55.645Z</updated>
+  <updated>2022-02-04T09:12:54.033Z</updated>
   <id>http://fly-adser.top/</id>
   
   <author>
@@ -15,6 +15,207 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>400.数字序列中某一位的数字</title>
+    <link href="http://fly-adser.top/2022/02/04/leetcode400/"/>
+    <id>http://fly-adser.top/2022/02/04/leetcode400/</id>
+    <published>2022-02-04T09:10:08.000Z</published>
+    <updated>2022-02-04T09:12:54.033Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。<a href="https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findNthDigit</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        digit, start, count = <span class="number">1</span>, <span class="number">1</span>, <span class="number">9</span> </span><br><span class="line">        <span class="keyword">while</span> n&gt;count:</span><br><span class="line">            n -= count </span><br><span class="line">            start *= <span class="number">10</span> </span><br><span class="line">            digit += <span class="number">1</span></span><br><span class="line">            count = <span class="number">9</span> * start * digit </span><br><span class="line">        </span><br><span class="line">        num = start + (n-<span class="number">1</span>) // digit </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">int</span>(<span class="built_in">str</span>(num)[(n-<span class="number">1</span>)%digit])</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="数学" scheme="http://fly-adser.top/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>233.1~n整数中1出现的次数</title>
+    <link href="http://fly-adser.top/2022/02/04/leetcode233/"/>
+    <id>http://fly-adser.top/2022/02/04/leetcode233/</id>
+    <published>2022-02-04T09:07:28.000Z</published>
+    <updated>2022-02-04T09:09:43.450Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。<a href="https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">countDigitOne</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        digit, res = <span class="number">1</span>, <span class="number">0</span></span><br><span class="line">        high, cur, low = n//<span class="number">10</span>, n%<span class="number">10</span>, <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> high!=<span class="number">0</span> <span class="keyword">or</span> cur!=<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> cur==<span class="number">0</span>:</span><br><span class="line">                res += high*digit </span><br><span class="line">            <span class="keyword">elif</span> cur==<span class="number">1</span>:</span><br><span class="line">                res += high*digit + low + <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res += (high+<span class="number">1</span>)*digit </span><br><span class="line">            </span><br><span class="line">            low += cur*digit </span><br><span class="line">            cur  = high % <span class="number">10</span></span><br><span class="line">            high = high // <span class="number">10</span></span><br><span class="line">            digit *= <span class="number">10</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。&lt;a href=&quot;https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="数学" scheme="http://fly-adser.top/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>343.剪绳子II</title>
+    <link href="http://fly-adser.top/2022/02/04/leetcode343-1/"/>
+    <id>http://fly-adser.top/2022/02/04/leetcode343-1/</id>
+    <published>2022-02-04T08:51:10.000Z</published>
+    <updated>2022-02-04T09:06:57.653Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m - 1] 。请问 k[0]<em>k[1]</em>…*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18  </p><p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。<a href="https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cuttingRope</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> n==<span class="number">2</span>: <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> n==<span class="number">3</span>: <span class="keyword">return</span> <span class="number">2</span> </span><br><span class="line">        <span class="keyword">if</span> n==<span class="number">4</span>: <span class="keyword">return</span> <span class="number">4</span> </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> n%<span class="number">3</span>==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">3</span>, n // <span class="number">3</span>) % <span class="number">1000000007</span> </span><br><span class="line">        <span class="keyword">if</span> n%<span class="number">3</span>==<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">3</span>, n // <span class="number">3</span> - <span class="number">1</span>) * <span class="number">4</span> % <span class="number">1000000007</span>  </span><br><span class="line">        <span class="keyword">if</span> n%<span class="number">3</span>==<span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">3</span>, n // <span class="number">3</span>) * <span class="number">2</span> % <span class="number">1000000007</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&amp;gt;1并且m&amp;gt;1），每段绳子的长度记为 k[0],k[1]…k[m - 1] 。请问 k[0]&lt;em&gt;k[1]&lt;/em&gt;…*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18  &lt;/p&gt;
+&lt;p&gt;答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。&lt;a href=&quot;https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="数学" scheme="http://fly-adser.top/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>51.数组中的逆序对</title>
+    <link href="http://fly-adser.top/2022/02/04/leetcodesd51/"/>
+    <id>http://fly-adser.top/2022/02/04/leetcodesd51/</id>
+    <published>2022-02-04T08:48:48.000Z</published>
+    <updated>2022-02-04T08:50:44.710Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。<a href="https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reversePairs</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.res = <span class="number">0</span></span><br><span class="line">        self.mergeSort(nums, <span class="number">0</span>, <span class="built_in">len</span>(nums)-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.res </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeSort</span>(<span class="params">self, nums, left, right</span>):</span></span><br><span class="line">        <span class="keyword">if</span> left&gt;=right: <span class="keyword">return</span> </span><br><span class="line">        </span><br><span class="line">        mid = left + (right - left) // <span class="number">2</span> </span><br><span class="line">        self.mergeSort(nums, left, mid)</span><br><span class="line">        self.mergeSort(nums, mid+<span class="number">1</span>, right)</span><br><span class="line">        self.merge(nums, left, mid, right) </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">self, nums, left, mid, right</span>):</span></span><br><span class="line">        <span class="keyword">if</span> left&gt;=right: <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line">        helper = [<span class="number">0</span>] * (right-left+<span class="number">1</span>)</span><br><span class="line">        i, j, k = left, mid+<span class="number">1</span>, <span class="number">0</span> </span><br><span class="line">        <span class="keyword">while</span> i&lt;=mid <span class="keyword">and</span> j&lt;=right:</span><br><span class="line">            <span class="keyword">if</span> nums[i]&gt;nums[j]:</span><br><span class="line">                self.res += (right-j+<span class="number">1</span>)</span><br><span class="line">                helper[k] = nums[i]</span><br><span class="line">                k += <span class="number">1</span></span><br><span class="line">                i += <span class="number">1</span> </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                helper[k] = nums[j]</span><br><span class="line">                k += <span class="number">1</span></span><br><span class="line">                j += <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> i&lt;=mid:</span><br><span class="line">            helper[k] = nums[i]</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            k += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> j&lt;=right:</span><br><span class="line">            helper[k] = nums[j]</span><br><span class="line">            j += <span class="number">1</span> </span><br><span class="line">            k += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, right-left+<span class="number">1</span>):</span><br><span class="line">            nums[left+i] = helper[i]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="动态规划" scheme="http://fly-adser.top/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>17.打印从1到最大的n位数</title>
+    <link href="http://fly-adser.top/2022/02/04/leetcodesd17/"/>
+    <id>http://fly-adser.top/2022/02/04/leetcodesd17/</id>
+    <published>2022-02-04T08:27:32.000Z</published>
+    <updated>2022-02-04T08:48:19.688Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。<a href="https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">printNumbers</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.num, self.res = [<span class="string">&#x27;0&#x27;</span>]*n, []</span><br><span class="line">        self.n = n </span><br><span class="line">        self.nine = <span class="number">0</span></span><br><span class="line">        self.start = n-<span class="number">1</span> </span><br><span class="line">        self.dfs(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.res</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">if</span> x==self.n:</span><br><span class="line">            s = <span class="string">&#x27;&#x27;</span>.join(self.num[self.start:])</span><br><span class="line">            <span class="keyword">if</span> s!=<span class="string">&#x27;0&#x27;</span>: self.res.append(s)</span><br><span class="line">            <span class="keyword">if</span> self.n-self.start==self.nine: self.start -=<span class="number">1</span> </span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">10</span>):</span><br><span class="line">            <span class="keyword">if</span> i==<span class="number">9</span>: self.nine += <span class="number">1</span> </span><br><span class="line">            self.num[x] = <span class="built_in">str</span>(i)</span><br><span class="line">            self.dfs(x+<span class="number">1</span>)</span><br><span class="line">        self.nine -= <span class="number">1</span> </span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。&lt;a href=&quot;https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="分治算法" scheme="http://fly-adser.top/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>60.n个骰子的点数</title>
+    <link href="http://fly-adser.top/2022/02/04/leetcodesd60/"/>
+    <id>http://fly-adser.top/2022/02/04/leetcodesd60/</id>
+    <published>2022-02-04T08:22:49.000Z</published>
+    <updated>2022-02-04T08:26:53.490Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值出现的概率。<a href="https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dicesProbability</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: List[float]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        dp = [<span class="number">1.0</span> / <span class="number">6</span>] * <span class="number">6</span> </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">            tmp = [<span class="number">0</span>]*(<span class="number">5</span>*i+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(dp)):</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">6</span>):</span><br><span class="line">                    tmp[j+k] += dp[j] / <span class="number">6</span> </span><br><span class="line">                </span><br><span class="line">            dp = tmp </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值出现的概率。&lt;a href=&quot;https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="动态规划" scheme="http://fly-adser.top/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>264.丑数</title>
+    <link href="http://fly-adser.top/2022/02/04/leetcode264/"/>
+    <id>http://fly-adser.top/2022/02/04/leetcode264/</id>
+    <published>2022-02-04T08:19:02.000Z</published>
+    <updated>2022-02-04T08:22:13.280Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。<a href="https://leetcode-cn.com/problems/chou-shu-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nthUglyNumber</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        dp, a, b, c = [<span class="number">1</span>]*n, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">            n1, n2, n3 = dp[a]*<span class="number">2</span>, dp[b]*<span class="number">3</span>, dp[c]*<span class="number">5</span></span><br><span class="line">            dp[i] = <span class="built_in">min</span>(n1, n2, n3)</span><br><span class="line">            <span class="keyword">if</span> dp[i]==n1: a += <span class="number">1</span> </span><br><span class="line">            <span class="keyword">if</span> dp[i]==n2: b += <span class="number">1</span> </span><br><span class="line">            <span class="keyword">if</span> dp[i]==n3: c += <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。&lt;a href=&quot;https://leetcode-cn.com/problems/chou-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="动态规划" scheme="http://fly-adser.top/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>10.正则表达式匹配</title>
+    <link href="http://fly-adser.top/2022/02/04/leetcode10/"/>
+    <id>http://fly-adser.top/2022/02/04/leetcode10/</id>
+    <published>2022-02-04T08:15:40.000Z</published>
+    <updated>2022-02-04T08:18:35.711Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>请实现一个函数用来匹配包含’. ‘和’<em>‘的正则表达式。模式中的字符’.’表示任意一个字符，而’</em>‘表示它前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串”aaa”与模式”a.a”和”ab<em>ac</em>a”匹配，但与”aa.a”和”ab*a”均不匹配。<a href="https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isMatch</span>(<span class="params">self, s, p</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type p: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        m, n = <span class="built_in">len</span>(s)+<span class="number">1</span>, <span class="built_in">len</span>(p)+<span class="number">1</span> </span><br><span class="line">        dp = [[<span class="literal">False</span>]*n <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">True</span> </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n, <span class="number">2</span>):</span><br><span class="line">            dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j-<span class="number">2</span>] <span class="keyword">and</span> p[j-<span class="number">1</span>]==<span class="string">&#x27;*&#x27;</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">                <span class="keyword">if</span> p[j-<span class="number">1</span>]==<span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                    <span class="keyword">if</span> dp[i][j-<span class="number">2</span>] <span class="keyword">or</span> (dp[i-<span class="number">1</span>][j] <span class="keyword">and</span> s[i-<span class="number">1</span>]==p[j-<span class="number">2</span>]) <span class="keyword">or</span> (dp[i-<span class="number">1</span>][j] <span class="keyword">and</span> p[j-<span class="number">2</span>]==<span class="string">&#x27;.&#x27;</span>): dp[i][j]=<span class="literal">True</span> </span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> dp[i-<span class="number">1</span>][j-<span class="number">1</span>] <span class="keyword">and</span> (s[i-<span class="number">1</span>]==p[j-<span class="number">1</span>] <span class="keyword">or</span> p[j-<span class="number">1</span>]==<span class="string">&#x27;.&#x27;</span>): dp[i][j]=<span class="literal">True</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[-<span class="number">1</span>][-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;请实现一个函数用来匹配包含’. ‘和’&lt;em&gt;‘的正则表达式。模式中的字符’.’表示任意一个字符，而’&lt;/em&gt;‘表示它前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串”aaa”与模式”a.a”和”ab&lt;em&gt;ac&lt;/em&gt;a”匹配，但与”aa.a”和”ab*a”均不匹配。&lt;a href=&quot;https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="动态规划" scheme="http://fly-adser.top/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+  </entry>
   
   <entry>
     <title>38.字符串的排列</title>
@@ -321,212 +522,6 @@
     <category term="机制策略" scheme="http://fly-adser.top/tags/%E6%9C%BA%E5%88%B6%E7%AD%96%E7%95%A5/"/>
     
     <category term="混排" scheme="http://fly-adser.top/tags/%E6%B7%B7%E6%8E%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>66.构建乘积数组</title>
-    <link href="http://fly-adser.top/2022/01/26/leetcode66/"/>
-    <id>http://fly-adser.top/2022/01/26/leetcode66/</id>
-    <published>2022-01-26T15:04:40.000Z</published>
-    <updated>2022-01-26T15:06:41.461Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h1><p>给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B[i] 的值是数组 A 中除了下标 i 以外的元素的积, 即 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法。<a href="https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">constructArr</span>(<span class="params">self, a</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type a: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        b, tmp = [<span class="number">1</span>]*<span class="built_in">len</span>(a), <span class="number">1</span> </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(a)):</span><br><span class="line">            b[i] = b[i-<span class="number">1</span>] * a[i-<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)-<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            tmp *= a[i+<span class="number">1</span>]</span><br><span class="line">            b[i] *= tmp  </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> b</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;数学&quot;&gt;&lt;a href=&quot;#数学&quot; class=&quot;headerlink&quot; title=&quot;数学&quot;&gt;&lt;/a&gt;数学&lt;/h1&gt;&lt;p&gt;给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B[i] 的值是数组 A 中除了下标 i 以外的元素的积, 即 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法。&lt;a href=&quot;https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="数学" scheme="http://fly-adser.top/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>169.数组中出现次数超过一半的数字</title>
-    <link href="http://fly-adser.top/2022/01/26/leetcode169/"/>
-    <id>http://fly-adser.top/2022/01/26/leetcode169/</id>
-    <published>2022-01-26T15:00:28.000Z</published>
-    <updated>2022-01-26T15:02:43.512Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。<a href="https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/">题目链接</a><br><span id="more"></span></p><h1 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">majorityElement</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        votes = <span class="number">0</span> </span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> votes==<span class="number">0</span>: x=num </span><br><span class="line">            votes += <span class="number">1</span> <span class="keyword">if</span> x==num <span class="keyword">else</span> -<span class="number">1</span>  </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h1&gt;&lt;p&gt;数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="数学" scheme="http://fly-adser.top/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>56-2.数组中出现的次数II</title>
-    <link href="http://fly-adser.top/2022/01/25/leetcode56-2/"/>
-    <id>http://fly-adser.top/2022/01/25/leetcode56-2/</id>
-    <published>2022-01-25T14:48:10.000Z</published>
-    <updated>2022-01-25T14:50:03.738Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。<a href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">singleNumber</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        res = <span class="number">0</span> </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">32</span>):</span><br><span class="line">            countOne = <span class="number">0</span> </span><br><span class="line">            <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">                countOne += (num &gt;&gt; i) &amp; <span class="number">1</span> </span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> countOne % <span class="number">3</span> == <span class="number">1</span>:</span><br><span class="line">                res |= <span class="number">1</span> &lt;&lt; i </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="位运算" scheme="http://fly-adser.top/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>56-1.数组中数字出现的次数</title>
-    <link href="http://fly-adser.top/2022/01/25/leetcode56-1/"/>
-    <id>http://fly-adser.top/2022/01/25/leetcode56-1/</id>
-    <published>2022-01-25T14:44:37.000Z</published>
-    <updated>2022-01-25T14:47:15.240Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。<a href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/">题目</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">singleNumbers</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        x, y, n, m = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span> </span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            n ^= num </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> n&amp;m==<span class="number">0</span>:</span><br><span class="line">            m &lt;&lt;= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> num &amp; m == <span class="number">0</span>: </span><br><span class="line">                x ^= num </span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                y ^= num </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>  x, y</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字。要求时间复杂度是O(n)，空间复杂度是O(1)。&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-lcof/&quot;&gt;题目&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="位运算" scheme="http://fly-adser.top/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>65.不用加减乘除做加法</title>
-    <link href="http://fly-adser.top/2022/01/24/leetcode65/"/>
-    <id>http://fly-adser.top/2022/01/24/leetcode65/</id>
-    <published>2022-01-24T14:05:08.000Z</published>
-    <updated>2022-01-24T14:37:56.243Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。<a href="https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">self, a, b</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type a: int</span></span><br><span class="line"><span class="string">        :type b: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        x = <span class="number">0xffffffff</span></span><br><span class="line">        a, b = a &amp; x, b &amp; x</span><br><span class="line">        <span class="keyword">while</span> b != <span class="number">0</span>:</span><br><span class="line">            a, b = (a ^ b), (a &amp; b) &lt;&lt; <span class="number">1</span> &amp; x</span><br><span class="line">        <span class="keyword">return</span> a <span class="keyword">if</span> a &lt;= <span class="number">0x7fffffff</span> <span class="keyword">else</span> ~(a ^ x)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。&lt;a href=&quot;https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="位运算" scheme="http://fly-adser.top/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>191.二进制中1的个数</title>
-    <link href="http://fly-adser.top/2022/01/24/leetcode191/"/>
-    <id>http://fly-adser.top/2022/01/24/leetcode191/</id>
-    <published>2022-01-24T13:52:15.000Z</published>
-    <updated>2022-01-24T14:03:54.300Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 '1' 的个数。<a href="https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hammingWeight</span>(<span class="params">self, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        res = <span class="number">0</span> </span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            <span class="keyword">if</span> n&amp;<span class="number">1</span>: res += <span class="number">1</span></span><br><span class="line">            n &gt;&gt;= <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 &#39;1&#39; 的个数。&lt;a href=&quot;https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="位运算" scheme="http://fly-adser.top/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>33.二叉搜索树的后序遍历序列</title>
-    <link href="http://fly-adser.top/2022/01/23/leetcode33/"/>
-    <id>http://fly-adser.top/2022/01/23/leetcode33/</id>
-    <published>2022-01-23T08:55:57.000Z</published>
-    <updated>2022-01-23T08:59:24.462Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。<a href="https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">verifyPostorder</span>(<span class="params">self, postorder</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type postorder: List[int]</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(postorder)&lt;=<span class="number">1</span>: <span class="keyword">return</span> <span class="literal">True</span> </span><br><span class="line"></span><br><span class="line">        left   = <span class="number">0</span> </span><br><span class="line">        length = <span class="built_in">len</span>(postorder)-<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> postorder[left]&lt;postorder[length]:</span><br><span class="line">            left += <span class="number">1</span>  </span><br><span class="line">        </span><br><span class="line">        right = left</span><br><span class="line">        <span class="keyword">while</span> right&lt;length:</span><br><span class="line">            <span class="keyword">if</span> postorder[right]&lt;postorder[length]: <span class="keyword">return</span> <span class="literal">False</span> </span><br><span class="line">            right += <span class="number">1</span> </span><br><span class="line"></span><br><span class="line">        left_pos  = postorder[<span class="number">0</span>: left]</span><br><span class="line">        right_pos = postorder[left: length]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.verifyPostorder(left_pos) <span class="keyword">and</span> self.verifyPostorder(right_pos)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。如果是则返回 true，否则返回 false。假设输入的数组的任意两个数字都互不相同。&lt;a href=&quot;https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="分治算法" scheme="http://fly-adser.top/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>50.数值的整数次方</title>
-    <link href="http://fly-adser.top/2022/01/23/leetcode50-1/"/>
-    <id>http://fly-adser.top/2022/01/23/leetcode50-1/</id>
-    <published>2022-01-23T08:37:46.000Z</published>
-    <updated>2022-01-23T08:55:15.354Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。<a href="https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">myPow</span>(<span class="params">self, x, n</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type x: float</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: float</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> x==<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span> </span><br><span class="line">        res = <span class="number">1</span> </span><br><span class="line">        <span class="keyword">if</span> n&lt;<span class="number">0</span>: x, n = <span class="number">1</span>/ x, -n </span><br><span class="line">        <span class="keyword">while</span> n:</span><br><span class="line">            <span class="keyword">if</span> n&amp;<span class="number">1</span>: res *= x </span><br><span class="line">            x *= x </span><br><span class="line">            n &gt;&gt;= <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。&lt;a href=&quot;https://leetcode-cn.com/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="分治算法" scheme="http://fly-adser.top/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
