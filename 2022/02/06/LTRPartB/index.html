@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fly-adser.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="上一篇文章，LTR预估: 从慕名而来到一探深浅，介绍了LTR预估建模的主要思路和一些经典算法。但是，算法理论到实际应用之间还存在一段距离，比如，样本如何构建、如何应用LTR进行排序等，本文试图从实际应用的角度出发来回答这些问题 在工业界中，排序在搜索、推荐和广告中都有较为广泛的应用。由于我在工作中接触广告业务比较多，因此，本文首先会简单总结一下排序在广告业务中的应用，再结合广告业务，从实际操作的角">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LTR预估：从一探深浅到实战演练">
+<meta property="og:url" content="http://fly-adser.top/2022/02/06/LTRPartB/index.html">
+<meta property="og:site_name" content="Fly Adser">
+<meta property="og:description" content="上一篇文章，LTR预估: 从慕名而来到一探深浅，介绍了LTR预估建模的主要思路和一些经典算法。但是，算法理论到实际应用之间还存在一段距离，比如，样本如何构建、如何应用LTR进行排序等，本文试图从实际应用的角度出发来回答这些问题 在工业界中，排序在搜索、推荐和广告中都有较为广泛的应用。由于我在工作中接触广告业务比较多，因此，本文首先会简单总结一下排序在广告业务中的应用，再结合广告业务，从实际操作的角">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/1.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/6.png">
+<meta property="article:published_time" content="2022-02-06T13:21:01.000Z">
+<meta property="article:modified_time" content="2022-02-06T13:28:16.635Z">
+<meta property="article:author" content="Fly Adser">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="LTR预估">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/1.png">
+
+<link rel="canonical" href="http://fly-adser.top/2022/02/06/LTRPartB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LTR预估：从一探深浅到实战演练 | Fly Adser</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fly Adser</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个广告策略算法工程师的学习笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">91</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/fly-adser" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/06/LTRPartB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Fly Adser">
+      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fly Adser">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LTR预估：从一探深浅到实战演练
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-06 21:21:01 / 修改时间：21:28:16" itemprop="dateCreated datePublished" datetime="2022-02-06T21:21:01+08:00">2022-02-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LTR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index"><span itemprop="name">LTR预估</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上一篇文章，<a href="https://fly-adser.top/2021/12/30/LTRpartA/#more">LTR预估: 从慕名而来到一探深浅</a>，介绍了LTR预估建模的主要思路和一些经典算法。但是，算法理论到实际应用之间还存在一段距离，比如，样本如何构建、如何应用LTR进行排序等，本文试图从实际应用的角度出发来回答这些问题</p>
+<p>在工业界中，排序在搜索、推荐和广告中都有较为广泛的应用。由于我在工作中接触广告业务比较多，因此，本文首先会简单总结一下排序在广告业务中的应用，再结合广告业务，从实际操作的角度出发，重新解读LTR</p>
+<h1 id="在线广告系统架构">在线广告系统架构</h1>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/1.png" width="50%" height="50%"></p>
+<p>如上图所示，常规的在线广告系统架构一般分为四个主要阶段：<br />
+1）<strong>召回层：</strong> 负责从全量广告库中<strong>快速筛选</strong>出部分广告，供后面排序阶段使用。在设计召回层时，既要考虑召回率，又要考虑计算速度，一般使用多路召回架构并行计算来提高计算速度。常见的召回算法可参考文献[1]<br />
+2）<strong>粗排层：</strong> 粗排层和后面的精排及重排本质上都是排序，之所以将排序分为三个不同的阶段，一方面是<strong>基于工程上的考虑</strong>，召回层吐出的广告数量仍然比较多，如果直接在这个阶段使用比较复杂的模型进行预估，性能耗时很难满足要求；另一方面，精排过后的重排层，需要<strong>融合用户体验、平台收益以及广告主利益等因素</strong>来生成最终的广告展示列表。因此，粗排处于召回层和精排层之间，作用是<strong>使用相对轻量的模型或策略，对召回层输出的广告进行初步排序，缩小候选广告池</strong>。一般情况下，是根据广告的预估ctr对其进行排序<br />
+3）<strong>精排层：</strong> 精排层的候选广告数量相对较少，可以使用一些<strong>复杂模型</strong>来提升预估质量，同样地，一般也是按照预估ctr进行排序。随着深度学习的兴起，这个阶段涌现出了许多优秀的模型，如WDL、DIN等[2]<br />
+4）<strong>重排层：</strong> 重排层是最接近用户的一个阶段，因此，这个阶段不仅需要考虑用户体验(相关性，如ctr)，还需要考虑平台收益和广告主利益，是一个<strong>三方博弈问题</strong>。一方面，可以将其抽象为<strong>一个多约束条件下的线性规划问题</strong>，根据业务场景，设定约束条件，推导排序公式[3]；另一方面，相比于精排阶段，重排阶段可以<strong>利用位置bias信息和list信息进一步对预估质量分进行校准</strong>，这方面的工作可参考文献[4]和文献[5]</p>
+<p>因此，排序在在线广告服务系统中是至关重要的</p>
+<h1 id="ltr模型实现概览">LTR模型实现概览</h1>
+<p>下面是每类LTR实现的模型、所使用的数据集及代码链接</p>
+<table>
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>模型</th>
+<th>数据集</th>
+<th>代码链接</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>point-wise</td>
+<td>LR、DNN</td>
+<td>MQ2008</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-LTR">point-wise实现</a></td>
+</tr>
+<tr class="even">
+<td>pair-wise</td>
+<td>RankNet、LambdaRank</td>
+<td>MQ2008</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-LTR">pair-wise实现</a></td>
+</tr>
+<tr class="odd">
+<td>list-wise</td>
+<td>ListNet</td>
+<td>MQ2008</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-LTR">list-wise实现</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据集-for-ltr">数据集 for LTR</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/6.png"></p>
+<p>如上图所示，其中第一列是是label；第二列是搜索请求id，即同一个qid下的所有样本是同一次搜索请求下的样本；从第三列开始是特征</p>
+<h1 id="ltr模型实现详细介绍">LTR模型实现详细介绍</h1>
+<p>在具体实现时，不同类型的LTR模型的差异主要体现在损失函数上。本节在每类LTR中选取一个模型进行实操介绍，其中，point-wise选取DNN模型、pair-wise选取RankNet模型以及list-wise选取listNet模型</p>
+<h2 id="point-wise模型">Point-Wise模型</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">score   = logits = self._score_fn(self.feature)</span><br><span class="line"></span><br><span class="line">logloss = tf.nn.sigmoid_cross_entropy_with_logits(logits=logits, labels=self.label)</span><br><span class="line">loss    = tf.reduce_mean(logloss)</span><br></pre></td></tr></table></figure>
+<p>从上面的损失函数可以看出，point-wise模型在训练和预估时：</p>
+<ul>
+<li>损失函数的计算是以单条样本的预估和label为基础的</li>
+<li>在预估时，对于同一个query下的多个样本，每个样本都会输出一个预估分，代表相关性，然后根据预估分进行排序</li>
+</ul>
+<h2 id="pair-wise模型">Pair-Wise模型</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># score</span></span><br><span class="line">score = self._score_fn(self.feature)</span><br><span class="line"></span><br><span class="line"><span class="comment"># logloss</span></span><br><span class="line">S_ij = self.label - tf.transpose(self.label)</span><br><span class="line">S_ij = tf.maximum(tf.minimum(<span class="number">1.</span>, S_ij), -<span class="number">1.</span>)</span><br><span class="line">P_ij = (<span class="number">1</span> / <span class="number">2</span>) * (<span class="number">1</span> + S_ij)</span><br><span class="line">s_i_minus_s_j = logits = score - tf.transpose(score)</span><br><span class="line"></span><br><span class="line">logloss = tf.nn.sigmoid_cross_entropy_with_logits(logits=s_i_minus_s_j, labels=P_ij)</span><br><span class="line"></span><br><span class="line"><span class="comment"># only extracted the loss of pairs of the same group</span></span><br><span class="line">mask1 = tf.equal(self.qid - tf.transpose(self.qid), <span class="number">0</span>)</span><br><span class="line">mask1 = tf.cast(mask1, tf.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># exclude the pair of sample and itself</span></span><br><span class="line">n     = tf.shape(self.feature)[<span class="number">0</span>]</span><br><span class="line">mask2 = tf.ones([n, n]) - tf.diag(tf.ones([n]))</span><br><span class="line">mask  = mask1 * mask2</span><br><span class="line">num_pairs = tf.reduce_sum(mask)</span><br><span class="line"></span><br><span class="line">loss  = tf.cond(tf.equal(num_pairs, <span class="number">0</span>), <span class="keyword">lambda</span>: <span class="number">0.</span>, <span class="keyword">lambda</span>: tf.reduce_sum(logloss * mask) / num_pairs)</span><br></pre></td></tr></table></figure>
+<p>从上面的损失函数可以看出，pair-wise模型在训练和预估时：</p>
+<ul>
+<li>损失函数的计算是以单个query下不同样本之间的相对顺序为基础的</li>
+<li>在预估时，对于同一个query下的多个样本，每个样本都会输出一个预估分，代表相关性，然后根据预估分进行排序</li>
+</ul>
+<h2 id="list-wise模型">List-Wise模型</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># score</span></span><br><span class="line">score = self._score_fn(self.feature)</span><br><span class="line"></span><br><span class="line">qid_unique = np.unique(self.qid)</span><br><span class="line">n = <span class="built_in">len</span>(qid_unique)</span><br><span class="line">losses = np.zeros(n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> e, qid <span class="keyword">in</span> <span class="built_in">enumerate</span>(qid_unique):</span><br><span class="line">    ind   = np.where(self.qid == qid)[<span class="number">0</span>]</span><br><span class="line">    df    = pd.DataFrame(&#123;<span class="string">&quot;label&quot;</span>: self.label[ind].flatten(), <span class="string">&quot;score&quot;</span>: score[ind].flatten()&#125;)</span><br><span class="line">    df.sort_values(<span class="string">&quot;label&quot;</span>, ascending=<span class="literal">False</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">    p_true, p_pred = <span class="number">1.0</span>, <span class="number">1.0</span></span><br><span class="line">    s     = <span class="built_in">len</span>(df)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, s):</span><br><span class="line">         p_true *= ((df[<span class="string">&quot;label&quot;</span>][i]+<span class="number">0.001</span>) / (<span class="built_in">sum</span>(df[<span class="string">&quot;label&quot;</span>][i:])+<span class="number">0.001</span>))</span><br><span class="line">         p_pred *= ((df[<span class="string">&quot;score&quot;</span>][i]+<span class="number">0.001</span>) / (<span class="built_in">sum</span>(df[<span class="string">&quot;score&quot;</span>][i:])+<span class="number">0.001</span>)) </span><br><span class="line">            </span><br><span class="line">losses[e] = tf.keras.losses.KLD(p_true, p_pred)</span><br><span class="line">        </span><br><span class="line">loss = np.mean(losses)</span><br></pre></td></tr></table></figure>
+<p>从上面的损失函数可以看出，list-wise模型在训练和预估时：</p>
+<ul>
+<li>损失函数的理算是以单个query下序列整体概率分布为基础的</li>
+<li>在预估时，对于同一个query下的多个样本，每个样本都会输出一个预估分，代表相关性，然后根据预估分进行排序</li>
+</ul>
+<h1 id="参考文献">参考文献</h1>
+<p>[1].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/351716045">【总结】推荐系统——召回篇【1】</a><br />
+[2].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/432817787">【总结】推荐系统——精排篇【1】</a><br />
+[3].<a href="https://fly-adser.top/2021/12/29/sortEquation/">多约束条件下的排序算法设计</a><br />
+[4].<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.06813">Personalized Re-ranking for Recommendation</a><br />
+[5].<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1810.02019">Seq2Slate: Re-ranking and Slate Optimization with RNNs</a><br />
+[6].<a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-LTR">github of fly adser. tensorflow-LTR</a><br />
+[7].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/66514492">Learning to Rank学习笔记--ListwiseRank</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Fly Adser 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/LTR%E9%A2%84%E4%BC%B0/" rel="tag"># LTR预估</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/06/leetcode02/" rel="prev" title="02.两数相加">
+      <i class="fa fa-chevron-left"></i> 02.两数相加
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E5%B9%BF%E5%91%8A%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">在线广告系统架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ltr%E6%A8%A1%E5%9E%8B%E5%AE%9E%E7%8E%B0%E6%A6%82%E8%A7%88"><span class="nav-number">2.</span> <span class="nav-text">LTR模型实现概览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86-for-ltr"><span class="nav-number">2.1.</span> <span class="nav-text">数据集 for LTR</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ltr%E6%A8%A1%E5%9E%8B%E5%AE%9E%E7%8E%B0%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">LTR模型实现详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#point-wise%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">Point-Wise模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pair-wise%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.2.</span> <span class="nav-text">Pair-Wise模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-wise%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.3.</span> <span class="nav-text">List-Wise模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Fly Adser"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Fly Adser</p>
+  <div class="site-description" itemprop="description">主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fly-adser" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fly-adser" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=718229223@qq.com" title="E-mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;cgi-bin&#x2F;qm_share?t&#x3D;qm_mailme&amp;email&#x3D;718229223@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png" title="公众号 → https:&#x2F;&#x2F;fly-adser-1302830623.cos.ap-beijing.myqcloud.com&#x2F;common&#x2F;wechat.png" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>公众号</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/its-tough" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;its-tough" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP </a>
+      <img src="/images/beian.png" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2022001516" rel="noopener" target="_blank">备2022001516号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fly Adser</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fd262d672cd4d2b91ce',
+      clientSecret: 'acd47e1dac8d5317949c86b494d9fa90fcb773db',
+      repo        : 'fly-adser.github.io',
+      owner       : 'fly-adser',
+      admin       : ['fly-adser'],
+      id          : '16759e0382715d7f9fdbbd3f159bb3b7',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

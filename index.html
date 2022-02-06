@@ -134,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">90</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">91</span></a>
 
   </li>
   </ul>
@@ -162,6 +162,149 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/06/LTRPartB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Fly Adser">
+      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fly Adser">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/06/LTRPartB/" class="post-title-link" itemprop="url">LTR预估：从一探深浅到实战演练</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-06 21:21:01 / 修改时间：21:28:16" itemprop="dateCreated datePublished" datetime="2022-02-06T21:21:01+08:00">2022-02-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LTR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index"><span itemprop="name">LTR预估</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>上一篇文章，<a href="https://fly-adser.top/2021/12/30/LTRpartA/#more">LTR预估: 从慕名而来到一探深浅</a>，介绍了LTR预估建模的主要思路和一些经典算法。但是，算法理论到实际应用之间还存在一段距离，比如，样本如何构建、如何应用LTR进行排序等，本文试图从实际应用的角度出发来回答这些问题</p>
+<p>在工业界中，排序在搜索、推荐和广告中都有较为广泛的应用。由于我在工作中接触广告业务比较多，因此，本文首先会简单总结一下排序在广告业务中的应用，再结合广告业务，从实际操作的角度出发，重新解读LTR</p>
+<h1 id="在线广告系统架构">在线广告系统架构</h1>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/1.png" width="50%" height="50%"></p>
+<p>如上图所示，常规的在线广告系统架构一般分为四个主要阶段：<br />
+1）<strong>召回层：</strong> 负责从全量广告库中<strong>快速筛选</strong>出部分广告，供后面排序阶段使用。在设计召回层时，既要考虑召回率，又要考虑计算速度，一般使用多路召回架构并行计算来提高计算速度。常见的召回算法可参考文献[1]<br />
+2）<strong>粗排层：</strong> 粗排层和后面的精排及重排本质上都是排序，之所以将排序分为三个不同的阶段，一方面是<strong>基于工程上的考虑</strong>，召回层吐出的广告数量仍然比较多，如果直接在这个阶段使用比较复杂的模型进行预估，性能耗时很难满足要求；另一方面，精排过后的重排层，需要<strong>融合用户体验、平台收益以及广告主利益等因素</strong>来生成最终的广告展示列表。因此，粗排处于召回层和精排层之间，作用是<strong>使用相对轻量的模型或策略，对召回层输出的广告进行初步排序，缩小候选广告池</strong>。一般情况下，是根据广告的预估ctr对其进行排序<br />
+3）<strong>精排层：</strong> 精排层的候选广告数量相对较少，可以使用一些<strong>复杂模型</strong>来提升预估质量，同样地，一般也是按照预估ctr进行排序。随着深度学习的兴起，这个阶段涌现出了许多优秀的模型，如WDL、DIN等[2]<br />
+4）<strong>重排层：</strong> 重排层是最接近用户的一个阶段，因此，这个阶段不仅需要考虑用户体验(相关性，如ctr)，还需要考虑平台收益和广告主利益，是一个<strong>三方博弈问题</strong>。一方面，可以将其抽象为<strong>一个多约束条件下的线性规划问题</strong>，根据业务场景，设定约束条件，推导排序公式[3]；另一方面，相比于精排阶段，重排阶段可以<strong>利用位置bias信息和list信息进一步对预估质量分进行校准</strong>，这方面的工作可参考文献[4]和文献[5]</p>
+<p>因此，排序在在线广告服务系统中是至关重要的</p>
+<h1 id="ltr模型实现概览">LTR模型实现概览</h1>
+<p>下面是每类LTR实现的模型、所使用的数据集及代码链接</p>
+<table>
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>模型</th>
+<th>数据集</th>
+<th>代码链接</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>point-wise</td>
+<td>LR、DNN</td>
+<td>MQ2008</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-LTR">point-wise实现</a></td>
+</tr>
+<tr class="even">
+<td>pair-wise</td>
+<td>RankNet、LambdaRank</td>
+<td>MQ2008</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-LTR">pair-wise实现</a></td>
+</tr>
+<tr class="odd">
+<td>list-wise</td>
+<td>ListNet</td>
+<td>MQ2008</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-LTR">list-wise实现</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据集-for-ltr">数据集 for LTR</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/6.png"></p>
+<p>如上图所示，其中第一列是是label；第二列是搜索请求id，即同一个qid下的所有样本是同一次搜索请求下的样本；从第三列开始是特征</p>
+<h1 id="ltr模型实现详细介绍">LTR模型实现详细介绍</h1>
+<p>在具体实现时，不同类型的LTR模型的差异主要体现在损失函数上。本节在每类LTR中选取一个模型进行实操介绍，其中，point-wise选取DNN模型、pair-wise选取RankNet模型以及list-wise选取listNet模型</p>
+<h2 id="point-wise模型">Point-Wise模型</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">score   = logits = self._score_fn(self.feature)</span><br><span class="line"></span><br><span class="line">logloss = tf.nn.sigmoid_cross_entropy_with_logits(logits=logits, labels=self.label)</span><br><span class="line">loss    = tf.reduce_mean(logloss)</span><br></pre></td></tr></table></figure>
+<p>从上面的损失函数可以看出，point-wise模型在训练和预估时：</p>
+<ul>
+<li>损失函数的计算是以单条样本的预估和label为基础的</li>
+<li>在预估时，对于同一个query下的多个样本，每个样本都会输出一个预估分，代表相关性，然后根据预估分进行排序</li>
+</ul>
+<h2 id="pair-wise模型">Pair-Wise模型</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># score</span></span><br><span class="line">score = self._score_fn(self.feature)</span><br><span class="line"></span><br><span class="line"><span class="comment"># logloss</span></span><br><span class="line">S_ij = self.label - tf.transpose(self.label)</span><br><span class="line">S_ij = tf.maximum(tf.minimum(<span class="number">1.</span>, S_ij), -<span class="number">1.</span>)</span><br><span class="line">P_ij = (<span class="number">1</span> / <span class="number">2</span>) * (<span class="number">1</span> + S_ij)</span><br><span class="line">s_i_minus_s_j = logits = score - tf.transpose(score)</span><br><span class="line"></span><br><span class="line">logloss = tf.nn.sigmoid_cross_entropy_with_logits(logits=s_i_minus_s_j, labels=P_ij)</span><br><span class="line"></span><br><span class="line"><span class="comment"># only extracted the loss of pairs of the same group</span></span><br><span class="line">mask1 = tf.equal(self.qid - tf.transpose(self.qid), <span class="number">0</span>)</span><br><span class="line">mask1 = tf.cast(mask1, tf.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># exclude the pair of sample and itself</span></span><br><span class="line">n     = tf.shape(self.feature)[<span class="number">0</span>]</span><br><span class="line">mask2 = tf.ones([n, n]) - tf.diag(tf.ones([n]))</span><br><span class="line">mask  = mask1 * mask2</span><br><span class="line">num_pairs = tf.reduce_sum(mask)</span><br><span class="line"></span><br><span class="line">loss  = tf.cond(tf.equal(num_pairs, <span class="number">0</span>), <span class="keyword">lambda</span>: <span class="number">0.</span>, <span class="keyword">lambda</span>: tf.reduce_sum(logloss * mask) / num_pairs)</span><br></pre></td></tr></table></figure>
+<p>从上面的损失函数可以看出，pair-wise模型在训练和预估时：</p>
+<ul>
+<li>损失函数的计算是以单个query下不同样本之间的相对顺序为基础的</li>
+<li>在预估时，对于同一个query下的多个样本，每个样本都会输出一个预估分，代表相关性，然后根据预估分进行排序</li>
+</ul>
+<h2 id="list-wise模型">List-Wise模型</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># score</span></span><br><span class="line">score = self._score_fn(self.feature)</span><br><span class="line"></span><br><span class="line">qid_unique = np.unique(self.qid)</span><br><span class="line">n = <span class="built_in">len</span>(qid_unique)</span><br><span class="line">losses = np.zeros(n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> e, qid <span class="keyword">in</span> <span class="built_in">enumerate</span>(qid_unique):</span><br><span class="line">    ind   = np.where(self.qid == qid)[<span class="number">0</span>]</span><br><span class="line">    df    = pd.DataFrame(&#123;<span class="string">&quot;label&quot;</span>: self.label[ind].flatten(), <span class="string">&quot;score&quot;</span>: score[ind].flatten()&#125;)</span><br><span class="line">    df.sort_values(<span class="string">&quot;label&quot;</span>, ascending=<span class="literal">False</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">    p_true, p_pred = <span class="number">1.0</span>, <span class="number">1.0</span></span><br><span class="line">    s     = <span class="built_in">len</span>(df)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, s):</span><br><span class="line">         p_true *= ((df[<span class="string">&quot;label&quot;</span>][i]+<span class="number">0.001</span>) / (<span class="built_in">sum</span>(df[<span class="string">&quot;label&quot;</span>][i:])+<span class="number">0.001</span>))</span><br><span class="line">         p_pred *= ((df[<span class="string">&quot;score&quot;</span>][i]+<span class="number">0.001</span>) / (<span class="built_in">sum</span>(df[<span class="string">&quot;score&quot;</span>][i:])+<span class="number">0.001</span>)) </span><br><span class="line">            </span><br><span class="line">losses[e] = tf.keras.losses.KLD(p_true, p_pred)</span><br><span class="line">        </span><br><span class="line">loss = np.mean(losses)</span><br></pre></td></tr></table></figure>
+<p>从上面的损失函数可以看出，list-wise模型在训练和预估时：</p>
+<ul>
+<li>损失函数的理算是以单个query下序列整体概率分布为基础的</li>
+<li>在预估时，对于同一个query下的多个样本，每个样本都会输出一个预估分，代表相关性，然后根据预估分进行排序</li>
+</ul>
+<h1 id="参考文献">参考文献</h1>
+<p>[1].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/351716045">【总结】推荐系统——召回篇【1】</a><br />
+[2].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/432817787">【总结】推荐系统——精排篇【1】</a><br />
+[3].<a href="https://fly-adser.top/2021/12/29/sortEquation/">多约束条件下的排序算法设计</a><br />
+[4].<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.06813">Personalized Re-ranking for Recommendation</a><br />
+[5].<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1810.02019">Seq2Slate: Re-ranking and Slate Optimization with RNNs</a><br />
+[6].<a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-LTR">github of fly adser. tensorflow-LTR</a><br />
+[7].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/66514492">Learning to Rank学习笔记--ListwiseRank</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -366,7 +509,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/">题目链接</a><br>
+          <h1 id="题目">题目</h1>
+<p>数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/04/leetcode400/#more" rel="contents">
@@ -441,7 +585,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/">题目链接</a><br>
+          <h1 id="题目">题目</h1>
+<p>输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/">题目链接</a><br />
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/04/leetcode233/#more" rel="contents">
@@ -516,8 +661,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m - 1] 。请问 k[0]<em>k[1]</em>…*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18  </p>
-<p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/">题目链接</a><br>
+          <h1 id="题目">题目</h1>
+<p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]...k[m - 1] 。请问 k[0]<em>k[1]</em>...*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18</p>
+<p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jian-sheng-zi-ii-lcof/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/04/leetcode343-1/#more" rel="contents">
@@ -592,7 +738,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/">题目链接</a><br>
+          <h1 id="题目">题目</h1>
+<p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shu-zu-zhong-de-ni-xu-dui-lcof/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/04/leetcodesd51/#more" rel="contents">
@@ -667,7 +814,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/">题目链接</a><br>
+          <h1 id="题目">题目</h1>
+<p>输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/04/leetcodesd17/#more" rel="contents">
@@ -742,7 +890,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值出现的概率。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/">题目链接</a><br>
+          <h1 id="题目">题目</h1>
+<p>把n个骰子扔在地上，所有骰子朝上一面的点数之和为s。输入n，打印出s的所有可能的值出现的概率。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/04/leetcodesd60/#more" rel="contents">
@@ -817,7 +966,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/chou-shu-lcof/">题目链接</a><br>
+          <h1 id="题目">题目</h1>
+<p>我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/chou-shu-lcof/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/04/leetcode264/#more" rel="contents">
@@ -840,85 +990,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/04/leetcode10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Fly Adser">
-      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fly Adser">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/04/leetcode10/" class="post-title-link" itemprop="url">10.正则表达式匹配</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-04 16:15:40 / 修改时间：16:18:35" itemprop="dateCreated datePublished" datetime="2022-02-04T16:15:40+08:00">2022-02-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>请实现一个函数用来匹配包含’. ‘和’<em>‘的正则表达式。模式中的字符’.’表示任意一个字符，而’</em>‘表示它前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串”aaa”与模式”a.a”和”ab<em>ac</em>a”匹配，但与”aa.a”和”ab*a”均不匹配。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/zheng-ze-biao-da-shi-pi-pei-lcof/">题目链接</a><br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/04/leetcode10/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -986,7 +1061,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
