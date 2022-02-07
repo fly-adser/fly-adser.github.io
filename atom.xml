@@ -6,7 +6,7 @@
   <link href="http://fly-adser.top/atom.xml" rel="self"/>
   
   <link href="http://fly-adser.top/"/>
-  <updated>2022-02-06T13:28:16.635Z</updated>
+  <updated>2022-02-07T08:24:29.675Z</updated>
   <id>http://fly-adser.top/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>04.寻找两个正序数组的中位数</title>
+    <link href="http://fly-adser.top/2022/02/07/leetcode04-1/"/>
+    <id>http://fly-adser.top/2022/02/07/leetcode04-1/</id>
+    <published>2022-02-07T08:22:16.000Z</published>
+    <updated>2022-02-07T08:24:29.675Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。</p><p>算法的时间复杂度应该为 O(log (m+n)) 。<a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMedianSortedArrays</span>(<span class="params">self, nums1, nums2</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums1: List[int]</span></span><br><span class="line"><span class="string">        :type nums2: List[int]</span></span><br><span class="line"><span class="string">        :rtype: float</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(nums1)&gt;<span class="built_in">len</span>(nums2):</span><br><span class="line">            nums1, nums2 = nums2, nums1 </span><br><span class="line">        </span><br><span class="line">        m = <span class="built_in">len</span>(nums1)</span><br><span class="line">        n = <span class="built_in">len</span>(nums2)</span><br><span class="line">        totalLeft = (m + n + <span class="number">1</span>) // <span class="number">2</span> </span><br><span class="line"></span><br><span class="line">        left, right = <span class="number">0</span>, m </span><br><span class="line">        <span class="keyword">while</span> left&lt;right:</span><br><span class="line">            i = left + (right - left + <span class="number">1</span>) // <span class="number">2</span> </span><br><span class="line">            j = totalLeft - i </span><br><span class="line">            <span class="keyword">if</span> nums1[i-<span class="number">1</span>]&gt;nums2[j]:</span><br><span class="line">                right = i - <span class="number">1</span> </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = i  </span><br><span class="line">        </span><br><span class="line">        i, j = left, totalLeft - left </span><br><span class="line">        num1LeftMax  = nums1[i-<span class="number">1</span>] <span class="keyword">if</span> i-<span class="number">1</span>&gt;=<span class="number">0</span> <span class="keyword">else</span> <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line">        num2LeftMax  = nums2[j-<span class="number">1</span>] <span class="keyword">if</span> j-<span class="number">1</span>&gt;=<span class="number">0</span> <span class="keyword">else</span> <span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line">        num1RightMin = nums1[i] <span class="keyword">if</span> i&lt;m <span class="keyword">else</span> <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)</span><br><span class="line">        num2RightMin = nums2[j] <span class="keyword">if</span> j&lt;n <span class="keyword">else</span> <span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>) </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (m+n)%<span class="number">2</span>==<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">max</span>(num1LeftMax, num2LeftMax)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> (<span class="built_in">max</span>(num1LeftMax, num2LeftMax) + <span class="built_in">min</span>(num1RightMin, num2RightMin)) / <span class="number">2.0</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。&lt;/p&gt;
+&lt;p&gt;算法的时间复杂度应该为 O(log (m+n)) 。&lt;a href=&quot;https://leetcode-cn.com/problems/median-of-two-sorted-arrays/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="分治算法" scheme="http://fly-adser.top/tags/%E5%88%86%E6%B2%BB%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="Hot100" scheme="http://fly-adser.top/tags/Hot100/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>03.无重复字符的最长子串</title>
+    <link href="http://fly-adser.top/2022/02/07/leetcode3/"/>
+    <id>http://fly-adser.top/2022/02/07/leetcode3/</id>
+    <published>2022-02-07T08:18:41.000Z</published>
+    <updated>2022-02-07T08:21:31.851Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。<a href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lengthOfLongestSubstring</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(s)&lt;=<span class="number">0</span>: <span class="keyword">return</span> <span class="number">0</span> </span><br><span class="line">        left, maxLen = <span class="number">0</span>, <span class="number">0</span> </span><br><span class="line">        dic = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(s):</span><br><span class="line">            <span class="keyword">if</span> c <span class="keyword">in</span> dic <span class="keyword">and</span> dic[c]&gt;=left:</span><br><span class="line">                left   = dic[c]+<span class="number">1</span></span><br><span class="line">                dic[c] = i</span><br><span class="line">                <span class="keyword">continue</span> </span><br><span class="line">            </span><br><span class="line">            dic[c] = i </span><br><span class="line">            maxLen = <span class="built_in">max</span>(maxLen, i-left+<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> maxLen</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给定一个字符串 s ，请你找出其中不含有重复字符的 最长子串 的长度。&lt;a href=&quot;https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/&quot;&gt;题目链接&lt;/a&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="字符串" scheme="http://fly-adser.top/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+    <category term="Hot100" scheme="http://fly-adser.top/tags/Hot100/"/>
+    
+  </entry>
   
   <entry>
     <title>LTR预估：从一探深浅到实战演练</title>
@@ -480,58 +533,6 @@
     <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
     
     <category term="模拟" scheme="http://fly-adser.top/tags/%E6%A8%A1%E6%8B%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>29.顺时针打印矩阵</title>
-    <link href="http://fly-adser.top/2022/01/28/leetcode29/"/>
-    <id>http://fly-adser.top/2022/01/28/leetcode29/</id>
-    <published>2022-01-28T14:51:07.000Z</published>
-    <updated>2022-01-28T14:53:21.158Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。<a href="https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/">题目链接</a><br /><span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">spiralOrder</span>(<span class="params">self, matrix</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        res       = []</span><br><span class="line">        <span class="keyword">if</span> matrix==[] <span class="keyword">or</span> matrix <span class="keyword">is</span> <span class="literal">None</span>: <span class="keyword">return</span> res </span><br><span class="line">        left, low = <span class="number">0</span>, <span class="number">0</span> </span><br><span class="line">        right, up = <span class="built_in">len</span>(matrix[<span class="number">0</span>])-<span class="number">1</span>, <span class="built_in">len</span>(matrix)-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(left, right+<span class="number">1</span>):</span><br><span class="line">                res.append(matrix[low][i])</span><br><span class="line">            low += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> low&gt;up: <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(low, up+<span class="number">1</span>):</span><br><span class="line">                res.append(matrix[j][right])</span><br><span class="line">            right -= <span class="number">1</span> </span><br><span class="line">            <span class="keyword">if</span> left&gt;right: <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">range</span>(right, left-<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                res.append(matrix[up][l])</span><br><span class="line">            up -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> low&gt;up: <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(up, low-<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                res.append(matrix[k][left])</span><br><span class="line">            left += <span class="number">1</span> </span><br><span class="line">            <span class="keyword">if</span> left&gt;right: <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。&lt;a href=&quot;https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/&quot;&gt;题目链接&lt;/a&gt;&lt;br /&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="模拟" scheme="http://fly-adser.top/tags/%E6%A8%A1%E6%8B%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>62.圆圈中最后剩下的数字</title>
-    <link href="http://fly-adser.top/2022/01/27/leetcode62/"/>
-    <id>http://fly-adser.top/2022/01/27/leetcode62/</id>
-    <published>2022-01-27T14:58:34.000Z</published>
-    <updated>2022-01-27T15:02:26.541Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>0,1,···,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字（删除后从下一个数字开始计数）。求出这个圆圈里剩下的最后一个数字。<a href="https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lastRemaining</span>(<span class="params">self, n, m</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :type m: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        f = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n + <span class="number">1</span>):</span><br><span class="line">            f = (m + f) % i</span><br><span class="line">        <span class="keyword">return</span> f</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;0,1,···,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字（删除后从下一个数字开始计数）。求出这个圆圈里剩下的最后一个数字。&lt;a href=&quot;https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="数学" scheme="http://fly-adser.top/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
