@@ -6,7 +6,7 @@
   <link href="http://fly-adser.top/atom.xml" rel="self"/>
   
   <link href="http://fly-adser.top/"/>
-  <updated>2022-02-07T08:24:29.675Z</updated>
+  <updated>2022-02-08T15:52:30.425Z</updated>
   <id>http://fly-adser.top/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>05.最长回文子串</title>
+    <link href="http://fly-adser.top/2022/02/08/leetcode05-1/"/>
+    <id>http://fly-adser.top/2022/02/08/leetcode05-1/</id>
+    <published>2022-02-08T15:50:31.000Z</published>
+    <updated>2022-02-08T15:52:30.425Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>给你一个字符串 s，找到 s 中最长的回文子串。<a href="https://leetcode-cn.com/problems/longest-palindromic-substring/">题目链接</a><br /><span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindrome</span>(<span class="params">self, s</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(s)&lt;= <span class="number">1</span>: <span class="keyword">return</span> s </span><br><span class="line">        begin, maxLen = <span class="number">0</span>, <span class="number">0</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(s)-<span class="number">1</span>):</span><br><span class="line">            len1 = self.countPalind(s, i, i)</span><br><span class="line">            len2 = self.countPalind(s, i, i+<span class="number">1</span>)</span><br><span class="line">            lenS = <span class="built_in">max</span>(len1, len2)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> lenS&gt;maxLen:</span><br><span class="line">                begin  = i - (lenS-<span class="number">1</span>) / <span class="number">2</span> </span><br><span class="line">                maxLen = lenS </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> s[begin: begin+maxLen]</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">countPalind</span>(<span class="params">self, s, left, right</span>):</span></span><br><span class="line">        maxLen = <span class="number">0</span> </span><br><span class="line">        <span class="keyword">while</span> left&gt;=<span class="number">0</span> <span class="keyword">and</span> right &lt;<span class="built_in">len</span>(s) <span class="keyword">and</span> s[left]==s[right]:</span><br><span class="line">            maxLen = right - left + <span class="number">1</span> </span><br><span class="line">            left  -= <span class="number">1</span> </span><br><span class="line">            right += <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> maxLen</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
+&lt;p&gt;给你一个字符串 s，找到 s 中最长的回文子串。&lt;a href=&quot;https://leetcode-cn.com/problems/longest-palindromic-substring/&quot;&gt;题目链接&lt;/a&gt;&lt;br /&gt;</summary>
+    
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
+    
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
+    
+    <category term="字符串" scheme="http://fly-adser.top/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+    <category term="Hot100" scheme="http://fly-adser.top/tags/Hot100/"/>
+    
+  </entry>
   
   <entry>
     <title>04.寻找两个正序数组的中位数</title>
@@ -509,30 +535,6 @@
     <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
     
     <category term="字符串" scheme="http://fly-adser.top/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>946.栈的压入、弹出序列</title>
-    <link href="http://fly-adser.top/2022/01/28/leetcode946/"/>
-    <id>http://fly-adser.top/2022/01/28/leetcode946/</id>
-    <published>2022-01-28T14:54:11.000Z</published>
-    <updated>2022-01-28T14:56:25.589Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如，序列 {1,2,3,4,5} 是某栈的压栈序列，序列 {4,5,3,2,1} 是该压栈序列对应的一个弹出序列，但 {4,3,5,1,2} 就不可能是该压栈序列的弹出序列。<a href="https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">validateStackSequences</span>(<span class="params">self, pushed, popped</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type pushed: List[int]</span></span><br><span class="line"><span class="string">        :type popped: List[int]</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        stack, i = [], <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> pushed:</span><br><span class="line">            stack.append(num)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> stack <span class="keyword">and</span> stack[-<span class="number">1</span>]==popped[i]:</span><br><span class="line">                stack.pop()</span><br><span class="line">                i += <span class="number">1</span> </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> stack</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;题目&quot;&gt;题目&lt;/h1&gt;
-&lt;p&gt;输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如，序列 {1,2,3,4,5} 是某栈的压栈序列，序列 {4,5,3,2,1} 是该压栈序列对应的一个弹出序列，但 {4,3,5,1,2} 就不可能是该压栈序列的弹出序列。&lt;a href=&quot;https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/&quot;&gt;题目链接&lt;/a&gt;</summary>
-    
-    
-    
-    
-    <category term="剑指offer" scheme="http://fly-adser.top/tags/%E5%89%91%E6%8C%87offer/"/>
-    
-    <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
-    
-    <category term="模拟" scheme="http://fly-adser.top/tags/%E6%A8%A1%E6%8B%9F/"/>
     
   </entry>
   
