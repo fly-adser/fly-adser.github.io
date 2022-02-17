@@ -6,7 +6,7 @@
   <link href="http://fly-adser.top/atom.xml" rel="self"/>
   
   <link href="http://fly-adser.top/"/>
-  <updated>2022-02-17T15:08:01.566Z</updated>
+  <updated>2022-02-17T15:11:38.182Z</updated>
   <id>http://fly-adser.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://fly-adser.top/2022/02/17/leetcode46-1/"/>
     <id>http://fly-adser.top/2022/02/17/leetcode46-1/</id>
     <published>2022-02-17T15:06:04.000Z</published>
-    <updated>2022-02-17T15:08:01.566Z</updated>
+    <updated>2022-02-17T15:11:38.182Z</updated>
     
     <content type="html"><![CDATA[<h1 id="题目">题目</h1><p>给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。<a href="https://leetcode-cn.com/problems/permutations/">题目链接</a> <span id="more"></span></p><h1 id="解法">解法</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permute</span>(<span class="params">self, nums</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.res = []</span><br><span class="line">        self.recur(nums, [], <span class="number">0</span>, <span class="built_in">len</span>(nums))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.res </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">recur</span>(<span class="params">self, nums, path, k, n</span>):</span></span><br><span class="line">        <span class="keyword">if</span> k==n: </span><br><span class="line">            self.res.append(<span class="built_in">list</span>(path))</span><br><span class="line">            <span class="keyword">return</span> </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n):</span><br><span class="line">            <span class="keyword">if</span> nums[i] <span class="keyword">in</span> path: <span class="keyword">continue</span> </span><br><span class="line">            path.append(nums[i])</span><br><span class="line">            self.recur(nums, path, k+<span class="number">1</span>, n)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -30,6 +30,8 @@
 &lt;p&gt;给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。&lt;a href=&quot;https://leetcode-cn.com/problems/permutations/&quot;&gt;题目链接&lt;/a&gt;</summary>
     
     
+    
+    <category term="LeetCode" scheme="http://fly-adser.top/categories/LeetCode/"/>
     
     
     <category term="LeetCode" scheme="http://fly-adser.top/tags/LeetCode/"/>
