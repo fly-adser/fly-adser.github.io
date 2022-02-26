@@ -74,119 +74,7 @@
   </style>
 </noscript>
 
-<style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -236,7 +124,7 @@ mjx-container[display="true"] + br {
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">33</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -246,7 +134,7 @@ mjx-container[display="true"] + br {
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">127</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">153</span></a>
 
   </li>
   </ul>
@@ -278,7 +166,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/30/leetcode239/">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/13/leetcode31/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -292,7 +180,7 @@ mjx-container[display="true"] + br {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/30/leetcode239/" class="post-title-link" itemprop="url">239.滑动窗口的最大值</a>
+            <a href="/2022/02/13/leetcode31/" class="post-title-link" itemprop="url">31.下一个排列</a>
         </h2>
 
         <div class="post-meta">
@@ -303,7 +191,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-30 23:46:25 / 修改时间：23:51:16" itemprop="dateCreated datePublished" datetime="2022-01-30T23:46:25+08:00">2022-01-30</time>
+              <time title="创建时间：2022-02-13 20:42:13 / 修改时间：20:44:40" itemprop="dateCreated datePublished" datetime="2022-02-13T20:42:13+08:00">2022-02-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -327,10 +215,10 @@ mjx-container[display="true"] + br {
 
       
           <h1 id="题目">题目</h1>
-<p>给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/">题目链接</a>
+<p>整数数组的一个 排列 就是将其所有成员以序列或线性顺序排列。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/next-permutation/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/30/leetcode239/#more" rel="contents">
+              <a class="btn" href="/2022/02/13/leetcode31/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -354,7 +242,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/30/leetcode8/">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/12/leetcode23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -368,7 +256,7 @@ mjx-container[display="true"] + br {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/30/leetcode8/" class="post-title-link" itemprop="url">8.把字符串转换成整数</a>
+            <a href="/2022/02/12/leetcode23/" class="post-title-link" itemprop="url">23.合并K个升序链表</a>
         </h2>
 
         <div class="post-meta">
@@ -379,7 +267,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-30 23:43:51 / 修改时间：23:45:49" itemprop="dateCreated datePublished" datetime="2022-01-30T23:43:51+08:00">2022-01-30</time>
+              <time title="创建时间：2022-02-12 11:11:13 / 修改时间：11:15:37" itemprop="dateCreated datePublished" datetime="2022-02-12T11:11:13+08:00">2022-02-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -403,10 +291,10 @@ mjx-container[display="true"] + br {
 
       
           <h1 id="题目">题目</h1>
-<p>写一个函数 StrToInt，实现把字符串转换成整数这个功能。不能使用 atoi 或者其他类似的库函数。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/">题目</a>
+<p>给你一个链表数组，每个链表都已经按升序排列。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-k-sorted-lists/">题目链接</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/30/leetcode8/#more" rel="contents">
+              <a class="btn" href="/2022/02/12/leetcode23/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -430,7 +318,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/30/leetcodesd20/">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/12/leetcode22-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -444,7 +332,7 @@ mjx-container[display="true"] + br {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/30/leetcodesd20/" class="post-title-link" itemprop="url">20.表示数值的字符串</a>
+            <a href="/2022/02/12/leetcode22-1/" class="post-title-link" itemprop="url">22.括号生成</a>
         </h2>
 
         <div class="post-meta">
@@ -455,7 +343,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-30 23:41:09 / 修改时间：23:44:09" itemprop="dateCreated datePublished" datetime="2022-01-30T23:41:09+08:00">2022-01-30</time>
+              <time title="创建时间：2022-02-12 11:07:20 / 修改时间：11:10:39" itemprop="dateCreated datePublished" datetime="2022-02-12T11:07:20+08:00">2022-02-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -479,10 +367,10 @@ mjx-container[display="true"] + br {
 
       
           <h1 id="题目">题目</h1>
-<p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/">题目</a>
+<p>数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/generate-parentheses/">题目链接</a><br />
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/30/leetcodesd20/#more" rel="contents">
+              <a class="btn" href="/2022/02/12/leetcode22-1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -506,7 +394,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/28/leetcode946/">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/11/leetcode21-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -520,7 +408,7 @@ mjx-container[display="true"] + br {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/28/leetcode946/" class="post-title-link" itemprop="url">946.栈的压入、弹出序列</a>
+            <a href="/2022/02/11/leetcode21-2/" class="post-title-link" itemprop="url">21.合并两个有序链表</a>
         </h2>
 
         <div class="post-meta">
@@ -531,74 +419,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-28 22:54:11 / 修改时间：22:56:25" itemprop="dateCreated datePublished" datetime="2022-01-28T22:54:11+08:00">2022-01-28</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="题目">题目</h1>
-<p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如，序列 {1,2,3,4,5} 是某栈的压栈序列，序列 {4,5,3,2,1} 是该压栈序列对应的一个弹出序列，但 {4,3,5,1,2} 就不可能是该压栈序列的弹出序列。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/zhan-de-ya-ru-dan-chu-xu-lie-lcof/">题目链接</a>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/28/leetcode946/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/28/leetcode29/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Fly Adser">
-      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fly Adser">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/28/leetcode29/" class="post-title-link" itemprop="url">29.顺时针打印矩阵</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-01-28 22:51:07 / 修改时间：22:53:21" itemprop="dateCreated datePublished" datetime="2022-01-28T22:51:07+08:00">2022-01-28</time>
+              <time title="创建时间：2022-02-11 07:47:55 / 修改时间：07:50:01" itemprop="dateCreated datePublished" datetime="2022-02-11T07:47:55+08:00">2022-02-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -622,10 +443,10 @@ mjx-container[display="true"] + br {
 
       
           <h1 id="题目">题目</h1>
-<p>输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/">题目链接</a><br />
+<p>将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/merge-two-sorted-lists/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/28/leetcode29/#more" rel="contents">
+              <a class="btn" href="/2022/02/11/leetcode21-2/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -649,7 +470,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/27/leetcode62/">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/11/leetcode20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -663,7 +484,7 @@ mjx-container[display="true"] + br {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/27/leetcode62/" class="post-title-link" itemprop="url">62.圆圈中最后剩下的数字</a>
+            <a href="/2022/02/11/leetcode20/" class="post-title-link" itemprop="url">20.有效的括号</a>
         </h2>
 
         <div class="post-meta">
@@ -674,7 +495,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-27 22:58:34 / 修改时间：23:02:26" itemprop="dateCreated datePublished" datetime="2022-01-27T22:58:34+08:00">2022-01-27</time>
+              <time title="创建时间：2022-02-11 07:42:16 / 修改时间：07:47:32" itemprop="dateCreated datePublished" datetime="2022-02-11T07:42:16+08:00">2022-02-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -698,10 +519,10 @@ mjx-container[display="true"] + br {
 
       
           <h1 id="题目">题目</h1>
-<p>0,1,···,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字（删除后从下一个数字开始计数）。求出这个圆圈里剩下的最后一个数字。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/">题目链接</a>
+<p>给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/valid-parentheses/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/27/leetcode62/#more" rel="contents">
+              <a class="btn" href="/2022/02/11/leetcode20/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -725,7 +546,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/27/leetcode57-1/">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/10/leetcode19/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -739,7 +560,7 @@ mjx-container[display="true"] + br {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/27/leetcode57-1/" class="post-title-link" itemprop="url">57.和为s的连续整数序列</a>
+            <a href="/2022/02/10/leetcode19/" class="post-title-link" itemprop="url">19.删除链表的倒数第N个节点</a>
         </h2>
 
         <div class="post-meta">
@@ -750,7 +571,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-27 22:55:23 / 修改时间：22:58:02" itemprop="dateCreated datePublished" datetime="2022-01-27T22:55:23+08:00">2022-01-27</time>
+              <time title="创建时间：2022-02-10 22:59:54 / 修改时间：23:01:49" itemprop="dateCreated datePublished" datetime="2022-02-10T22:59:54+08:00">2022-02-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -774,10 +595,10 @@ mjx-container[display="true"] + br {
 
       
           <h1 id="题目">题目</h1>
-<p>输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/">题目链接</a>
+<p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">题目链接</a><br />
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/27/leetcode57-1/#more" rel="contents">
+              <a class="btn" href="/2022/02/10/leetcode19/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -801,7 +622,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/27/leetcode343/">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/10/leetcode17/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -815,7 +636,7 @@ mjx-container[display="true"] + br {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/27/leetcode343/" class="post-title-link" itemprop="url">343.剪绳子</a>
+            <a href="/2022/02/10/leetcode17/" class="post-title-link" itemprop="url">17.电话号码的字母组合</a>
         </h2>
 
         <div class="post-meta">
@@ -826,7 +647,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-27 22:50:43 / 修改时间：22:53:17" itemprop="dateCreated datePublished" datetime="2022-01-27T22:50:43+08:00">2022-01-27</time>
+              <time title="创建时间：2022-02-10 22:57:13 / 修改时间：22:59:36" itemprop="dateCreated datePublished" datetime="2022-02-10T22:57:13+08:00">2022-02-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -849,10 +670,11 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m-1] 。请问 k[0]<em>k[1]</em>…*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jian-sheng-zi-lcof/">题目链接</a><br>
+          <h1 id="题目">题目</h1>
+<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/">题目链接</a>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/27/leetcode343/#more" rel="contents">
+              <a class="btn" href="/2022/02/10/leetcode17/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -876,7 +698,7 @@ mjx-container[display="true"] + br {
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/26/linkedinmerge/">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/09/leetcode15/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -890,88 +712,7 @@ mjx-container[display="true"] + br {
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/26/linkedinmerge/" class="post-title-link" itemprop="url">信息流场景下自然流量和广告流量的混排机制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-26 23:33:44" itemprop="dateCreated datePublished" datetime="2022-01-26T23:33:44+08:00">2022-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-28 22:56:43" itemprop="dateModified" datetime="2022-01-28T22:56:43+08:00">2022-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%88%B6%E7%AD%96%E7%95%A5/" itemprop="url" rel="index"><span itemprop="name">机制策略</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>论文名称和地址：</strong> <em><a target="_blank" rel="noopener" href="https://www.kdd.org/kdd2020/accepted-papers/view/ads-allocation-in-feed-via-constrained-optimization">Ads Allocation in Feed via Constrained Optimization</a></em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/26/linkedinmerge/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/01/26/leetcode66/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Fly Adser">
-      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fly Adser">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/26/leetcode66/" class="post-title-link" itemprop="url">66.构建乘积数组</a>
+            <a href="/2022/02/09/leetcode15/" class="post-title-link" itemprop="url">15.三数之和</a>
         </h2>
 
         <div class="post-meta">
@@ -982,7 +723,7 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-26 23:04:40 / 修改时间：23:06:41" itemprop="dateCreated datePublished" datetime="2022-01-26T23:04:40+08:00">2022-01-26</time>
+              <time title="创建时间：2022-02-09 22:59:37 / 修改时间：23:01:31" itemprop="dateCreated datePublished" datetime="2022-02-09T22:59:37+08:00">2022-02-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1005,10 +746,161 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h1><p>给定一个数组 A[0,1,…,n-1]，请构建一个数组 B[0,1,…,n-1]，其中 B[i] 的值是数组 A 中除了下标 i 以外的元素的积, 即 B[i]=A[0]×A[1]×…×A[i-1]×A[i+1]×…×A[n-1]。不能使用除法。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/">题目链接</a><br>
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/3sum/">题目链接</a><br>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/26/leetcode66/#more" rel="contents">
+              <a class="btn" href="/2022/02/09/leetcode15/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/09/leetcode11-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Fly Adser">
+      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fly Adser">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/09/leetcode11-1/" class="post-title-link" itemprop="url">11.盛最多水的容器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-09 22:56:54 / 修改时间：22:59:43" itemprop="dateCreated datePublished" datetime="2022-02-09T22:56:54+08:00">2022-02-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0) 。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/container-with-most-water/">题目链接</a><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/09/leetcode11-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/02/08/leetcode05-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Fly Adser">
+      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fly Adser">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/08/leetcode05-1/" class="post-title-link" itemprop="url">05.最长回文子串</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-08 23:50:31 / 修改时间：23:52:30" itemprop="dateCreated datePublished" datetime="2022-02-08T23:50:31+08:00">2022-02-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="题目">题目</h1>
+<p>给你一个字符串 s，找到 s 中最长的回文子串。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/">题目链接</a><br />
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/08/leetcode05-1/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1031,7 +923,7 @@ mjx-container[display="true"] + br {
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1099,7 +991,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1112,7 +1004,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1213,72 +1105,6 @@ mjx-container[display="true"] + br {
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    // window.MathJax = {
-    //   loader: {
-    //
-    //       load: ['[tex]/mhchem'],
-    //
-    //     source: {
-    //       '[tex]/amsCd': '[tex]/amscd',
-    //       '[tex]/AMScd': '[tex]/amscd'
-    //     }
-    //   },
-    //   tex: {
-    //     inlineMath: {'[+]': [['$', '$']]},
-    //
-    //       packages: {'[+]': ['mhchem']},
-    //
-    //     tags: 'ams'
-    //   },
-    //   options: {
-    //     renderActions: {
-    //       findScript: [10, doc => {
-    //         document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-    //           const display = !!node.type.match(/; *mode=display/);
-    //           const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-    //           const text = document.createTextNode('');
-    //           node.parentNode.replaceChild(text, node);
-    //           math.start = {node: text, delim: '', n: 0};
-    //           math.end = {node: text, delim: '', n: 0};
-    //           doc.math.push(math);
-    //         });
-    //       }, '', false],
-    //       insertedScript: [200, () => {
-    //         document.querySelectorAll('mjx-container').forEach(node => {
-    //           let target = node.parentNode;
-    //           if (target.nodeName.toLowerCase() === 'li') {
-    //             target.parentNode.classList.add('has-jax');
-    //           }
-    //         });
-    //       }, '', false]
-    //     }
-    //   }
-    // };
-    window.MathJax = {
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        processEscapes: true
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-
-    
 
   
 
