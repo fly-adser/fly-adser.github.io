@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/1.png">
 <meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/LTRpartB/6.png">
 <meta property="article:published_time" content="2022-02-06T13:21:01.000Z">
-<meta property="article:modified_time" content="2022-02-12T03:16:19.276Z">
+<meta property="article:modified_time" content="2022-03-23T23:23:40.715Z">
 <meta property="article:author" content="Fly Adser">
 <meta property="article:tag" content="机器学习">
 <meta property="article:tag" content="LTR预估">
@@ -131,17 +131,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">34</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">154</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
 
   </li>
   </ul>
@@ -204,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-12 11:16:19" itemprop="dateModified" datetime="2022-02-12T11:16:19+08:00">2022-02-12</time>
+                <time title="修改时间：2022-03-24 07:23:40" itemprop="dateModified" datetime="2022-03-24T07:23:40+08:00">2022-03-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -289,7 +289,7 @@
 <li>在预估时，对于同一个query下的多个样本，每个样本都会输出一个预估分，代表相关性，然后根据预估分进行排序</li>
 </ul>
 <h2 id="list-wise模型">List-Wise模型</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># score</span></span><br><span class="line">score = self._score_fn(self.feature)</span><br><span class="line"></span><br><span class="line">qid_unique = np.unique(self.qid)</span><br><span class="line">n = <span class="built_in">len</span>(qid_unique)</span><br><span class="line">losses = np.zeros(n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> e, qid <span class="keyword">in</span> <span class="built_in">enumerate</span>(qid_unique):</span><br><span class="line">    ind   = np.where(self.qid == qid)[<span class="number">0</span>]</span><br><span class="line">    df    = pd.DataFrame(&#123;<span class="string">&quot;label&quot;</span>: self.label[ind].flatten(), <span class="string">&quot;score&quot;</span>: score[ind].flatten()&#125;)</span><br><span class="line">    df.sort_values(<span class="string">&quot;label&quot;</span>, ascending=<span class="literal">False</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">    p_true, p_pred = <span class="number">1.0</span>, <span class="number">1.0</span></span><br><span class="line">    s     = <span class="built_in">len</span>(df)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, s):</span><br><span class="line">         p_true *= ((df[<span class="string">&quot;label&quot;</span>][i]+<span class="number">0.001</span>) / (<span class="built_in">sum</span>(df[<span class="string">&quot;label&quot;</span>][i:])+<span class="number">0.001</span>))</span><br><span class="line">         p_pred *= ((df[<span class="string">&quot;score&quot;</span>][i]+<span class="number">0.001</span>) / (<span class="built_in">sum</span>(df[<span class="string">&quot;score&quot;</span>][i:])+<span class="number">0.001</span>)) </span><br><span class="line">            </span><br><span class="line">losses[e] = tf.keras.losses.KLD(p_true, p_pred)</span><br><span class="line">        </span><br><span class="line">loss = np.mean(losses)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># score</span></span><br><span class="line"><span class="comment"># score</span></span><br><span class="line">score = self._score_fn(self.feature)</span><br><span class="line"></span><br><span class="line">qid_unique = np.unique(self.qid)</span><br><span class="line">n = <span class="built_in">len</span>(qid_unique)</span><br><span class="line">truth, preds = [], []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> e, qid <span class="keyword">in</span> <span class="built_in">enumerate</span>(qid_unique):</span><br><span class="line">    ind   = np.where(self.qid == qid)[<span class="number">0</span>]</span><br><span class="line">    df    = pd.DataFrame(&#123;<span class="string">&quot;label&quot;</span>: self.label[ind].flatten(), <span class="string">&quot;score&quot;</span>: score[ind].flatten()&#125;)</span><br><span class="line">    df.sort_values(<span class="string">&quot;label&quot;</span>, ascending=<span class="literal">False</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">    p_true, p_pred = <span class="number">1.0</span>, <span class="number">1.0</span></span><br><span class="line">    s     = <span class="built_in">len</span>(df)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, s):</span><br><span class="line">        p_true *= ((df[<span class="string">&quot;label&quot;</span>][i] + <span class="number">0.001</span>) / (<span class="built_in">sum</span>(df[<span class="string">&quot;label&quot;</span>][i:]) + <span class="number">0.001</span>))</span><br><span class="line">        p_pred *= ((df[<span class="string">&quot;score&quot;</span>][i] + <span class="number">0.001</span>) / (<span class="built_in">sum</span>(df[<span class="string">&quot;score&quot;</span>][i:]) + <span class="number">0.001</span>))</span><br><span class="line"></span><br><span class="line">    truth.append(p_true)</span><br><span class="line">    preds.append(p_pred)</span><br><span class="line"></span><br><span class="line">loss = tf.keras.losses.KLD(truth, preds)</span><br></pre></td></tr></table></figure>
 <p>从上面的损失函数可以看出，list-wise模型在训练和预估时：</p>
 <ul>
 <li>损失函数的理算是以单个query下序列整体概率分布为基础的</li>
@@ -337,12 +337,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/02/06/leetcode02/" rel="prev" title="02.两数相加">
-      <i class="fa fa-chevron-left"></i> 02.两数相加
+    <a href="/2022/01/26/linkedinmerge/" rel="prev" title="信息流场景下自然流量和广告流量的混排机制">
+      <i class="fa fa-chevron-left"></i> 信息流场景下自然流量和广告流量的混排机制
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/02/07/leetcode3/" rel="next" title="03.无重复字符的最长子串">
-      03.无重复字符的最长子串 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/03/06/rerankalg/" rel="next" title="基于上下文感知的重排序算法梳理">
+      基于上下文感知的重排序算法梳理 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -419,20 +419,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">154</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
