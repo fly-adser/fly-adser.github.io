@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fly-adser.top","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="本文的目的是梳理工作中实用且常用预估模型，一方面，可以在工作中有需要时，快速拿来复用验证一些想法；另一方面，有助于进一步理解这些基础算法模型的原理和实现。梳理的模型主要有以下几种：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用预估模型原理及Tensorflow实现">
+<meta property="og:url" content="http://fly-adser.top/2022/04/30/predict/index.html">
+<meta property="og:site_name" content="Fly Adser">
+<meta property="og:description" content="本文的目的是梳理工作中实用且常用预估模型，一方面，可以在工作中有需要时，快速拿来复用验证一些想法；另一方面，有助于进一步理解这些基础算法模型的原理和实现。梳理的模型主要有以下几种：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/ctr/1.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/ctr/4.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/tf/5.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/tf/6.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/tf/7.png">
+<meta property="og:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/tf/8.png">
+<meta property="article:published_time" content="2022-04-30T11:26:16.000Z">
+<meta property="article:modified_time" content="2022-04-30T11:38:59.089Z">
+<meta property="article:author" content="Fly Adser">
+<meta property="article:tag" content="LTR预估">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/ctr/1.png">
+
+<link rel="canonical" href="http://fly-adser.top/2022/04/30/predict/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>常用预估模型原理及Tensorflow实现 | Fly Adser</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Fly Adser" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fly Adser</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个广告策略算法工程师的学习笔记</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/fly-adser" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://fly-adser.top/2022/04/30/predict/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Fly Adser">
+      <meta itemprop="description" content="主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fly Adser">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用预估模型原理及Tensorflow实现
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-30 19:26:16 / 修改时间：19:38:59" itemprop="dateCreated datePublished" datetime="2022-04-30T19:26:16+08:00">2022-04-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LTR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index"><span itemprop="name">LTR预估</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文的目的是梳理工作中实用且常用预估模型，一方面，可以在工作中有需要时，快速拿来复用验证一些想法；另一方面，有助于进一步理解这些基础算法模型的原理和实现。梳理的模型主要有以下几种： <span id="more"></span> - LR - XGBoost - FM - Wide and Deep - DeepFM - DCN - xDeepFM - AFM</p>
+<p>所有模型的tensorflow代码实现都在github(包含样本数据且可运行)：<a target="_blank" rel="noopener" href="https://github.com/fly-adser/tensorflow-CTR">https://github.com/fly-adser/tensorflow-CTR</a></p>
+<h2 id="logistic-regressionlr">Logistic Regression(LR)</h2>
+<p><span class="math display">\[
+y = \frac{1}{1+e^{-(\theta^{T}x+b)}}{\quad}{\quad}(1)
+\]</span></p>
+<p>如公式(1)所示，LR通过对数几率函数将线性函数结果转变为类别概率。它的损失函数是交叉熵损失函数： <span class="math display">\[
+J(\theta)=-\frac{1}{m}\sum_{i=1}^{m}[y^{(i)}log h_{\theta}(x)+(1-y^{(i)})log(1-h_{\theta}(x))]{\quad}{\quad}(2)
+\]</span></p>
+<p>使用梯度下降法进行参数学习</p>
+<h2 id="xgboost">XGBoost</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/ctr/1.png" width=50%></p>
+<p>具体的推导过程这里不再描述，可参考文献[1]和[2]。下面说下xgboost算法的优势和劣势</p>
+<p><strong>算法优化点</strong><br />
+1）在目标函数中显示地加入了正则项，用于控制模型的复杂度。正则项通过平滑叶子节点数量和叶子节点权重和来控制模型的复杂度</p>
+<p>2）相对于gbdt使用目标函数的一阶梯度，xgboost使用了目标函数的二阶梯度。主要作用有两个：一个是支持自定义损失函数；另一个是二阶信息本身能让梯度收敛更快更准确，可以简单认为一阶导指引梯度方向，二阶导指引梯度方向如何变化</p>
+<p>3）稀疏感知分裂算法。在遍历特征值寻找分割点时，把缺失值分别放在左边和右边，分别计算一次收益；选取收益最大的方向作为缺失值的默认方向</p>
+<p><strong>工程实现优化点</strong><br />
+1）加权直方图算法寻找最佳分割点<br />
+精确贪婪算法枚举所有可能的分割点。然而，当数据不能完全装入内存时，就无法有效地这么做。近似算法首先提出了根据特征分布的百分位数选取分裂点的方法。然后，该算法将连续特征映射到候选点划分的桶中，对统计量进行聚合，根据聚合后的统计量找到最佳分割点<br />
+然而，我们要均分的是loss，而不是样本的数量，而每个样本对loss的贡献可能是不一样的，按样本均分会导致loss分布不均匀，取到的分位点会有偏差。所以要在每个样本前面加个权重，我们把每个样本的二阶导作为其权重，就是加权直方图算法</p>
+<p>2）支持并行的块结构<br />
+块结构中每一列都是排好序的特征值，它含有指向对应样本的指针，用于获取相应的一阶梯度和二阶梯度信息<br />
+在精确贪婪算法中，我们将整个数据集存储在单个块中，并通过线性扫描预先排序的特征值来运行分割搜索算法。不同特征上的分割点可并行计算，因此，一次扫描即可完成所有候选分割点的计算<br />
+块结构在使用近似算法时也有帮助。在这种情况下可以使用多个块，每个块对应于数据集中的一个行子集。不同的块可以分布在不同的机器上，或者存储在外部磁盘上，它们之间可以并行统计候选分割点的一阶梯度和二阶梯度信息。此外，列块结构还支持列抽样，因为很容易在一个块中选择列的子集</p>
+<p>3）其它优化<br />
+缓存感知访问、核外计算优化</p>
+<p><strong>劣势</strong><br />
+1）难以适应在线学习模式。作为树模型的变种，xgboost并非通过一般意义上的梯度下降方法来训练模型，而是通过寻找最佳分裂点的方式来生成树，以贪婪的方式训练模型，过程是不可微的，在线模式下更新树模型是非常困难的<br />
+2）能很好地处理稀疏分类特征。该类特征的信息增益非常小，不能有效地利用来生成树<br />
+3）只适合处理结构化的特征数据，而对于类似图像中的目标检测等任务重的非结构化数据没有很好的处理能力</p>
+<h2 id="factorization-machinesfm">Factorization Machines(FM)</h2>
+<p>FM克服了xgboost不适合处理稀疏数据的缺点。度为2的FM的模型方程定义如下：</p>
+<p><span class="math display">\[
+\hat y(x) := w_{0} + \sum_{i=1}^{n}w_{i}x_{i} + \sum_{i=1}^{n}\sum_{j=i+1}^{n} &lt;v_{i},v_{j} &gt;x_{i}x_{j}{\quad}{\quad}(3)
+\]</span></p>
+<p>下面是模型需要估计的参数：</p>
+<p><span class="math display">\[ 
+w_{0} \in R, w \in R^{n}, V \in R^{n \times k}{\quad}{\quad}(4)
+\]</span></p>
+<p>另外，<span class="math inline">\(&lt;v_{i},v_{j}&gt;\)</span>是向量之间的点乘：</p>
+<p><span class="math display">\[
+&lt;v_{i},v_{j}&gt;:= \sum_{f=1}^{k}v_{i,f} \cdot v_{j,f}{\quad}{\quad}(5)
+\]</span></p>
+<p>一个二维的FM能够捕捉所有变量的单一和成对交互的信息：</p>
+<ul>
+<li><span class="math inline">\(w_{0}\)</span>是全局偏置系数</li>
+<li><span class="math inline">\(w_{i}\)</span>是对第<span class="math inline">\(i\)</span>个变量的影响力进行建模</li>
+<li><span class="math inline">\(\hat w_{i,j}:=&lt;v_{i},v_{j}&gt;\)</span>对第<span class="math inline">\(i\)</span>个变量和第<span class="math inline">\(j\)</span>个变量之间的交互进行建模。不同于使用<span class="math inline">\(w_{i,j} \in R\)</span>来表示变量之间的交互，FM选择通过分解<span class="math inline">\(w_{i,j} \in R\)</span>来对交互进行建模</li>
+</ul>
+<p><strong>分解后的<span class="math inline">\(v_{i}\)</span>和<span class="math inline">\(v_{j}\)</span>实际上相当于特征<span class="math inline">\(i\)</span>和特征<span class="math inline">\(j\)</span>的embedding向量，这能够极大地增强模型在稀疏数据场景下的泛化能力(即使两个特征在训练数据中完全没有交互，FM也可以对它们之间的交互进行建模预估)</strong></p>
+<h2 id="wide-deepwdl">Wide &amp; Deep(WDL)</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/ctr/4.png" width=100%></p>
+<p>Wide &amp; Deep将线性模型和深度神经网络模型连接起来，一方面用深度神经网络弥补线性模型泛化能力较弱的缺点，另一方面用线性模型弥补深度神经网络记忆能力较差的缺点，从而达到较好的系统性能。其中：</p>
+<p>1）Wide组件是一个形如<span class="math inline">\(y=w^{T}x+b\)</span>的广义线性模型，输入包括原始特征和交叉特征<br />
+2）Deep组件首先将高维稀疏的类别特征转化为embedding向量，然后送入前馈神经网络训练，激活函数采用ReLUs<br />
+3）Wide部分的优化器采用基于L1正则化的FTRL算法，Deep部分的优化器采用AdaGrad<br />
+4）连续特征通过累积分布函数<span class="math inline">\(p(X \leq x)\)</span>和<span class="math inline">\(n_{q}\)</span>各分位点映射到[0, 1]</p>
+<h2 id="deepfm">DeepFM</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/tf/5.png" width=60%></p>
+<p>DeepFM在WDL的基础上，做了下面两个优化：</p>
+<p>1）使用FM代替WDL的wide部分<br />
+2）DeepFM的wide部分和deep部分共享输入和embedding向量</p>
+<p>这使得DeepFM可以：1）从原始特征中学习低阶和高阶特征交互；2）不需要像WDL模型那样，做大量专业的特征工作</p>
+<h2 id="deep-crossdcn">Deep &amp; Cross(DCN)</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/tf/6.png" width=60%></p>
+<p>DCN在WDL的基础上，为了避免人工构造交叉特征的工作，将其wide部分替换为如下如所示的交叉网络：</p>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/tf/7.png" width=60%></p>
+<p>每一层的公式为： <span class="math display">\[
+\rm x_{\it l+1}=\rm x_{0}x_{\it l}^{T}w_{\it l} + b_{\it l} + x_{\it l}=f(x_{\it l},w_{\it l},b_{\it l})+x_{\it l}\quad \quad(7)
+\]</span></p>
+<p>对交叉网络的输入输出进行分析。设交叉网络的输入<span class="math inline">\(x_{0} \in R^{d}\)</span>，忽略每一层中的bias项，对于第一次交叉有：</p>
+<p><span class="math display">\[
+x_{1}=x_{0}x_{0}^{T}w_{0}+x_{0} = x_{0}(x_{0}^{T}w_{0}+1)=\alpha_{0}x_{0} \quad \quad(8)
+\]</span></p>
+<p>对于第二次交叉，有：</p>
+<p><span class="math display">\[
+x_{2} = x_{0}x_{1}^{T}w_{1} + x_{1} = x_{0}(\alpha_{0}x_{0})^{T}w_{1} + \alpha_{0}x_{0}=\alpha_{0}x_{0}(x_{0}^{T}w_{1}+1) = \alpha_{1}x_{0}\quad \quad(9)
+\]</span></p>
+<p>基于以上推广，第k+1次交叉有<span class="math inline">\(x_{k+1}=\alpha_{k}x_{0}\)</span>，它是输入<span class="math inline">\(x_{0}\)</span>的标量倍。此时实际上组合层并不能感知到交叉网络希望传递的特征交互，因此限制了模型的表达能力</p>
+<h2 id="xdeepfm">xDeepFM</h2>
+<p><img src="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/tf/8.png" width=90%></p>
+<p>为了克服特征交互时embedding向量元素之间的相互影响，xDeepFM模型在wide部分采用了新提出的Compressed Interaction Network(CIN)网络。模型的整体计算流程如下：</p>
+<p>1）CIN的输入是所有列向量横向拼接得到的矩阵<span class="math inline">\(X^{0} \in R^{m \times D}\)</span>，后续每层的特征组合形状都是<span class="math inline">\((H_{i}, D)\)</span>，每层的特征个数<span class="math inline">\(H_{i}\)</span>不再相同，维度<span class="math inline">\(D\)</span>始终保持不变<br />
+2）第<span class="math inline">\(i\)</span>层的特征矩阵与原始输入<span class="math inline">\((m, D)\)</span>交互，得到第<span class="math inline">\(i+1\)</span>层的特征矩阵，具体交互方式下面介绍<br />
+3）将每层特征矩阵的<span class="math inline">\(H_{i}\)</span>个特征在<span class="math inline">\(D\)</span>维度做sum polling，得到<span class="math inline">\(H_{1}, H_{2}, ..., H_{k}\)</span>个标量，拼接到一起得到一维向量作为CIN层的输出，与linear和DNN部分的输出拼接起来做最终的预测</p>
+<p>第<span class="math inline">\(i\)</span>层的特征举证和<span class="math inline">\((m, D)\)</span>的交互过程如下：</p>
+<p>1）矩阵(<span class="math inline">\(H_{i}, D)\)</span>和<span class="math inline">\((m, D)\)</span>分别有<span class="math inline">\(H_{i}\)</span>和<span class="math inline">\(m\)</span>个<span class="math inline">\(D\)</span>维特征的矩阵<br />
+2）两个矩阵中的元素两两做对应元素的乘积，会得到<span class="math inline">\(H_{i} * m\)</span>个<span class="math inline">\(D\)</span>维向量<br />
+3）这些交互特征不是直接拼接成形状为<span class="math inline">\((H_{i}*m, D)\)</span>的特征举证，而是拼接成三维矩阵<span class="math inline">\(H_{i}, m, D\)</span><br />
+4）使用一个形状为<span class="math inline">\((H_{k}, m)\)</span>的权重矩阵W，分别与三维矩阵中<span class="math inline">\(D\)</span>个相同形状的矩阵做内积，将得到的每个标量拼接到一起，得到一个维度为<span class="math inline">\(D\)</span>的向量<span class="math inline">\(Feature{\,}map\)</span><br />
+5）使用<span class="math inline">\(H_{k+1}\)</span>个不同的权重矩阵<span class="math inline">\(W\)</span>，即可得到<span class="math inline">\(H_{k+1}\)</span>个不同的D维向量，拼接到一起即为下一层的特征矩阵<span class="math inline">\((H_{k+1}, D)\)</span></p>
+<h2 id="afm">AFM</h2>
+<p>AFM模型是受FM模型的启发研究出来的，不过它认为每个特征交互对于最终预测应该是不一样的，因此通过一个神经网络子组件来学习每个特征交互的权重。假设这里有三个特征<span class="math inline">\(\rm x = (\it x_{1}, x_{2}, x_{3} \rm )\)</span>，对应三个embedding隐向量如下：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\rm v_{1} = (a_{1}, a_{2}, a_{3}) \\
+&amp;\rm v_{2} = (b_{1}, b_{2}, b_{3}) \\
+&amp;\rm v_{3} = (c_{1}, c_{2}, c_{3})
+\end{aligned}
+\]</span></p>
+<p>对于FM，它的二阶特征交互为：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;{\,}{\,}{\,}{\,}{\,}{\,}\sum_{i=1}^{3}\sum_{j=i+1}^{3}\langle \rm v_{i}, v_{j} \rangle \it x_{i}x_{j} \\
+&amp;=(a_{1}b_{1}+a_{2}b_{2}+a_{3}b_{3})x_{1}x_{2}+...+(b_{1}c_{1}+b_{2}c_{2}+b_{3}c_{3})x_{2}x_{3}
+\end{aligned}
+\]</span></p>
+<p>对于AFM，在进入全连接层前，它的二阶特征交互为：</p>
+<p><span class="math display">\[
+\begin{bmatrix} 
+a_{12}a_{1}b_{1}x_{1}x_{2} + a_{13}a_{1}c_{1}x_{1}x_{3} + a_{23}b_{1}c_{1}x_{2}x_{3}\\
+a_{12}a_{2}b_{2}x_{1}x_{2} + a_{13}a_{2}c_{2}x_{1}x_{3} + a_{23}b_{2}c_{2}x_{2}x_{3}\\
+a_{12}a_{3}b_{3}x_{1}x_{2} + a_{13}a_{3}c_{3}x_{1}x_{3} + a_{23}b_{3}c_{3}x_{2}x_{3}
+\end{bmatrix}
+\]</span></p>
+<p>其中，<span class="math inline">\(a_{12}\)</span>，<span class="math inline">\(a_{13}\)</span>，<span class="math inline">\(a_{23}\)</span>是注意力网络计算出的二阶特征交互权重。然后再把这个向量送入全连接层，获得最终预测得分。由此可以看出，这里面有两层权重，一层是注意力网络计算出的权重，作用于二阶特征交互上；另外一层是全连接层的参数，作用于最后送入的这个向量的每个元素上。这两层权重作用对象不同，形式上分别是横向赋权和纵向赋权</p>
+<h2 id="参考文献">参考文献</h2>
+<p>[1].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/56900935">逻辑回归(Logistic Regression)详解</a><br />
+[2].<a target="_blank" rel="noopener" href="https://dl.acm.org/doi/pdf/10.1145/2939672.2939785">XGBoost：A Scalable Tree Boosting System</a><br />
+[3].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/396055555">[广告机制]-模型篇：XGBoost: A Scalable Tree Boosting System</a><br />
+[4].<a target="_blank" rel="noopener" href="https://github.com/fly-adser/home_for_adser/blob/main/CTR%E9%A2%84%E4%BC%B0/(ICDM2010%2C%20Steffen%20Rendle)Factorization%20Machines.pdf">Factorization Machines</a><br />
+[5].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/397166601">[广告机制]-模型篇：CTR预估之Wide&amp;Deep算法</a><br />
+[6].<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1606.07792.pdf">Wide &amp; Deep Learning for Recommender Systems</a><br />
+[7].<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/142958834">见微知著，你真的搞懂Google的Wide&amp;Deep模型了吗？</a><br />
+[8].<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1703.04247">DeepFM: A Factorization-Machine based Neural Network for CTR Prediction</a><br />
+[9].<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1803.05170">xDeepFM: Combining Explicit and Implicit Feature Interactions for Recommender Systems</a><br />
+[10].<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45658131/article/details/116713285">xDeepFM 通俗理解及代码实战</a><br />
+[11].<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1708.04617">Attentional Factorization Machines: Learning the Weight of Feature Interactions via Attention Networks</a><br />
+[12].<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1708.05123">Deep &amp; Cross Network for Ad Click Predictions</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Fly Adser 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LTR%E9%A2%84%E4%BC%B0/" rel="tag"># LTR预估</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/06/rerankalg/" rel="prev" title="基于上下文感知的重排序算法梳理">
+      <i class="fa fa-chevron-left"></i> 基于上下文感知的重排序算法梳理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#logistic-regressionlr"><span class="nav-number">1.</span> <span class="nav-text">Logistic Regression(LR)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xgboost"><span class="nav-number">2.</span> <span class="nav-text">XGBoost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#factorization-machinesfm"><span class="nav-number">3.</span> <span class="nav-text">Factorization Machines(FM)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wide-deepwdl"><span class="nav-number">4.</span> <span class="nav-text">Wide &amp; Deep(WDL)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deepfm"><span class="nav-number">5.</span> <span class="nav-text">DeepFM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deep-crossdcn"><span class="nav-number">6.</span> <span class="nav-text">Deep &amp; Cross(DCN)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xdeepfm"><span class="nav-number">7.</span> <span class="nav-text">xDeepFM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afm"><span class="nav-number">8.</span> <span class="nav-text">AFM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">9.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Fly Adser"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Fly Adser</p>
+  <div class="site-description" itemprop="description">主要涉猎方向有：排序机制、智能出价、LTR预估、运筹优化、强化学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fly-adser" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fly-adser" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=718229223@qq.com" title="E-mail → https:&#x2F;&#x2F;mail.qq.com&#x2F;cgi-bin&#x2F;qm_share?t&#x3D;qm_mailme&amp;email&#x3D;718229223@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://fly-adser-1302830623.cos.ap-beijing.myqcloud.com/common/wechat.png" title="公众号 → https:&#x2F;&#x2F;fly-adser-1302830623.cos.ap-beijing.myqcloud.com&#x2F;common&#x2F;wechat.png" rel="noopener" target="_blank"><i class="fab fa-weixin fa-fw"></i>公众号</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/its-tough" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;its-tough" rel="noopener" target="_blank"><i class="fab fa-zhihu fa-fw"></i>知乎</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP </a>
+      <img src="/images/beian.png" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=2022001516" rel="noopener" target="_blank">备2022001516号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fly Adser</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '2fd262d672cd4d2b91ce',
+      clientSecret: 'acd47e1dac8d5317949c86b494d9fa90fcb773db',
+      repo        : 'fly-adser.github.io',
+      owner       : 'fly-adser',
+      admin       : ['fly-adser'],
+      id          : '7bcaead19d26ef1f1d6f0c2395677104',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
